@@ -1,0 +1,38 @@
+﻿USE [GesRTS]
+GO
+
+/****** Object:  View [dbo].[V_UbicacionesTP]   ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+CREATE VIEW [dbo].[V_UbicacionesTP]
+AS
+SELECT 
+	 [REGION_ID]
+	,[TYPE]
+	,[ID]
+	,[ADDR_LINE1]
+	,[REGION1]
+	,[COUNTRY]
+	,[LONGITUDE]
+	,[LATITUDE]
+	,[DELIVERY_DAYS]
+	,[PHONE_NUMBER]
+	,[USER_FIELD1]
+	,[USER_FIELD2]
+	,[USER_FIELD3]
+	,[DATE_ADDED]
+	,[DESCRIPTION]
+	,[LOCQUALITY]
+	,[LAST_ORDER_DATE]
+	,[USER_MODIFIED]
+	,[DATE_MODIFIED]
+	,[GEOCODE_VERIFIED]
+  FROM S_TS_LOCATION
+
+
+GO

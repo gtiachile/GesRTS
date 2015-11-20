@@ -1,0 +1,38 @@
+﻿USE [GesRTS]
+GO
+
+/****** Object:  View [dbo].[V_ParadasTP]   ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+CREATE VIEW [dbo].[V_ParadasTP]
+AS
+SELECT 
+	 [PKEY]
+	,[RN_SESSION_PKEY]
+	,[ROUTE_PKEY]
+	,[LOCATION_REGION_ID]
+	,[LOCATION_TYPE]
+	,[LOCATION_ID]
+	,[LOCATION_EXTENSION_PKEY]
+	,[SEQUENCE_NUMBER]
+	,[STOP_TYPE]
+	,[STOP_IX]
+	,[ARRIVAL]
+	,[SERVICE_TIME]
+	,[TRAVEL_TIME]
+	,[DISTANCE]
+	,[OPEN_TIME]
+	,[CLOSE_TIME]
+	,[TW1_OPEN_TIME]
+	,[TW1_CLOSE_TIME]
+	,[TW2_OPEN_TIME]
+	,[TW2_CLOSE_TIME]
+  FROM S_RS_STOP
+
+
+GO

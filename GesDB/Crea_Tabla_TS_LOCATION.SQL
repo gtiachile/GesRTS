@@ -1,0 +1,73 @@
+USE [UPSLT]
+GO
+
+/****** Object:  Table [TSDBA].[TS_LOCATION]    Script Date: 15-11-2015 17:09:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [TSDBA].[TS_LOCATION](
+	[REGION_ID] [nvarchar](9) NOT NULL,
+	[TYPE] [nvarchar](3) NOT NULL,
+	[ID] [nvarchar](15) NOT NULL,
+	[ADDR_LINE1] [nvarchar](50) NULL,
+	[ADDR_LINE2] [nvarchar](20) NULL,
+	[XADDR_LINE1] [nvarchar](50) NULL,
+	[REGION1] [nvarchar](40) NULL,
+	[REGION2] [nvarchar](40) NULL,
+	[REGION3] [nvarchar](40) NULL,
+	[POSTAL_CODE] [nvarchar](15) NULL,
+	[COUNTRY] [nvarchar](5) NULL,
+	[LONGITUDE] [int] NULL,
+	[LATITUDE] [int] NULL,
+	[DELIVERY_DAYS] [nvarchar](7) NULL,
+	[PHONE_NUMBER] [nvarchar](20) NULL,
+	[FAX_NUMBER] [nvarchar](20) NULL,
+	[STANDARD_INSTRUCTIONS] [ntext] NULL,
+	[ACCOUNT_TYPE_ID] [nvarchar](5) NULL,
+	[SERVICE_TIME_TYPE_ID] [nvarchar](5) NULL,
+	[TIME_WINDOW_TYPE_ID] [nvarchar](5) NULL,
+	[ZONE_ID] [nvarchar](15) NULL,
+	[PRIORITY] [int] NULL,
+	[BULK_THRESHOLD_SIZE1] [int] NULL,
+	[BULK_THRESHOLD_SIZE2] [int] NULL,
+	[BULK_THRESHOLD_SIZE3] [int] NULL,
+	[COLOR] [int] NULL,
+	[USER_FIELD1] [nvarchar](20) NULL,
+	[USER_FIELD2] [nvarchar](20) NULL,
+	[USER_FIELD3] [nvarchar](20) NULL,
+	[DATE_ADDED] [datetime] NULL,
+	[DESCRIPTION] [nvarchar](60) NULL,
+	[LOCQUALITY] [int] NULL,
+	[TIME_WINDOW_FACTOR] [int] NULL,
+	[STORE_NUMBER] [nvarchar](15) NULL,
+	[CONTACT] [nvarchar](255) NULL,
+	[ALTERNATE_CONTACT] [nvarchar](255) NULL,
+	[SF_NOTIFY] [nvarchar](1) NULL,
+	[SF_NOTIFY_TYPE] [int] NULL,
+	[SF_CONTACT] [nvarchar](64) NULL,
+	[SF_NOTIFY_MINUTES] [int] NULL,
+	[TIMEZONE] [int] NULL,
+	[FIXED_FEE] [float] NULL,
+	[VARIABLE_FEE] [float] NULL,
+	[PREFERRED_ROUTE_ID] [nvarchar](15) NULL,
+	[DELIVERY_RADIUS] [float] NULL,
+	[BUILDING_DELIVERY_SEQUENCE] [int] NULL DEFAULT ((0)),
+	[LAST_ORDER_DATE] [datetime] NULL,
+	[URL] [nvarchar](512) NULL,
+	[USER_MODIFIED] [nvarchar](12) NULL,
+	[DATE_MODIFIED] [datetime] NULL,
+	[READ_ONLY] [int] NULL,
+	[GEOCODE_VERIFIED] [nvarchar](1) NULL,
+ CONSTRAINT [PK_TS_LOCATION] PRIMARY KEY CLUSTERED 
+(
+	[REGION_ID] ASC,
+	[TYPE] ASC,
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+

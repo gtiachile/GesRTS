@@ -1,0 +1,14 @@
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\bin\Microsoft.ReportViewer.Common.dll
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\bin\Microsoft.ReportViewer.WebForms.dll
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\bin\Microsoft.Web.Infrastructure.xml
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.csprojResolveAssemblyReference.cache
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\BitOp.Properties.Resources.resources
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.csproj.GenerateResource.Cache
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.dll.licenses
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\bin\GesRTS.dll.config
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\bin\GesRTS.dll
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\bin\GesRTS.pdb
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.dll
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.pdb
