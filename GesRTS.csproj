@@ -216,6 +216,8 @@
     <Content Include="Images\Cancel%28build%29_194_32.bmp" />
     <Content Include="Images\Cancel.png" />
     <Content Include="Images\clock.png" />
+    <Content Include="Images\Comunas.png" />
+    <Content Include="Images\Criterios.png" />
     <Content Include="Images\DeleteHS.png" />
     <Content Include="Images\edificioCIAL.jpeg" />
     <Content Include="Images\EditTableHS.png" />
@@ -223,12 +225,14 @@
     <Content Include="Images\Home_5699.png" />
     <Content Include="Images\logocial.png" />
     <Content Include="Images\NewRow.png" />
+    <Content Include="Images\Regiones.png" />
     <Content Include="Images\saveHS.png" />
     <Content Include="Images\Select.png" />
     <Content Include="Images\selectedtab.GIF" />
     <Content Include="Images\StopHS.png" />
     <Content Include="Images\tabb.gif" />
     <Content Include="Images\unselectedtab.GIF" />
+    <Content Include="Images\Vendedores.png" />
     <Content Include="Images\ZoomHS.png" />
     <Content Include="InicioMenu.aspx" />
     <Content Include="Inicio.aspx" />

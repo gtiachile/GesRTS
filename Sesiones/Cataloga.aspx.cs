@@ -11,13 +11,12 @@ namespace BitOp.Sesiones
 {
     public partial class Cataloga1 : System.Web.UI.Page
     {
-        int nro_sesion = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Page.IsPostBack != true)
             {
                 if (!this.IsPostBack) { BitOP.Global.MenuControl.getMenu((Menu)Master.FindControl("NavigationMenu"), (Login)Master.FindControl("Login1"), BitOP.Global.Perfil); }
-                fill_header(DropDownList2.SelectedValue.ToString());
+                Fill_Header(DropDownList2.SelectedValue.ToString());
             }
         }
 
@@ -29,6 +28,7 @@ namespace BitOp.Sesiones
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
             MultiView1.ActiveViewIndex = 0;
+            GridView1.DataBind();
         }
 
         protected void UpdateCancelButton_Click(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace BitOp.Sesiones
         {
 
         }
-        protected void fill_header(string _criterio_id)
+        protected void Fill_Header(string _criterio_id)
         {
             Lbl_Inicio_Descrip.Text = "";
             Lbl_Fecha_Desde.Text = "";
@@ -58,7 +58,7 @@ namespace BitOp.Sesiones
             con = new SqlConnection(connString.ToString());
             cmd.Connection = con;
             con.Open();
-            string sql = "SELECT * FROM Criterios Where [Criterio_ID]='" + _criterio_id + "'";
+            string sql = "SELECT * FROM Criterios WHERE [Criterio_ID]='" + _criterio_id + "'";
             SqlDataAdapter da = new SqlDataAdapter(sql, con);
             da.Fill(ds);
             dt = ds.Tables[0];
@@ -66,8 +66,8 @@ namespace BitOp.Sesiones
             foreach (DataRowView row in view)
             {
                 Lbl_Inicio_Descrip.Text = row["Inicio_Nombre"].ToString();
-                Lbl_Fecha_Desde.Text = row["Fecha_Desde"].ToString();
-                Lbl_Region.Text = row["Region"].ToString();
+                Lbl_Fecha_Desde.Text    = row["Fecha_Desde"].ToString();
+                Lbl_Region.Text         = row["Region"].ToString();
                 Lbl_Supervisor.Text     = row["Supervisor"].ToString();
             }
             con.Close();
@@ -118,7 +118,16 @@ namespace BitOp.Sesiones
 
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            fill_header(DropDownList2.SelectedValue.ToString());
+            Fill_Header(DropDownList2.SelectedValue.ToString());
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int indice = GridView1.SelectedIndex;
+            Label _nro_sesion = (Label)GridView1.Rows[indice].FindControl("Label3");
+            Lbl_Sesion.Text = _nro_sesion.Text;
+            FormView1.DataBind();
+            GridView1.DataBind();
         }
     }
 }

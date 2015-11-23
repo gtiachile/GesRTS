@@ -37,9 +37,5 @@ namespace BitOp.Admin
             textbox_region.Text = region;
         }
 
-        protected void FormView1_ItemInserting(object sender, FormViewInsertEventArgs e)
-        {
-
-        }
     }
 }

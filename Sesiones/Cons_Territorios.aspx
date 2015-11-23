@@ -49,7 +49,14 @@ WHERE [Region_ID] = @Region_ID">
                 </asp:BoundField>
                 <asp:BoundField DataField="Territorio_ID" HeaderText="ID Territorio" SortExpression="Territorio_ID" />
                 <asp:BoundField DataField="Territorio_Descrip" HeaderText="Descripción" SortExpression="Territorio_Descrip" />
-                <asp:BoundField DataField="Vendedor" HeaderText="Vendedor" SortExpression="Vendedor" />
+                <asp:TemplateField HeaderText="Vendedor" SortExpression="Vendedor">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Vendedor") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("Vendedor_Nombre") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="Sesion_Key_RTS" HeaderText="ID Sesión" SortExpression="Sesion_Key_RTS">
                 <ItemStyle HorizontalAlign="Center" />
                 </asp:BoundField>
@@ -70,9 +77,11 @@ WHERE [Region_ID] = @Region_ID">
         </asp:GridView>
     </p>
     <p>
-        <asp:SqlDataSource ID="GesDBTerritorios" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Territorio_Key_RTS], [Sesion_Key_RTS], [Territorio_Nro], [Territorio_ID], [Territorio_Descrip], [Vendedor]
-  FROM [Territorios]
-WHERE [Sesion_Key_RTS] = @Sesion_Key_RTS">
+        <asp:SqlDataSource ID="GesDBTerritorios" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT Territorio_Key_RTS, Sesion_Key_RTS, Territorio_Nro, Territorio_ID, Territorio_Descrip,
+              Vendedor_Nombre
+  FROM Territorios INNER JOIN
+              Vendedores ON Vendedor = Vendedor_ID
+WHERE Sesion_Key_RTS = @Sesion_Key_RTS">
             <SelectParameters>
                 <asp:ControlParameter ControlID="DropDownList2" Name="Sesion_Key_RTS" PropertyName="SelectedValue" />
             </SelectParameters>

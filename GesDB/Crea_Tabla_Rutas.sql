@@ -18,6 +18,7 @@ CREATE TABLE [dbo].[Rutas] (
 	[Ruta_Nro] [int] NOT NULL,
 	[Ruta_ID] [nvarchar](15) NULL,
 	[Ruta_Descrip] [nvarchar](30) NULL,
+	[Ruta_Dia] [nvarchar](1) NULL,
 	[Ruta_Inicio_Tipo] [nvarchar](3) NULL,
 	[Ruta_Inicio_Ubicacion] [nvarchar](15) NULL,
 

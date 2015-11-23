@@ -76,6 +76,15 @@ namespace BitOp.Sesiones {
         protected global::System.Web.UI.WebControls.Label Lbl_Fecha_Desde;
         
         /// <summary>
+        /// Control Lbl_Sesion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Lbl_Sesion;
+        
+        /// <summary>
         /// Control Lbl_Inicio_Descrip.
         /// </summary>
         /// <remarks>
@@ -94,15 +103,6 @@ namespace BitOp.Sesiones {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// Control CatalogaSesion0.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CatalogaSesion0;
-        
-        /// <summary>
         /// Control GesDBSesionesTP.
         /// </summary>
         /// <remarks>
@@ -110,6 +110,15 @@ namespace BitOp.Sesiones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource GesDBSesionesTP;
+        
+        /// <summary>
+        /// Control CatalogaSesion0.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CatalogaSesion0;
         
         /// <summary>
         /// Control View2.
@@ -155,5 +164,14 @@ namespace BitOp.Sesiones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource GesDBTerritorios;
+        
+        /// <summary>
+        /// Control GesDBVendedores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource GesDBVendedores;
     }
 }

@@ -15,7 +15,8 @@ CREATE TABLE [dbo].[Dias_Semana](
 	[Nro_Dia]             int            NOT NULL,
 	[Inicial_Dia_Ingles]  [nvarchar](1)  NOT NULL,
 	[Inicial_Dia_Espanol] [nvarchar](1)  NOT NULL,
-	[Dia_Semana]          [nvarchar](10) NOT NULL,
+	[Dia_Semana]          [varchar](10)  NOT NULL,
+	[Dia_Nombre_Corto]    [varchar](3)   NOT NULL,
  CONSTRAINT [PK_Dias_Semana] PRIMARY KEY CLUSTERED 
 (
 	[Nro_Dia] ASC

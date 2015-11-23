@@ -14,7 +14,9 @@
         Región:
         <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID">
         </asp:DropDownList>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cliente :
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Búsqueda:
+        <asp:TextBox ID="TextBoxBusqueda" runat="server" MaxLength="15" OnTextChanged="TextBoxBusqueda_TextChanged" AutoPostBack="True"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; Cliente :
         <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="True" DataSourceID="GesDBClientes" DataTextField="Nombre_Cliente" DataValueField="ID">
         </asp:DropDownList>
     </p>
@@ -27,9 +29,12 @@ UNION
 SELECT [REGION_ID], [TYPE], [ID], [ID] + ' - ' + [DESCRIPTION] AS Nombre_Cliente
   FROM [V_ClientesTP]
 WHERE [REGION_ID] = @Region_ID
-    AND [TYPE]            = 'SIT'">
+     AND [TYPE]            = 'SIT'
+    AND (([DESCRIPTION] LIKE ('%' +@Busqueda + '%'))
+       OR  ([ID] LIKE ('%' +@Busqueda + '%')))">
             <SelectParameters>
                 <asp:ControlParameter ControlID="DropDownList1" DefaultValue="" Name="Region_ID" PropertyName="SelectedValue" />
+                <asp:ControlParameter ControlID="TextBoxBusqueda" Name="Busqueda" PropertyName="Text" />
             </SelectParameters>
     </asp:SqlDataSource>
     <br />
@@ -50,9 +55,15 @@ WHERE [REGION_ID] = @Region_ID
             <asp:BoundField DataField="ROUTE_NUMBER" HeaderText="Nº Ruta" SortExpression="ROUTE_NUMBER">
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:BoundField DataField="INITIAL_DAY" HeaderText="Dia" SortExpression="INITIAL_DAY">
-            <ItemStyle HorizontalAlign="Center" />
-            </asp:BoundField>
+            <asp:TemplateField HeaderText="Dia" SortExpression="INITIAL_DAY">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("INITIAL_DAY") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("Dia_Nombre_Corto") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
             <asp:BoundField DataField="SEQUENCE_NUMBER" HeaderText="Nº Secuencia" SortExpression="SEQUENCE_NUMBER">
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
@@ -76,12 +87,13 @@ WHERE [REGION_ID] = @Region_ID
         <asp:SqlDataSource ID="GesRTSTerritorios" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT	V_ParadasTP.RN_SESSION_PKEY, V_SesionesTP.DESCRIPTION,
 	V_RutasTP.TERRITORY_PKEY, V_TerritoriosTP.DESCRIPTION,
 	V_ParadasTP.ROUTE_PKEY, V_RutasTP.ROUTE_ID, V_RutasTP.ROUTE_NUMBER,
-	V_RutasTP.INITIAL_DAY,V_ParadasTP.LOCATION_ID, V_ParadasTP.SEQUENCE_NUMBER,
+	Dia_Nombre_Corto,V_ParadasTP.LOCATION_ID, V_ParadasTP.SEQUENCE_NUMBER,
 	V_ParadasTP.STOP_IX	
   FROM     V_ParadasTP INNER JOIN
 	V_RutasTP         ON V_ParadasTP.ROUTE_PKEY               = V_RutasTP.PKEY INNER JOIN
 	V_TerritoriosTP ON V_RutasTP.TERRITORY_PKEY           = V_TerritoriosTP.PKEY INNER JOIN
-	V_SesionesTP    ON V_TerritoriosTP.RN_SESSION_PKEY = V_SesionesTP.PKEY	
+	V_SesionesTP    ON V_TerritoriosTP.RN_SESSION_PKEY = V_SesionesTP.PKEY INNER JOIN
+                   Dias_Semana    ON INITIAL_DAY                                       = Inicial_Dia_Ingles
   WHERE   LOCATION_TYPE            = 'SIT'
      AND     LOCATION_REGION_ID = @Region_ID
      AND     LOCATION_ID                 = @Cliente_ID

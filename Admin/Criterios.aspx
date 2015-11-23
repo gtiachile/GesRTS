@@ -5,6 +5,65 @@
             font-size: medium;
             color: #000000;
         }
+        .auto-style15 {
+            width: 99px;
+        }
+        .auto-style25 {
+            width: 22px;
+            height: 40px;
+        }
+        .auto-style31 {
+            width: 22px;
+            height: 38px;
+        }
+        .auto-style32 {
+            width: 96px;
+            height: 38px;
+        }
+        .auto-style37 {
+            width: 22px;
+            height: 39px;
+        }
+        .auto-style38 {
+            width: 96px;
+            height: 39px;
+        }
+        .auto-style40 {
+            height: 38px;
+            color: red;
+            width: 138px;
+        }
+        .auto-style42 {
+            height: 39px;
+            width: 138px;
+        }
+        .auto-style47 {
+            width: 200px;
+            height: 38px;
+        }
+        .auto-style48 {
+            width: 200px;
+            height: 39px;
+        }
+        .auto-style54 {
+            width: 596px;
+        }
+        .auto-style55 {
+            height: 40px;
+            width: 138px;
+        }
+        .auto-style58 {
+            width: 87px;
+            height: 40px;
+        }
+        .auto-style59 {
+            width: 200px;
+            height: 40px;
+        }
+        .auto-style60 {
+            width: 96px;
+            height: 40px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -43,7 +102,7 @@
                         <asp:BoundField DataField="Inicio_Nombre" HeaderText="Inicio Nombre" SortExpression="Inicio_Nombre" />
                         <asp:TemplateField HeaderText="Región" SortExpression="Region">
                             <EditItemTemplate>
-                                <asp:DropDownList ID="DropDownList6" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Descripción" DataValueField="Region_ID" SelectedValue='<%# Bind("Region") %>'>
+                                <asp:DropDownList ID="DropDownList6" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" SelectedValue='<%# Bind("Region") %>'>
                                 </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
@@ -108,7 +167,7 @@
                 </asp:SqlDataSource>
             </asp:View>
             <asp:View ID="View2" runat="server">
-                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Criterio_ID" DataSourceID="GesDBCriteriosFV" DefaultMode="Insert" Width="314px">
+                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Criterio_ID" DataSourceID="GesDBCriteriosFV" DefaultMode="Insert" Width="525px" Height="319px">
                     <EditItemTemplate>
                         Criterio_ID:
                         <asp:Label ID="Criterio_IDLabel1" runat="server" Text='<%# Eval("Criterio_ID") %>' />
@@ -132,59 +191,67 @@
                         &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" />
                     </EditItemTemplate>
                     <InsertItemTemplate>
-                        &nbsp;<br />&nbsp;<table style="width:100%;">
+                        &nbsp;&nbsp;<table class="auto-style54">
                             <tr>
-                                <td>ID Criterio:</td>
-                                <td>
-                                    <asp:TextBox ID="Criterio_IDTextBox" runat="server" Text='<%# Bind("Criterio_ID") %>' />
+                                <td class="auto-style15" rowspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                    <asp:Image ID="Image1" runat="server" Height="150px" ImageAlign="Middle" ImageUrl="~/Images/Criterios.png" Width="100px" />
+                                    &nbsp; &nbsp;</td>
+                                <td class="auto-style25"></td>
+                                <td class="auto-style60">ID Criterio:</td>
+                                <td class="auto-style59">
+                                    <asp:TextBox ID="Criterio_IDTextBox" runat="server" Height="22px" MaxLength="20" Text='<%# Bind("Criterio_ID") %>' Width="180px" />
                                 </td>
-                                <td>&nbsp;</td>
+                                <td class="auto-style55"></td>
                             </tr>
                             <tr>
-                                <td>Fecha Desde:</td>
-                                <td>
-                                    <asp:TextBox ID="Fecha_DesdeTextBox" runat="server" Text='<%# Bind("Fecha_Desde") %>' />
+                                <td class="auto-style31">&nbsp;&nbsp;&nbsp;</td>
+                                <td class="auto-style32">Fecha Desde:</td>
+                                <td class="auto-style47">
+                                    <asp:TextBox ID="Fecha_DesdeTextBox" runat="server" Height="22px" Text='<%# Bind("Fecha_Desde") %>' TextMode="Date" Width="100px" MaxLength="10" />
                                 </td>
-                                <td>&nbsp;</td>
+                                <td class="auto-style40">* Formato dd-mm-aaaa</td>
                             </tr>
                             <tr>
-                                <td>Inicio Nombre:</td>
-                                <td>
-                                    <asp:TextBox ID="Inicio_NombreTextBox" runat="server" Height="22px" Text='<%# Bind("Inicio_Nombre") %>' Width="171px" />
+                                <td class="auto-style25"></td>
+                                <td class="auto-style60">Inicio Nombre:&nbsp;&nbsp;&nbsp; </td>
+                                <td class="auto-style59">
+                                    <asp:TextBox ID="Inicio_NombreTextBox" runat="server" Height="22px" MaxLength="20" Text='<%# Bind("Inicio_Nombre") %>' Width="180px" />
                                 </td>
-                                <td>&nbsp;</td>
+                                <td class="auto-style55"></td>
                             </tr>
                             <tr>
-                                <td>Región:</td>
-                                <td>
-                                    <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Descripción" DataValueField="Region_ID" SelectedValue='<%# Bind("Region") %>'>
+                                <td class="auto-style25"></td>
+                                <td class="auto-style60">Región:</td>
+                                <td class="auto-style59">
+                                    <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" Height="22px" SelectedValue='<%# Bind("Region") %>' Width="200px">
                                     </asp:DropDownList>
                                 </td>
-                                <td>&nbsp;</td>
+                                <td class="auto-style55"></td>
                             </tr>
                             <tr>
-                                <td>Supervisor:</td>
-                                <td>
-                                    <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" SelectedValue='<%# Bind("Supervisor") %>'>
+                                <td class="auto-style25"></td>
+                                <td class="auto-style60">Supervisor:</td>
+                                <td class="auto-style59">
+                                    <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" Height="22px" SelectedValue='<%# Bind("Supervisor") %>' Width="150px" AutoPostBack="True">
                                     </asp:DropDownList>
                                 </td>
-                                <td>&nbsp;</td>
+                                <td class="auto-style55"></td>
                             </tr>
                             <tr>
-                                <td>Estado:</td>
-                                <td>
-                                    <asp:DropDownList ID="DropDownList3" runat="server" SelectedValue='<%# Bind("Estado") %>'>
+                                <td class="auto-style37"></td>
+                                <td class="auto-style38">Estado:</td>
+                                <td class="auto-style48">
+                                    <asp:DropDownList ID="DropDownList3" runat="server" Height="22px" SelectedValue='<%# Bind("Estado") %>' Width="90px">
                                         <asp:ListItem>Activo</asp:ListItem>
                                         <asp:ListItem>Inactivo</asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                                <td>&nbsp;</td>
+                                <td class="auto-style42"></td>
                             </tr>
                         </table>
                         <br />
-                        <br />
-                        <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" OnClick="InsertButton_Click" />
-                        &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" OnClick="InsertCancelButton_Click" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" OnClick="InsertButton_Click" />
+                        &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancelar" />
                     </InsertItemTemplate>
                     <ItemTemplate>
                         Criterio_ID:
@@ -234,9 +301,20 @@
                         <asp:Parameter Name="Criterio_ID" Type="String" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
-                <asp:SqlDataSource ID="GesDBRegiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Region_ID], [Descripción], [Region_Chile] FROM [Regiones]"></asp:SqlDataSource>
-                <asp:SqlDataSource ID="GesDBSupervisores" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Vendedor_ID], [Vendedor_Nombre], [Vendedor_Tipo] FROM [Vendedores]
- WHERE [Vendedor_Tipo] = 'Supervisor'"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="GesDBRegiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Region_ID], ([Region_Chile] + ' - ' + [Descripción]) as Region_Txt, [Region_RTS] 
+  FROM [Regiones]
+ORDER BY [Region_Txt]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="GesDBSupervisores" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT ' ' AS [Vendedor_ID], 'Seleccione Supervisor' AS [Vendedor_Nombre], ' ' AS [Vendedor_Tipo]
+ FROM [Vendedores]
+UNION
+SELECT [Vendedor_ID], [Vendedor_Nombre], [Vendedor_Tipo]
+ FROM [Vendedores]
+ WHERE [Vendedor_Tipo] = 'Supervisor'
+     AND [Region]                = @Region">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="FormView1" DefaultValue="RM" Name="Region" PropertyName="SelectedValue" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
                 <br />
             </asp:View>
         </asp:MultiView>

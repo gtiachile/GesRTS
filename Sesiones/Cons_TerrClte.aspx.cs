@@ -19,6 +19,12 @@ namespace BitOp.Sesiones
 
         }
 
+        protected void TextBoxBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            TextBoxBusqueda.Text = TextBoxBusqueda.Text.ToUpper();
+            GridView1.DataBind();
+        }
+
 
     }
 }

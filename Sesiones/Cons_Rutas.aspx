@@ -47,19 +47,22 @@ WHERE [Sesion_Key_RTS] = @Sesion_Key_RTS">
         <Columns>
             <asp:TemplateField ShowHeader="False">
                 <ItemTemplate>
-                    <asp:Button ID="Paradas" runat="server" CausesValidation="False" CommandName="Select" Text="Paradas" />
+                    <asp:Button ID="Button1" runat="server" CausesValidation="False" CommandName="Select" Text="Paradas" />
                 </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:BoundField DataField="Ruta_Nro" HeaderText="Nº Ruta" SortExpression="Ruta_Nro">
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:BoundField DataField="Ruta_ID" HeaderText="ID Ruta" SortExpression="Ruta_ID" />
-            <asp:BoundField DataField="Ruta_Descrip" HeaderText="Descripción" SortExpression="Ruta_Descrip" />
-            <asp:BoundField DataField="Ruta_Inicio_Tipo" HeaderText="Tipo Inicial" SortExpression="Ruta_Inicio_Tipo">
+            <asp:BoundField DataField="Ruta_ID" HeaderText="ID Ruta" SortExpression="Ruta_ID" >
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:BoundField DataField="Ruta_Inicio_Ubicacion" HeaderText="Ubicación Inicial" SortExpression="Ruta_Inicio_Ubicacion">
-            <ItemStyle HorizontalAlign="Center" />
+            <asp:BoundField DataField="Ruta_Descrip" HeaderText="Descripción Ruta" SortExpression="Ruta_Descrip" />
+            <asp:BoundField DataField="Dia_Semana" HeaderText="Dia" SortExpression="Dia_Semana">
+            </asp:BoundField>
+            <asp:BoundField DataField="Ruta_Inicio_Tipo" HeaderText="Tipo Inicio" SortExpression="Ruta_Inicio_Tipo">
+            </asp:BoundField>
+            <asp:BoundField DataField="Ruta_Inicio_Ubicacion" HeaderText="Ubicación Inicio" SortExpression="Ruta_Inicio_Ubicacion">
             </asp:BoundField>
             <asp:BoundField DataField="Ruta_Key_RTS" HeaderText="Clave TP (Ruta)" ReadOnly="True" SortExpression="Ruta_Key_RTS">
             <ItemStyle HorizontalAlign="Center" />
@@ -78,8 +81,10 @@ WHERE [Sesion_Key_RTS] = @Sesion_Key_RTS">
     </asp:GridView>
     <br />
     <br />
-    <asp:SqlDataSource ID="GesDBRutas" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Ruta_Key_RTS], [Sesion_Key_RTS], [Territorio_Key_RTS], [Ruta_Nro], [Ruta_ID], [Ruta_Descrip],               [Ruta_Inicio_Tipo], [Ruta_Inicio_Ubicacion] 
-  FROM [Rutas]
+    <asp:SqlDataSource ID="GesDBRutas" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Ruta_Key_RTS], [Sesion_Key_RTS], [Territorio_Key_RTS], [Ruta_Nro], [Ruta_ID], [Ruta_Descrip],
+              [Dia_Semana], [Ruta_Inicio_Tipo], [Ruta_Inicio_Ubicacion] 
+  FROM [Rutas]  INNER JOIN
+              [Dias_Semana] ON [Ruta_Dia] = [Inicial_Dia_Ingles]
 WHERE [Territorio_Key_RTS] =  @Territorio_Key_RTS">
         <SelectParameters>
             <asp:ControlParameter ControlID="DropDownList3" Name="Territorio_Key_RTS" PropertyName="SelectedValue" />

@@ -17,11 +17,17 @@
         .auto-style22 {
             width: 441px;
         }
+        .auto-style23 {
+            width: 845px;
+        }
+        .auto-style26 {
+            width: 474px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <p class="auto-style13">
-        <strong>REGIONES</strong></p>
+        <strong>REGIONES&nbsp; (Zonales)</strong></p>
     <p>
         <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
             <asp:View ID="View1" runat="server">
@@ -43,13 +49,19 @@
                                 &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" OnClientClick="return confirm('¿Está seguro que desea eliminar?'); " Text="Eliminar" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Region_ID" HeaderText="ID Región" ReadOnly="True" SortExpression="Region_ID" />
+                        <asp:BoundField DataField="Region_ID" HeaderText="ID Región" ReadOnly="True" SortExpression="Region_ID" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="Descripción" HeaderText="Descripción" SortExpression="Descripción" />
                         <asp:BoundField DataField="Dirección" HeaderText="Dirección" SortExpression="Dirección" />
                         <asp:BoundField DataField="Ciudad" HeaderText="Ciudad" SortExpression="Ciudad" />
                         <asp:BoundField DataField="Jefe_Zonal" HeaderText="Jefe Zonal" SortExpression="Jefe_Zonal" />
-                        <asp:BoundField DataField="Region_Chile" HeaderText="Region Chile" SortExpression="Region_Chile" />
-                        <asp:BoundField DataField="Region_RTS" HeaderText="Region RTS" SortExpression="Region_RTS" />
+                        <asp:BoundField DataField="Region_Chile" HeaderText="Region Chile" SortExpression="Region_Chile" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Region_RTS" HeaderText="Region RTS" SortExpression="Region_RTS" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
                         <asp:TemplateField HeaderText="Estado" SortExpression="Estado">
                             <EditItemTemplate>
                                 <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="True" SelectedValue='<%# Bind("Estado") %>'>
@@ -107,7 +119,7 @@ WHERE  [Region_ID] = @Region_ID">
                 </asp:SqlDataSource>
             </asp:View>
             <asp:View ID="View2" runat="server">
-                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Region_ID" DataSourceID="GesDBRegionesGV" DefaultMode="Insert" Width="655px">
+                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Region_ID" DataSourceID="GesDBRegionesGV" DefaultMode="Insert" Width="451px" Height="161px">
                     <EditItemTemplate>
                         Region_ID:
                         <asp:Label ID="Region_IDLabel1" runat="server" Text='<%# Eval("Region_ID") %>' />
@@ -139,42 +151,53 @@ WHERE  [Region_ID] = @Region_ID">
                     <InsertItemTemplate>
                         <table style="width:100%;">
                             <tr>
+                                <td class="auto-style23" rowspan="4">
+                                    <asp:Image ID="Image1" runat="server" Height="220px" ImageAlign="Middle" ImageUrl="~/Images/Regiones.png" Width="60px" />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
+                                <td class="auto-style26">
+                                    &nbsp;</td>
                                 <td class="auto-style22">ID Región: </td>
                                 <td class="auto-style18">
-                                    <asp:TextBox ID="Region_IDTextBox" runat="server" Text='<%# Bind("Region_ID") %>' />
+                                    <asp:TextBox ID="Region_IDTextBox" runat="server" Height="22px" MaxLength="9" Text='<%# Bind("Region_ID") %>' Width="130px" />
                                 </td>
                                 <td class="auto-style11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
                                 <td class="auto-style12">Descripción:</td>
                                 <td>
-                                    <asp:TextBox ID="DescripciónTextBox" runat="server" Text='<%# Bind("Descripción") %>' Width="300px" />
+                                    <asp:TextBox ID="DescripciónTextBox" runat="server" Text='<%# Bind("Descripción") %>' Width="300px" Height="22px" MaxLength="30" />
                                 </td>
                             </tr>
                             <tr>
+                                <td class="auto-style26">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
                                 <td class="auto-style22">Dirección:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                                 <td class="auto-style18">
-                                    <asp:TextBox ID="DirecciónTextBox" runat="server" Height="22px" Text='<%# Bind("Dirección") %>' Width="300px" />
+                                    <asp:TextBox ID="DirecciónTextBox" runat="server" Height="22px" MaxLength="50" Text='<%# Bind("Dirección") %>' Width="300px" />
                                 </td>
                                 <td class="auto-style11">&nbsp;</td>
                                 <td class="auto-style12">Ciudad:</td>
                                 <td>
-                                    <asp:TextBox ID="CiudadTextBox" runat="server" Height="25px" Text='<%# Bind("Ciudad") %>' Width="147px" />
+                                    <asp:TextBox ID="CiudadTextBox" runat="server" Height="22px" Text='<%# Bind("Ciudad") %>' Width="150px" MaxLength="30" />
                                 </td>
                             </tr>
                             <tr>
+                                <td class="auto-style26">
+                                    &nbsp;</td>
                                 <td class="auto-style22">Jefe Zonal:</td>
                                 <td class="auto-style18">
-                                    <asp:TextBox ID="Jefe_ZonalTextBox" runat="server" Text='<%# Bind("Jefe_Zonal") %>' />
+                                    <asp:TextBox ID="Jefe_ZonalTextBox" runat="server" Height="22px" MaxLength="50" Text='<%# Bind("Jefe_Zonal") %>' Width="300px" />
                                 </td>
                                 <td class="auto-style11">&nbsp;</td>
                                 <td class="auto-style12">Estado:</td>
                                 <td>
-                                    <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" SelectedValue='<%# Bind("Estado") %>'>
+                                    <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" SelectedValue='<%# Bind("Estado") %>' Height="22px" Width="80px">
                                         <asp:ListItem>Activo</asp:ListItem>
                                         <asp:ListItem>Inactivo</asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
+                                <td class="auto-style26">
+                                    &nbsp;</td>
                                 <td class="auto-style22">Región Chile:</td>
                                 <td class="auto-style18">
                                     <asp:TextBox ID="Region_ChileTextBox" runat="server" Height="22px" Text='<%# Bind("Region_Chile") %>' Width="30px" />
@@ -188,6 +211,7 @@ WHERE  [Region_ID] = @Region_ID">
                         </table>
                         <br />
                         <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" OnClick="InsertButton_Click" Text="Insertar" />
                         &nbsp;&nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancelar" />
                     </InsertItemTemplate>

@@ -58,17 +58,21 @@
         .auto-style32 {
             width: 33px;
         }
-        .auto-style41 {
-            width: 141px;
+        .auto-style45 {
+            width: 279px;
         }
-        .auto-style42 {
-            width: 77px;
+        .auto-style47 {
+            width: 174px;
         }
-        .auto-style43 {
-            width: 376px;
+        .auto-style51 {
+            width: 152px;
         }
-        .auto-style44 {
-            width: 89px;
+        .auto-style52 {
+            width: 152px;
+            color: red;
+        }
+        .auto-style53 {
+            width: 65px;
         }
     </style>
 </asp:Content>
@@ -93,27 +97,29 @@ WHERE [Estado] = 'Activo'"></asp:SqlDataSource>
                         </td>
                         <td class="auto-style14">Región:</td>
                         <td class="auto-style15">
-                            <asp:Label ID="Lbl_Region" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="Lbl_Region" runat="server" Text="Lbl_Region"></asp:Label>
                         </td>
                         <td class="auto-style20">&nbsp;</td>
                         <td class="auto-style18">Supervisor:</td>
                         <td class="auto-style22">
-                            <asp:Label ID="Lbl_Supervisor" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="Lbl_Supervisor" runat="server" Text="Lbl_Supervisor"></asp:Label>
                         </td>
                     </tr>
                     <tr>
                         <td class="auto-style17">F.Desde:</td>
                         <td class="auto-style16">
-                            <asp:Label ID="Lbl_Fecha_Desde" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="Lbl_Fecha_Desde" runat="server" Text="Lbl_Fecha_Desde"></asp:Label>
                         </td>
-                        <td class="auto-style21">&nbsp;</td>
+                        <td class="auto-style21">
+                            <asp:Label ID="Lbl_Sesion" runat="server" Visible="False"></asp:Label>
+                        </td>
                         <td class="auto-style19">Inicio Descrip.: </td>
                         <td class="auto-style23">
-                            <asp:Label ID="Lbl_Inicio_Descrip" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="Lbl_Inicio_Descrip" runat="server" Text="Lbl_Inicio_Descrip"></asp:Label>
                         </td>
                     </tr>
                 </table>
-                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="PKEY" DataSourceID="GesDBSesionesTP" ForeColor="#333333" GridLines="None" Width="90%" PageSize="8" ShowHeaderWhenEmpty="True">
+                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="PKEY" DataSourceID="GesDBSesionesTP" ForeColor="#333333" GridLines="None" Width="90%" PageSize="8" ShowHeaderWhenEmpty="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField ShowHeader="False">
@@ -121,9 +127,15 @@ WHERE [Estado] = 'Activo'"></asp:SqlDataSource>
                                 <asp:Button ID="Button1" runat="server" CausesValidation="False" CommandName="Select" OnClick="Button1_Click" Text="Sel" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="PKEY" HeaderText="ID Sesión" ReadOnly="True" SortExpression="PKEY" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
+                        <asp:TemplateField HeaderText="ID Sesión" SortExpression="PKEY">
+                            <EditItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("PKEY") %>'></asp:Label>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("PKEY") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
                         <asp:BoundField DataField="REGION_ID" HeaderText="Región" SortExpression="REGION_ID" >
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
@@ -163,100 +175,104 @@ WHERE [Estado] = 'Activo'"></asp:SqlDataSource>
                 <br />
                 <table style="width:100%;">
                     <tr>
-                        <td class="auto-style24">&nbsp;</td>
+                        <td class="auto-style24">
+                            <asp:SqlDataSource ID="GesDBSesionesTP" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [PKEY], [REGION_ID], [TYPE], [DESCRIPTION], [SCENARIO], [SESSION_DATE], [USER_MODIFIED],
+              [DATE_MODIFIED]
+  FROM [V_SesionesTP]
+WHERE [REGION_ID]           =     @Region_ID
+    AND [DATE_MODIFIED] &gt;=   CAST(@Fecha_Desde AS DATETIME)
+    AND [DESCRIPTION]      LIKE (@Inicio_Descrip + '%')
+ORDER BY [PKEY]">
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="Lbl_Region" Name="Region_ID" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="Lbl_Fecha_Desde" Name="Fecha_Desde" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="Lbl_Inicio_Descrip" Name="Inicio_Descrip" PropertyName="Text" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                        </td>
                         <td>
                             <asp:Button ID="CatalogaSesion0" runat="server" CssClass="bold" Height="42px" OnClick="CatalogaSesion_Click" Text="Cataloga Sesión" Width="118px" />
                         </td>
                         <td>&nbsp;</td>
                     </tr>
                 </table>
-                <asp:SqlDataSource ID="GesDBSesionesTP" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [PKEY], [REGION_ID], [TYPE], [DESCRIPTION], [SCENARIO], [SESSION_DATE], [USER_MODIFIED],                            [DATE_MODIFIED]
- FROM [V_SesionesTP]
-WHERE [REGION_ID] = 'DMC2'
-ORDER BY [PKEY]"></asp:SqlDataSource>
                 <br />
             </asp:View>
             <asp:View ID="View2" runat="server">
-                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Sesion_Key_RTS" DataSourceID="GesDBSesiones" DefaultMode="Edit" Width="469px">
+                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Sesion_Key_RTS" DataSourceID="GesDBSesiones" DefaultMode="Edit" Width="972px">
                     <EditItemTemplate>
                         <br />
                         <table style="width:100%;">
                             <tr>
-                                <td class="auto-style41">ID Sesión:</td>
+                                <td class="auto-style47">ID Sesión:</td>
                                 <td class="auto-style29">
-                                    <asp:Label ID="Lbl_ID_Sesion" runat="server" Text='<%# Bind("Sesion_Key_RTS") %>' />
+                                    <asp:TextBox ID="TextBoxNro_Sesion" runat="server" Text='<%# Bind("Sesion_Key_RTS") %>' BackColor="#CCCCCC" Height="22px" ReadOnly="True" Width="80px"></asp:TextBox>
                                 </td>
-                                <td class="auto-style42">&nbsp;</td>
+                                <td class="auto-style53">&nbsp;</td>
                                 <td class="auto-style30">Nombre Sesión:</td>
-                                <td class="auto-style43">
-                                    <asp:TextBox ID="DescripcionTextBox" runat="server" Text='<%# Bind("Descripcion") %>' Width="250px" />
+                                <td class="auto-style45">
+                                    <asp:TextBox ID="DescripcionTextBox" runat="server" Text='<%# Bind("Descripcion") %>' Width="250px" BackColor="#CCCCCC" Height="22px" ReadOnly="True" />
                                 </td>
-                                <td class="auto-style44">&nbsp;</td>
+                                <td class="auto-style53">&nbsp;</td>
                                 <td class="auto-style32">Región:</td>
                                 <td>
-                                    <asp:TextBox ID="Region_IDTextBox" runat="server" Height="22px" Text='<%# Bind("Region_ID") %>' Width="35px" />
+                                    <asp:TextBox ID="Region_IDTextBox" runat="server" Height="22px" Text='<%# Bind("Region_ID") %>' Width="80px" BackColor="#CCCCCC" ReadOnly="True" />
                                 </td>
+                                <td class="auto-style51">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style41">F.Creación:</td>
+                                <td class="auto-style47">F.Creación:</td>
                                 <td class="auto-style29">
-                                    <asp:TextBox ID="Fecha_CreacionTextBox" runat="server" Text='<%# Bind("Fecha_Creacion", "{0:d}") %>' />
+                                    <asp:TextBox ID="Fecha_CreacionTextBox" runat="server" BackColor="#CCCCCC" Height="22px" ReadOnly="True" Text='<%# Bind("Fecha_Creacion", "{0:d}") %>' TextMode="Date" Width="80px" />
                                 </td>
-                                <td class="auto-style42">&nbsp;</td>
-                                <td class="auto-style30">Escenario: </td>
-                                <td class="auto-style43">
-                                    <asp:TextBox ID="EscenarioTextBox" runat="server" Text='<%# Bind("Escenario") %>' />
+                                <td class="auto-style53">&nbsp;</td>
+                                <td class="auto-style30">Escenario:</td>
+                                <td class="auto-style45">
+                                    <asp:TextBox ID="EscenarioTextBox" runat="server" BackColor="#CCCCCC" Height="22px" ReadOnly="True" Text='<%# Bind("Escenario") %>' Width="130px" />
                                 </td>
-                                <td class="auto-style44">&nbsp;</td>
+                                <td class="auto-style53">&nbsp;</td>
                                 <td class="auto-style32">&nbsp;</td>
                                 <td>&nbsp;</td>
+                                <td class="auto-style51">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style41">F.Vigencia:</td>
+                                <td class="auto-style47">Usuario Modifica:</td>
                                 <td class="auto-style29">
-                                    <asp:TextBox ID="Fecha_VigenciaTextBox" runat="server" Text='<%# Bind("Fecha_Vigencia", "{0:d}") %>' />
+                                    <asp:TextBox ID="Usuario_ModificacionTextBox" runat="server" Text='<%# Bind("Usuario_Modificacion") %>' BackColor="#CCCCCC" Height="22px" ReadOnly="True" Width="130px" />
                                 </td>
-                                <td class="auto-style42">&nbsp;</td>
-                                <td class="auto-style30">F.Expiración:</td>
-                                <td class="auto-style43">
-                                    <asp:TextBox ID="Fecha_ExpiracionTextBox" runat="server" Text='<%# Bind("Fecha_Expiracion", "{0:d}") %>' />
-                                </td>
-                                <td class="auto-style44">&nbsp;</td>
-                                <td class="auto-style32">&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style41">Usuario Modif.:</td>
-                                <td class="auto-style29">
-                                    <asp:TextBox ID="Usuario_ModificacionTextBox" runat="server" Text='<%# Bind("Usuario_Modificacion") %>' />
-                                </td>
-                                <td class="auto-style42">&nbsp;</td>
+                                <td class="auto-style53">&nbsp;</td>
                                 <td class="auto-style30">F.Modificación:</td>
-                                <td class="auto-style43">
-                                    <asp:TextBox ID="Fecha_ModificacionTextBox" runat="server" Text='<%# Bind("Fecha_Modificacion", "{0:d}") %>' />
+                                <td class="auto-style45">
+                                    <asp:TextBox ID="Fecha_ModificacionTextBox" runat="server" Text='<%# Bind("Fecha_Modificacion", "{0:d}") %>' BackColor="Silver" Height="22px" ReadOnly="True" TextMode="Date" Width="80px" />
                                 </td>
-                                <td class="auto-style44">&nbsp;</td>
-                                <td class="auto-style32">&nbsp;</td>
-                                <td>&nbsp;</td>
+                                <td class="auto-style53">&nbsp;</td>
+                                <td class="auto-style32">Inicio Vigencia:</td>
+                                <td>
+                                    <asp:TextBox ID="Fecha_VigenciaTextBox" runat="server" Height="22px" Text='<%# Bind("Fecha_Vigencia", "{0:d}") %>' TextMode="Date" Width="80px" />
+                                </td>
+                                <td class="auto-style52">dd-mm-aaaa</td>
                             </tr>
                             <tr>
-                                <td class="auto-style41">Usuario cataloga:</td>
+                                <td class="auto-style47">Usuario Cataloga:</td>
                                 <td class="auto-style29">
-                                    <asp:TextBox ID="Usuario_CatalogacionTextBox" runat="server" Text='<%# Bind("Usuario_Catalogacion") %>' />
+                                    <asp:TextBox ID="Usuario_CatalogacionTextBox" runat="server" Text='<%# Bind("Usuario_Catalogacion") %>' BackColor="#CCCCCC" Height="22px" Width="130px" />
                                 </td>
-                                <td class="auto-style42">&nbsp;</td>
+                                <td class="auto-style53">&nbsp;</td>
                                 <td class="auto-style30">F.Catalogación:</td>
-                                <td class="auto-style43">
-                                    <asp:TextBox ID="Fecha_CatalogacionTextBox" runat="server" Text='<%# Bind("Fecha_Catalogacion", "{0:d}") %>' />
+                                <td class="auto-style45">
+                                    <asp:TextBox ID="Fecha_CatalogacionTextBox" runat="server" Text='<%# Bind("Fecha_Catalogacion", "{0:d}") %>' BackColor="#CCCCCC" Height="22px" ReadOnly="True" TextMode="Date" Width="80px" />
                                 </td>
-                                <td class="auto-style44">&nbsp;</td>
-                                <td class="auto-style32">&nbsp;</td>
-                                <td>&nbsp;</td>
+                                <td class="auto-style53">&nbsp;</td>
+                                <td class="auto-style32">F.Expiración:</td>
+                                <td>
+                                    <asp:TextBox ID="Fecha_ExpiracionTextBox" runat="server" Height="22px" Text='<%# Bind("Fecha_Expiracion", "{0:d}") %>' TextMode="Date" Width="80px" />
+                                </td>
+                                <td class="auto-style52">dd-mm-aaaa</td>
                             </tr>
                         </table>
                         <br />
-                        <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" OnClick="UpdateButton_Click" Text="Actualizar" />
-                        &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="UpdateCancelButton_Click" Text="Cancelar" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" OnClick="UpdateButton_Click" Text="Catalogar" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="UpdateCancelButton_Click" Text="Cancelar" />
                     </EditItemTemplate>
                     <InsertItemTemplate>
                         Sesion_Key_RTS:
@@ -338,18 +354,11 @@ ORDER BY [PKEY]"></asp:SqlDataSource>
                         <asp:LinkButton ID="EditButton" runat="server" CausesValidation="False" CommandName="Edit" Text="Editar" />
                     </ItemTemplate>
                 </asp:FormView>
-                <asp:GridView ID="GridView2" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Territorio_Key_RTS" DataSourceID="GesDBTerritorios" ForeColor="#333333" GridLines="None" PageSize="6" Width="90%">
+                <br />
+                <asp:GridView ID="GridView2" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Territorio_Key_RTS" DataSourceID="GesDBTerritorios" ForeColor="#333333" GridLines="None" PageSize="7" Width="90%">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
-                        <asp:TemplateField ShowHeader="False">
-                            <EditItemTemplate>
-                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" ImageUrl="~/Images/saveHS.png" Text="Actualizar" />
-                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/Cancel(build)_194_32.bmp" Text="Cancelar" />
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:ImageButton ID="ImageButton3" runat="server" CausesValidation="False" CommandName="Edit" ImageUrl="~/Images/EditTableHS.png" Text="Editar" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                        <asp:CommandField ButtonType="Image" CancelImageUrl="~/Images/Cancel(build)_194_32.bmp" EditImageUrl="~/Images/EditTableHS.png" ShowEditButton="True" UpdateImageUrl="~/Images/saveHS.png" />
                         <asp:BoundField DataField="Territorio_Nro" HeaderText="Nº Territorio" SortExpression="Territorio_Nro">
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
@@ -357,13 +366,19 @@ ORDER BY [PKEY]"></asp:SqlDataSource>
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="Territorio_Descrip" HeaderText="Descrip. Territorio" SortExpression="Territorio_Descrip" />
-                        <asp:BoundField DataField="Vendedor" HeaderText="Vendedor" SortExpression="Vendedor">
+                        <asp:TemplateField HeaderText="Vendedor" SortExpression="Vendedor_Nombre">
+                            <EditItemTemplate>
+                                <asp:DropDownList ID="DropDownList3" runat="server" AutoPostBack="True" DataSourceID="GesDBVendedores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" SelectedValue='<%# Bind("Vendedor") %>'>
+                                </asp:DropDownList>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("Vendedor_Nombre") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="Sesion_Key_RTS" HeaderText="Clave TP (Sesión)" SortExpression="Sesion_Key_RTS">
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="Sesion_Key_RTS" HeaderText="ID Sesión" SortExpression="Sesion_Key_RTS">
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="Territorio_Key_RTS" HeaderText="Clave TP (Terr)" ReadOnly="True" SortExpression="Territorio_Key_RTS">
+                        <asp:BoundField DataField="Territorio_Key_RTS" HeaderText="Clave TP (Terr)" SortExpression="Territorio_Key_RTS" ReadOnly="True">
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                     </Columns>
@@ -382,7 +397,11 @@ ORDER BY [PKEY]"></asp:SqlDataSource>
         </asp:MultiView>
     </p>
     <p>
-        <asp:SqlDataSource ID="GesDBSesiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Sesion_Key_RTS], [Region_ID], [Tipo], [Descripcion], [Escenario], [Fecha_Creacion], [Fecha_Vigencia], [Fecha_Expiracion], [Fecha_Catalogacion], [Usuario_Catalogacion], [Fecha_Modificacion], [Usuario_Modificacion] FROM [Sesiones]" UpdateCommand="UPDATE [Sesiones] SET [Region_ID] = @Region_ID, [Tipo] = @Tipo, [Descripcion] = @Descripcion, [Escenario] = @Escenario, [Fecha_Creacion] = @Fecha_Creacion, [Fecha_Vigencia] = @Fecha_Vigencia, [Fecha_Expiracion] = @Fecha_Expiracion, [Fecha_Catalogacion] = @Fecha_Catalogacion, [Usuario_Catalogacion] = @Usuario_Catalogacion, [Fecha_Modificacion] = @Fecha_Modificacion, [Usuario_Modificacion] = @Usuario_Modificacion WHERE [Sesion_Key_RTS] = @Sesion_Key_RTS">
+        <asp:SqlDataSource ID="GesDBSesiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Sesion_Key_RTS], [Region_ID], [Tipo], [Descripcion], [Escenario], [Fecha_Creacion], [Fecha_Vigencia], [Fecha_Expiracion], [Fecha_Catalogacion], [Usuario_Catalogacion], [Fecha_Modificacion], [Usuario_Modificacion] FROM [Sesiones]
+WHERE Sesion_Key_RTS = @Nro_sesion" UpdateCommand="UPDATE [Sesiones] SET [Region_ID] = @Region_ID, [Tipo] = @Tipo, [Descripcion] = @Descripcion, [Escenario] = @Escenario, [Fecha_Creacion] = @Fecha_Creacion, [Fecha_Vigencia] = @Fecha_Vigencia, [Fecha_Expiracion] = @Fecha_Expiracion, [Fecha_Catalogacion] = @Fecha_Catalogacion, [Usuario_Catalogacion] = @Usuario_Catalogacion, [Fecha_Modificacion] = @Fecha_Modificacion, [Usuario_Modificacion] = @Usuario_Modificacion WHERE [Sesion_Key_RTS] = @Sesion_Key_RTS">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="Lbl_Sesion" DefaultValue="" Name="Nro_sesion" PropertyName="Text" />
+            </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="Region_ID" Type="String" />
                 <asp:Parameter Name="Tipo" Type="Int32" />
@@ -398,30 +417,28 @@ ORDER BY [PKEY]"></asp:SqlDataSource>
                 <asp:Parameter Name="Sesion_Key_RTS" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:SqlDataSource ID="GesDBTerritorios" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Territorios] WHERE [Territorio_Key_RTS] = @Territorio_Key_RTS" InsertCommand="INSERT INTO [Territorios] ([Territorio_Key_RTS], [Sesion_Key_RTS], [Territorio_Nro], [Territorio_ID], [Territorio_Descrip], [Vendedor]) VALUES (@Territorio_Key_RTS, @Sesion_Key_RTS, @Territorio_Nro, @Territorio_ID, @Territorio_Descrip, @Vendedor)" SelectCommand="SELECT * FROM [Territorios]
-WHERE Sesion_Key_RTS = @Sesion_Key_RTS" UpdateCommand="UPDATE [Territorios] SET [Sesion_Key_RTS] = @Sesion_Key_RTS, [Territorio_Nro] = @Territorio_Nro, [Territorio_ID] = @Territorio_ID, [Territorio_Descrip] = @Territorio_Descrip, [Vendedor] = @Vendedor WHERE [Territorio_Key_RTS] = @Territorio_Key_RTS">
-            <DeleteParameters>
-                <asp:Parameter Name="Territorio_Key_RTS" Type="Int32" />
-            </DeleteParameters>
-            <InsertParameters>
-                <asp:Parameter Name="Territorio_Key_RTS" Type="Int32" />
-                <asp:Parameter Name="Sesion_Key_RTS" Type="Int32" />
-                <asp:Parameter Name="Territorio_Nro" Type="Int32" />
-                <asp:Parameter Name="Territorio_ID" Type="String" />
-                <asp:Parameter Name="Territorio_Descrip" Type="String" />
-                <asp:Parameter Name="Vendedor" Type="String" />
-            </InsertParameters>
+        <asp:SqlDataSource ID="GesDBTerritorios" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Territorio_Key_RTS], [Sesion_Key_RTS], [Territorio_Nro], [Territorio_ID], [Territorio_Descrip],
+               [Vendedor], [Vendedor_Nombre]
+  FROM [Territorios] INNER JOIN
+              [Vendedores] ON [Vendedor] = [Vendedor_ID]
+WHERE Sesion_Key_RTS = @Nro_Sesion" UpdateCommand="UPDATE [Territorios] SET ([Vendedor] = @Vendedor_ID)
+  WHERE Sesion_Key_RTS = @Nro_Sesion">
             <SelectParameters>
-                <asp:Parameter Name="Sesion_Key_RTS" />
+                <asp:ControlParameter ControlID="Lbl_Sesion" Name="Nro_Sesion" PropertyName="Text" />
             </SelectParameters>
             <UpdateParameters>
-                <asp:Parameter Name="Sesion_Key_RTS" Type="Int32" />
-                <asp:Parameter Name="Territorio_Nro" Type="Int32" />
-                <asp:Parameter Name="Territorio_ID" Type="String" />
-                <asp:Parameter Name="Territorio_Descrip" Type="String" />
-                <asp:Parameter Name="Vendedor" Type="String" />
-                <asp:Parameter Name="Territorio_Key_RTS" Type="Int32" />
+                <asp:Parameter Name="Vendedor_ID" />
+                <asp:Parameter Name="Nro_Sesion" />
             </UpdateParameters>
         </asp:SqlDataSource>
+                <asp:SqlDataSource ID="GesDBVendedores" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Vendedor_ID], [Vendedor_Tipo], [Vendedor_Nombre], [Region], [Supervisor], [Estado]
+  FROM [Vendedores]
+WHERE [Region]                = @Region_ID
+     AND [Vendedor_Tipo] = 'Vendedor'
+     AND [Estado]                = 'Activo'">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="Lbl_Region" DefaultValue="" Name="Region_ID" PropertyName="Text" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
     </p>
 </asp:Content>
