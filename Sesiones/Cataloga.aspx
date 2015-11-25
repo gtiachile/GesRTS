@@ -205,7 +205,7 @@ ORDER BY [PKEY]"><SelectParameters>
                                 </td>
                                 <td class="auto-style28">F. Creación: </td>
                                 <td class="auto-style31">
-                                    <asp:TextBox ID="SESSION_DATETextBox" runat="server" BackColor="#CCCCCC" Height="22px" ReadOnly="True" Text='<%# Bind("SESSION_DATE") %>' Width="100px" />
+                                    <asp:TextBox ID="SESSION_DATETextBox" runat="server" BackColor="#CCCCCC" Height="22px" ReadOnly="True" Text='<%# Bind("SESSION_DATE", "{0:d}") %>' Width="100px" />
                                 </td>
                                 <td class="auto-style30">&nbsp;</td>
                                 <td class="auto-style34">Región:</td>
@@ -235,7 +235,7 @@ ORDER BY [PKEY]"><SelectParameters>
                                 <td class="auto-style30">&nbsp;</td>
                                 <td class="auto-style28">F.Modifica: </td>
                                 <td class="auto-style31">
-                                    <asp:TextBox ID="DATE_MODIFIEDTextBox" runat="server" BackColor="#CCCCCC" Height="22px" ReadOnly="True" Text='<%# Bind("DATE_MODIFIED") %>' Width="100px" />
+                                    <asp:TextBox ID="DATE_MODIFIEDTextBox" runat="server" BackColor="#CCCCCC" Height="22px" ReadOnly="True" Text='<%# Bind("DATE_MODIFIED", "{0:d}") %>' Width="100px" />
                                 </td>
                                 <td class="auto-style30">&nbsp;</td>
                                 <td class="auto-style34">Vigencia Desde: </td>
