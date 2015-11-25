@@ -20,7 +20,7 @@ GO
 	 DECLARE @Fecha_Expiracion	DATETIME
 	 DECLARE @Fecha_Cataloga	DATETIME 
 
-	 SET @Nro_Sesion       = 2014
+	 SET @Nro_Sesion       = 916
 	 SET @Usuario          = 'A.Ulloa'
 	 SET @Fecha_Vigencia   = GETDATE()
 	 SET @Fecha_Expiracion = GETDATE() + 365

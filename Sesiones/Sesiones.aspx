@@ -21,12 +21,12 @@
                 <asp:LinkButton ID="LinkButton1" runat="server" OnClick="ImageButton1_Click">Agrega Sesión</asp:LinkButton>
                 <br />
                 <br />
-                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Sesion_Key_RTS" DataSourceID="GesDBSesionesGV" CellPadding="4" ForeColor="#333333" GridLines="None" PageSize="6" ShowHeaderWhenEmpty="True" Width="90%">
+                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Sesion_Key_RTS" DataSourceID="GesDBSesionesGV" CellPadding="4" ForeColor="#333333" GridLines="None" PageSize="6" ShowHeaderWhenEmpty="True" Width="100%">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField ShowHeader="False">
                             <EditItemTemplate>
-                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Actualizar" />
+                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Actualizar" ImageUrl="~/Images/saveHS.png" />
                                 &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/Cancel(build)_194_32.bmp" Text="Cancelar" />
                             </EditItemTemplate>
                             <ItemTemplate>
@@ -34,17 +34,31 @@
                                 &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" OnClientClick="return confirm('¿Está seguro que desea eliminar?'); " Text="Eliminar" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Sesion_Key_RTS" HeaderText="ID Sesion" ReadOnly="True" SortExpression="Sesion_Key_RTS" >
+                        <asp:BoundField DataField="Sesion_Key_RTS" HeaderText="ID Sesión" ReadOnly="True" SortExpression="Sesion_Key_RTS" >
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:TemplateField HeaderText="Región" SortExpression="Region_ID"><EditItemTemplate><asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" SelectedValue='<%# Bind("Region_ID") %>'></asp:DropDownList></EditItemTemplate><ItemTemplate><asp:Label ID="Label1" runat="server" Text='<%# Bind("Region_ID") %>'></asp:Label></ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Descripcion" HeaderText="Descripción" SortExpression="Descripcion" />
-                        <asp:BoundField DataField="Escenario" HeaderText="Escenario" SortExpression="Escenario" />
+                        <asp:TemplateField HeaderText="Descripción" SortExpression="Descripcion">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox6" runat="server" MaxLength="60" Text='<%# Bind("Descripcion") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label7" runat="server" Text='<%# Bind("Descripcion") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Escenario" SortExpression="Escenario">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox7" runat="server" MaxLength="15" Text='<%# Bind("Escenario") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label8" runat="server" Text='<%# Bind("Escenario") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="F.Creación" SortExpression="Fecha_Creacion">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Fecha_Creacion") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Fecha_Creacion") %>' MaxLength="10" TextMode="Date"></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("Fecha_Creacion", "{0:d}") %>'></asp:Label>
@@ -52,7 +66,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="F.Vigencia" SortExpression="Fecha_Vigencia">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Fecha_Vigencia") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Fecha_Vigencia") %>' MaxLength="10" TextMode="Date"></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label3" runat="server" Text='<%# Bind("Fecha_Vigencia", "{0:d}") %>'></asp:Label>
@@ -60,25 +74,39 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="F.Expiración" SortExpression="Fecha_Expiracion">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Fecha_Expiracion") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Fecha_Expiracion") %>' MaxLength="10" TextMode="Date"></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label4" runat="server" Text='<%# Bind("Fecha_Expiracion", "{0:d}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Usuario_Modificacion" HeaderText="Usuario Modif." SortExpression="Usuario_Modificacion" />
+                        <asp:TemplateField HeaderText="Usuario Modif." SortExpression="Usuario_Modificacion">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox8" runat="server" MaxLength="12" Text='<%# Bind("Usuario_Modificacion") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label9" runat="server" Text='<%# Bind("Usuario_Modificacion") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="F.Modif." SortExpression="Fecha_Modificacion">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Fecha_Modificacion") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Fecha_Modificacion") %>' MaxLength="10" TextMode="Date"></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("Fecha_Modificacion", "{0:g}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Usuario_Catalogacion" HeaderText="Usuario Cataloga" SortExpression="Usuario_Catalogacion" />
+                        <asp:TemplateField HeaderText="Usuario Cataloga" SortExpression="Usuario_Catalogacion">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("Usuario_Catalogacion") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label10" runat="server" Text='<%# Bind("Usuario_Catalogacion") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="F.Cataloga" SortExpression="Fecha_Catalogacion">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Fecha_Catalogacion") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Fecha_Catalogacion") %>' MaxLength="50"></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label6" runat="server" Text='<%# Bind("Fecha_Catalogacion", "{0:g}") %>'></asp:Label>
@@ -181,73 +209,73 @@
                             <tr>
                                 <td class="auto-style16">ID Sesión:</td>
                                 <td>
-                                    <asp:TextBox ID="Sesion_Key_RTSTextBox" runat="server" Text='<%# Bind("Sesion_Key_RTS") %>' />
+                                    <asp:TextBox ID="Sesion_Key_RTSTextBox" runat="server" Text='<%# Bind("Sesion_Key_RTS") %>' Height="22px" MaxLength="10" Width="100px" />
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>Tipo:</td>
                                 <td>
-                                    <asp:TextBox ID="TipoTextBox" runat="server" Text='<%# Bind("Tipo") %>' />
+                                    <asp:TextBox ID="TipoTextBox" runat="server" Text='<%# Bind("Tipo") %>' Height="22px" MaxLength="1" Width="15px" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
                                 <td class="auto-style16">Región:</td>
                                 <td>
-                                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" SelectedValue='<%# Bind("Region_ID") %>'>
+                                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" SelectedValue='<%# Bind("Region_ID") %>' Height="22px" Width="120px">
                                     </asp:DropDownList>
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>Escenario:</td>
                                 <td>
-                                    <asp:TextBox ID="EscenarioTextBox" runat="server" Text='<%# Bind("Escenario") %>' />
+                                    <asp:TextBox ID="EscenarioTextBox" runat="server" Text='<%# Bind("Escenario") %>' Height="22px" MaxLength="15" Width="100px" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
                                 <td class="auto-style16">Descripcion:</td>
                                 <td>
-                                    <asp:TextBox ID="DescripcionTextBox" runat="server" Text='<%# Bind("Descripcion") %>' />
+                                    <asp:TextBox ID="DescripcionTextBox" runat="server" Text='<%# Bind("Descripcion") %>' Height="22px" MaxLength="60" Width="300px" />
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>F.Creación:</td>
                                 <td>
-                                    <asp:TextBox ID="Fecha_CreacionTextBox" runat="server" Text='<%# Bind("Fecha_Creacion") %>' />
+                                    <asp:TextBox ID="Fecha_CreacionTextBox" runat="server" Text='<%# Bind("Fecha_Creacion") %>' Height="22px" MaxLength="10" TextMode="Date" Width="120px" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
                                 <td class="auto-style16">F.Vigencia:</td>
                                 <td>
-                                    <asp:TextBox ID="Fecha_VigenciaTextBox" runat="server" Text='<%# Bind("Fecha_Vigencia") %>' TextMode="Date" />
+                                    <asp:TextBox ID="Fecha_VigenciaTextBox" runat="server" Text='<%# Bind("Fecha_Vigencia") %>' TextMode="Date" Height="22px" MaxLength="10" Width="120px" />
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>F.Expiración:</td>
                                 <td>
-                                    <asp:TextBox ID="Fecha_ExpiracionTextBox" runat="server" Text='<%# Bind("Fecha_Expiracion") %>' />
+                                    <asp:TextBox ID="Fecha_ExpiracionTextBox" runat="server" Text='<%# Bind("Fecha_Expiracion") %>' Height="22px" MaxLength="10" TextMode="Date" Width="120px" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
                                 <td class="auto-style16">Usuario Modif.</td>
                                 <td>
-                                    <asp:TextBox ID="Usuario_ModificacionTextBox" runat="server" Text='<%# Bind("Usuario_Modificacion") %>' />
+                                    <asp:TextBox ID="Usuario_ModificacionTextBox" runat="server" Text='<%# Bind("Usuario_Modificacion") %>' Height="22px" MaxLength="12" Width="120px" />
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>F.Modif.</td>
                                 <td>
-                                    <asp:TextBox ID="Fecha_ModificacionTextBox" runat="server" Text='<%# Bind("Fecha_Modificacion") %>' />
+                                    <asp:TextBox ID="Fecha_ModificacionTextBox" runat="server" Text='<%# Bind("Fecha_Modificacion") %>' Height="22px" MaxLength="10" TextMode="Date" Width="120px" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
                                 <td class="auto-style16">Usuario Cataloga:</td>
                                 <td>
-                                    <asp:TextBox ID="Usuario_CatalogacionTextBox" runat="server" Text='<%# Bind("Usuario_Catalogacion") %>' />
+                                    <asp:TextBox ID="Usuario_CatalogacionTextBox" runat="server" Text='<%# Bind("Usuario_Catalogacion") %>' Height="22px" MaxLength="50" Width="120px" />
                                 </td>
                                 <td>&nbsp;</td>
                                 <td>F.Cataloga:</td>
                                 <td>
-                                    <asp:TextBox ID="Fecha_CatalogacionTextBox" runat="server" Text='<%# Bind("Fecha_Catalogacion") %>' />
+                                    <asp:TextBox ID="Fecha_CatalogacionTextBox" runat="server" Text='<%# Bind("Fecha_Catalogacion") %>' Height="22px" MaxLength="10" TextMode="Date" Width="120px" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>

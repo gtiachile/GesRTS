@@ -52,10 +52,6 @@
             height: 40px;
             width: 138px;
         }
-        .auto-style58 {
-            width: 87px;
-            height: 40px;
-        }
         .auto-style59 {
             width: 200px;
             height: 40px;
@@ -76,12 +72,13 @@
                 &nbsp;
                 <asp:LinkButton ID="LinkButton1" runat="server" OnClick="ImageButton3_Click">Agregar Criterio</asp:LinkButton>
                 <br />
+                <br />
                 <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Criterio_ID" DataSourceID="GesDBCriteriosGV" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" Width="80%">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField ShowHeader="False">
                             <EditItemTemplate>
-                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Actualizar" />
+                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" ImageUrl="~/Images/saveHS.png" Text="Actualizar" />
                                 &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/Cancel(build)_194_32.bmp" Text="Cancelar" />
                             </EditItemTemplate>
                             <ItemTemplate>
@@ -92,41 +89,41 @@
                         <asp:BoundField DataField="Criterio_ID" HeaderText="ID Criterio" ReadOnly="True" SortExpression="Criterio_ID" />
                         <asp:TemplateField HeaderText="Fecha Desde" SortExpression="Fecha_Desde">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Fecha_Desde") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Fecha_Desde") %>' MaxLength="10" TextMode="Date"></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Fecha_Desde" runat="server" Text='<%# Bind("Fecha_Desde", "{0:d}") %>'></asp:Label>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("Fecha_Desde", "{0:d}") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-                        <asp:BoundField DataField="Inicio_Nombre" HeaderText="Inicio Nombre" SortExpression="Inicio_Nombre" />
+                        <asp:BoundField DataField="Inicio_Nombre" HeaderText="Inicio Descripción" SortExpression="Inicio_Nombre" />
                         <asp:TemplateField HeaderText="Región" SortExpression="Region">
                             <EditItemTemplate>
-                                <asp:DropDownList ID="DropDownList6" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" SelectedValue='<%# Bind("Region") %>'>
+                                <asp:DropDownList ID="DropDownList4" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" SelectedValue='<%# Bind("Region") %>'>
                                 </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("Region") %>'></asp:Label>
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("Region") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Supervisor" SortExpression="Supervisor">
                             <EditItemTemplate>
-                                <asp:DropDownList ID="DropDownList7" runat="server" AutoPostBack="True" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" SelectedValue='<%# Bind("Supervisor") %>'>
+                                <asp:DropDownList ID="DropDownList5" runat="server" AutoPostBack="True" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" SelectedValue='<%# Bind("Supervisor") %>'>
                                 </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("Supervisor") %>'></asp:Label>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("Supervisor") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Estado" SortExpression="Estado">
                             <EditItemTemplate>
-                                <asp:DropDownList ID="DropDownList5" runat="server" AutoPostBack="True" SelectedValue='<%# Bind("Estado") %>'>
+                                <asp:DropDownList ID="DropDownList6" runat="server" AutoPostBack="True" SelectedValue='<%# Bind("Estado") %>'>
                                     <asp:ListItem>Activo</asp:ListItem>
-                                    <asp:ListItem Value="Inactivo"></asp:ListItem>
+                                    <asp:ListItem>Inactivo</asp:ListItem>
                                 </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("Estado") %>'></asp:Label>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("Estado") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -207,7 +204,7 @@
                                 <td class="auto-style31">&nbsp;&nbsp;&nbsp;</td>
                                 <td class="auto-style32">Fecha Desde:</td>
                                 <td class="auto-style47">
-                                    <asp:TextBox ID="Fecha_DesdeTextBox" runat="server" Height="22px" Text='<%# Bind("Fecha_Desde") %>' TextMode="Date" Width="100px" MaxLength="10" />
+                                    <asp:TextBox ID="Fecha_DesdeTextBox" runat="server" Height="22px" Text='<%# Bind("Fecha_Desde", "{0:d}") %>' TextMode="Date" Width="100px" MaxLength="10" />
                                 </td>
                                 <td class="auto-style40">* Formato dd-mm-aaaa</td>
                             </tr>
@@ -223,7 +220,7 @@
                                 <td class="auto-style25"></td>
                                 <td class="auto-style60">Región:</td>
                                 <td class="auto-style59">
-                                    <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" Height="22px" SelectedValue='<%# Bind("Region") %>' Width="200px">
+                                    <asp:DropDownList ID="DropDownRegionFV" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" Height="22px" SelectedValue='<%# Bind("Region") %>' Width="200px">
                                     </asp:DropDownList>
                                 </td>
                                 <td class="auto-style55"></td>
@@ -232,7 +229,7 @@
                                 <td class="auto-style25"></td>
                                 <td class="auto-style60">Supervisor:</td>
                                 <td class="auto-style59">
-                                    <asp:DropDownList ID="DropDownList2" runat="server" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" Height="22px" SelectedValue='<%# Bind("Supervisor") %>' Width="150px" AutoPostBack="True">
+                                    <asp:DropDownList ID="DropDownSupervisorFV" runat="server" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" Height="22px" SelectedValue='<%# Bind("Supervisor") %>' Width="200px" AutoPostBack="True">
                                     </asp:DropDownList>
                                 </td>
                                 <td class="auto-style55"></td>
@@ -251,7 +248,7 @@
                         </table>
                         <br />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" OnClick="InsertButton_Click" />
-                        &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancelar" />
+                        &nbsp; &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancelar" />
                     </InsertItemTemplate>
                     <ItemTemplate>
                         Criterio_ID:
@@ -301,18 +298,21 @@
                         <asp:Parameter Name="Criterio_ID" Type="String" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
-                <asp:SqlDataSource ID="GesDBRegiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Region_ID], ([Region_Chile] + ' - ' + [Descripción]) as Region_Txt, [Region_RTS] 
-  FROM [Regiones]
-ORDER BY [Region_Txt]"></asp:SqlDataSource>
-                <asp:SqlDataSource ID="GesDBSupervisores" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT ' ' AS [Vendedor_ID], 'Seleccione Supervisor' AS [Vendedor_Nombre], ' ' AS [Vendedor_Tipo]
- FROM [Vendedores]
+                <asp:SqlDataSource ID="GesDBRegiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT ' ' AS Region_ID, '- Seleccione Región' as Region_Txt, ' ' AS Region_RTS 
+  FROM Regiones
 UNION
-SELECT [Vendedor_ID], [Vendedor_Nombre], [Vendedor_Tipo]
- FROM [Vendedores]
- WHERE [Vendedor_Tipo] = 'Supervisor'
-     AND [Region]                = @Region">
+SELECT Region_ID, (Region_Chile + ' - ' + Descripción) as Region_Txt, Region_RTS
+  FROM Regiones
+ORDER BY Region_Txt"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="GesDBSupervisores" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT ' ' AS Vendedor_ID, '- Seleccione Supervisor' AS Vendedor_Nombre
+ FROM Vendedores
+UNION
+SELECT Vendedor_ID, Vendedor_Nombre
+ FROM Vendedores
+ WHERE Vendedor_Tipo = 'Supervisor'
+     AND Region                = @Region_ID">
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="FormView1" DefaultValue="RM" Name="Region" PropertyName="SelectedValue" />
+                        <asp:ControlParameter ControlID="GridView1" DefaultValue="RM" Name="Region_ID" PropertyName="SelectedValue" />
                     </SelectParameters>
                 </asp:SqlDataSource>
                 <br />

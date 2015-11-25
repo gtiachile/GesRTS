@@ -11,7 +11,7 @@ namespace BitOp.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack) { BitOP.Global.MenuControl.getMenu((Menu)Master.FindControl("NavigationMenu"), (Login)Master.FindControl("Login1"), BitOP.Global.Perfil); }                  
+            if (!this.IsPostBack) { BitOP.Global.MenuControl.getMenu((Menu)Master.FindControl("NavigationMenu"), (Login)Master.FindControl("Login1"), BitOP.Global.Perfil); }
         }
 
         protected void ImageButton3_Click(object sender, EventArgs e)
@@ -21,7 +21,7 @@ namespace BitOp.Admin
 
         protected void InsertButton_Click(object sender, EventArgs e)
         {
-            MultiView1.ActiveViewIndex = 0; 
+            MultiView1.ActiveViewIndex = 0;
             GridView1.DataBind();
         }
 

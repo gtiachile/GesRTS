@@ -85,6 +85,15 @@ namespace BitOp.Admin {
         protected global::System.Web.UI.WebControls.SqlDataSource GesDBVendedoresGV;
         
         /// <summary>
+        /// Control GesDBSupervisoresGV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource GesDBSupervisoresGV;
+        
+        /// <summary>
         /// Control View2.
         /// </summary>
         /// <remarks>

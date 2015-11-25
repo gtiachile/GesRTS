@@ -39,12 +39,12 @@ ORDER BY [Region_Txt]"></asp:SqlDataSource>
                     <Columns>
                         <asp:TemplateField ShowHeader="False">
                             <EditItemTemplate>
-                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" />
-                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/Cancel(build)_194_32.bmp" />
+                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" ImageUrl="~/Images/saveHS.png" Text="Actualizar" />
+                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/Cancel(build)_194_32.bmp" Text="Cancelar" />
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Edit" ImageUrl="~/Images/EditTableHS.png" />
-                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" OnClientClick="return confirm('¿Está seguro que desea eliminar?'); " />
+                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Edit" ImageUrl="~/Images/EditTableHS.png" Text="Editar" />
+                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" OnClientClick="return confirm('¿Está seguro que desea eliminar?'); " Text="Eliminar" />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="Vendedor_ID" HeaderText="ID Vendedor" ReadOnly="True" SortExpression="Vendedor_ID" >
@@ -65,17 +65,16 @@ ORDER BY [Region_Txt]"></asp:SqlDataSource>
                         <asp:BoundField DataField="Vendedor_Nombre" HeaderText="Nombre" SortExpression="Vendedor_Nombre" />
                         <asp:TemplateField HeaderText="Región" SortExpression="Region">
                             <EditItemTemplate>
-                                <asp:DropDownList ID="DropDownList11" runat="server" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" SelectedValue='<%# Bind("Region") %>' AutoPostBack="True">
-                                </asp:DropDownList>
+                                <asp:Label ID="Label7" runat="server" Text='<%# Bind("Region") %>'></asp:Label>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label5" runat="server" Text='<%# Eval("Region") %>'></asp:Label>
+                                <asp:Label ID="Lbl_Region" runat="server" Text='<%# Eval("Region") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Supervisor" SortExpression="Supervisor">
                             <EditItemTemplate>
-                                <asp:DropDownList ID="DropDownList9" runat="server" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" SelectedValue='<%# Bind("Supervisor") %>' AutoPostBack="True">
+                                <asp:DropDownList ID="DropDownRegionGV" runat="server" DataSourceID="GesDBSupervisoresGV" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" SelectedValue='<%# Bind("Supervisor") %>' AutoPostBack="True">
                                 </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
@@ -136,6 +135,15 @@ WHERE [Vendedor_ID] = @Vendedor_ID">
                         <asp:Parameter Name="Vendedor_ID" Type="String" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
+                <asp:SqlDataSource ID="GesDBSupervisoresGV" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Vendedor_ID], [Vendedor_Nombre]
+  FROM [Vendedores]
+WHERE [Vendedor_Tipo] = 'Supervisor'
+    AND [Region]                = @Region_ID
+    AND [Estado]                 = 'Activo'">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="DropDownList1" Name="Region_ID" PropertyName="SelectedValue" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
                 <br />
             </asp:View>
             <asp:View ID="View2" runat="server">
@@ -179,7 +187,7 @@ WHERE [Vendedor_ID] = @Vendedor_ID">
                                 <td class="auto-style18">&nbsp;</td>
                                 <td class="auto-style21">Tipo:</td>
                                 <td>
-                                    <asp:DropDownList ID="DropDownList2" runat="server" SelectedValue='<%# Bind("Vendedor_Tipo") %>' Height="22px" Width="90px">
+                                    <asp:DropDownList ID="DropDownList2" runat="server" SelectedValue='<%# Bind("Vendedor_Tipo") %>' Height="22px" Width="90px" AutoPostBack="True">
                                         <asp:ListItem>Vendedor</asp:ListItem>
                                         <asp:ListItem>Supervisor</asp:ListItem>
                                     </asp:DropDownList>
@@ -198,7 +206,7 @@ WHERE [Vendedor_ID] = @Vendedor_ID">
                                 <td class="auto-style18">&nbsp;</td>
                                 <td class="auto-style21">Región:</td>
                                 <td>
-                                    <asp:TextBox ID="TextBoxRegion" runat="server" Height="22px" ReadOnly="True" Width="40px" BackColor="#CCCCCC">RM</asp:TextBox>
+                                    <asp:TextBox ID="TextBoxRegion" runat="server" Height="22px" ReadOnly="True" Width="40px" BackColor="#CCCCCC" Text='<%# Bind("Region") %>'></asp:TextBox>
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>

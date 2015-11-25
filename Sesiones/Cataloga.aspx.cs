@@ -65,17 +65,47 @@ namespace BitOp.Sesiones
             view = new DataView(dt);
             foreach (DataRowView row in view)
             {
-                Lbl_Inicio_Descrip.Text = row["Inicio_Nombre"].ToString();
-                Lbl_Fecha_Desde.Text    = row["Fecha_Desde"].ToString();
-                Lbl_Region.Text         = row["Region"].ToString();
-                Lbl_Supervisor.Text     = row["Supervisor"].ToString();
+                if (row["Inicio_Nombre"] != DBNull.Value)
+                    Lbl_Inicio_Descrip.Text = row["Inicio_Nombre"].ToString();
+                if (row["Fecha_Desde"] != DBNull.Value)
+                    Lbl_Fecha_Desde.Text    = row["Fecha_Desde"].ToString().Substring(0,10);
+                if (row["Region"] != DBNull.Value)
+                    Lbl_Region.Text         = row["Region"].ToString();
+                if (row["Supervisor"] != DBNull.Value)
+                    Lbl_Supervisor.Text     = row["Supervisor"].ToString();
             }
             con.Close();
         }
 
+        protected void Carga_Tabla_Territorios_Temp(int Nro_Sesion)
+        {
+            System.Configuration.Configuration rootWebConfig = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/GesRTS");
+            System.Configuration.ConnectionStringSettings connString;
+            connString = rootWebConfig.ConnectionStrings.ConnectionStrings["BopDBConnectionString"];
+
+            using (SqlConnection conn = new SqlConnection(connString.ToString()))
+            {
+                using (SqlCommand comm = new SqlCommand("dbo.Carga_Territorios_Temp", conn))
+                {
+                    comm.CommandType = CommandType.StoredProcedure;
+
+                    // You can call the return value parameter anything, .e.g. "@Result".
+
+                    SqlParameter p1 = new SqlParameter("@Nro_Sesion", SqlDbType.Int);
+
+                    p1.Direction = ParameterDirection.Input;
+
+                    p1.Value = Nro_Sesion;
+
+                    comm.Parameters.Add(p1);
+
+                    conn.Open();
+                    comm.ExecuteNonQuery();
+                }
+            }
+        }
         protected void Carga_Tablas_Desde_RTS(int Nro_Sesion, string Usuario, DateTime Fecha_Vigencia, DateTime Fecha_Expiracion)
         {
-
             System.Configuration.Configuration rootWebConfig = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/GesRTS");
             System.Configuration.ConnectionStringSettings connString;
             connString = rootWebConfig.ConnectionStrings.ConnectionStrings["BopDBConnectionString"];
@@ -110,11 +140,9 @@ namespace BitOp.Sesiones
 
                     conn.Open();
                     comm.ExecuteNonQuery();
-
                 }
             }
         }
-
 
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -127,7 +155,17 @@ namespace BitOp.Sesiones
             Label _nro_sesion = (Label)GridView1.Rows[indice].FindControl("Label3");
             Lbl_Sesion.Text = _nro_sesion.Text;
             FormView1.DataBind();
-            GridView1.DataBind();
+            GridView2.DataBind();
+        }
+
+        protected void UpdateButton_Click1(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0;
+        }
+
+        protected void UpdateCancelButton_Click1(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0;
         }
     }
 }
