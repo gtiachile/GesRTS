@@ -22,6 +22,9 @@ namespace BitOp.Sesiones
 
         protected void CatalogaSesion_Click(object sender, EventArgs e)
         {
+            int _nro_sesion = 0;
+            _nro_sesion = Convert.ToInt16(Lbl_Sesion.Text);
+            Carga_Tabla_Territorios_Temp(_nro_sesion);
             MultiView1.ActiveViewIndex = 1;
         }
 
@@ -85,7 +88,7 @@ namespace BitOp.Sesiones
 
             using (SqlConnection conn = new SqlConnection(connString.ToString()))
             {
-                using (SqlCommand comm = new SqlCommand("dbo.Carga_Territorios_Temp", conn))
+                using (SqlCommand comm = new SqlCommand("dbo.p_Carga_Territorios_Temp", conn))
                 {
                     comm.CommandType = CommandType.StoredProcedure;
 
@@ -147,6 +150,7 @@ namespace BitOp.Sesiones
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
             Fill_Header(DropDownList2.SelectedValue.ToString());
+            CatalogaSesion0.Enabled = false;
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -154,6 +158,7 @@ namespace BitOp.Sesiones
             int indice = GridView1.SelectedIndex;
             Label _nro_sesion = (Label)GridView1.Rows[indice].FindControl("Label3");
             Lbl_Sesion.Text = _nro_sesion.Text;
+            CatalogaSesion0.Enabled = true;
             FormView1.DataBind();
             GridView2.DataBind();
         }

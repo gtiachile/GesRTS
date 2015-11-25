@@ -184,7 +184,7 @@ ORDER BY [PKEY]"><SelectParameters>
                             </asp:SqlDataSource>
                         </td>
                         <td>
-                            <asp:Button ID="CatalogaSesion0" runat="server" CssClass="bold" Height="42px" OnClick="CatalogaSesion_Click" Text="Cataloga Sesión" Width="118px" />
+                            <asp:Button ID="CatalogaSesion0" runat="server" CssClass="bold" Height="42px" OnClick="CatalogaSesion_Click" Text="Cataloga Sesión" Width="118px" Enabled="False" />
                         </td>
                         <td>&nbsp;</td>
                     </tr>

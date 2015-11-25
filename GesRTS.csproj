@@ -256,6 +256,17 @@
     <Content Include="BopDBDataSet.xss">
       <DependentUpon>BopDBDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="GesRTSDataSet.xsc">
+      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="GesRTSDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GesRTSDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="GesRTSDataSet.xss">
+      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -297,6 +308,7 @@
     <Content Include="Sesiones\Cons_Territorios.aspx" />
     <Content Include="Sesiones\Cons_TerrVend.aspx" />
     <Content Include="Sesiones\Cons_UbicRuta.aspx" />
+    <Content Include="Sesiones\Rep_Sesiones.aspx" />
     <Content Include="Sesiones\Sesiones.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Global.asax" />
@@ -393,6 +405,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BopDBDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GesRTSDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="InicioMenu.aspx.cs">
       <DependentUpon>InicioMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -474,6 +491,13 @@
     <Compile Include="Sesiones\Cons_UbicRuta.aspx.designer.cs">
       <DependentUpon>Cons_UbicRuta.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Sesiones\Rep_Sesiones.aspx.cs">
+      <DependentUpon>Rep_Sesiones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sesiones\Rep_Sesiones.aspx.designer.cs">
+      <DependentUpon>Rep_Sesiones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Sesiones\Sesiones.aspx.cs">
       <DependentUpon>Sesiones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -496,6 +520,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="Sesiones\Rep_Sesiones.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -531,7 +556,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1701</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1701/</IISUrl>
+          <IISUrl>http://localhost:1705/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://10.250.240.58/Bop</CustomServerUrl>
