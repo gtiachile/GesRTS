@@ -8,6 +8,8 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Threading;
 
 namespace BitOP
 {
@@ -170,6 +172,14 @@ namespace BitOP
             // is set to InProc in the Web.config file. If session mode is set to StateServer 
             // or SQLServer, the event is not raised.
 
+        }
+
+        protected void Application_BeginRequest(Object sender, EventArgs e)
+        {
+            CultureInfo newCulture = (CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
+            newCulture.DateTimeFormat.ShortDatePattern = "dd-MM-yyyy";
+            newCulture.DateTimeFormat.DateSeparator = "-";
+            Thread.CurrentThread.CurrentCulture = newCulture;
         }
 
     }
