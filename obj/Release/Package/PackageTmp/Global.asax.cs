@@ -67,7 +67,7 @@ namespace BitOP
                 SqlCommand cmd = new SqlCommand();
                 DataSet ds = new DataSet();
                 DataTable dt = new DataTable();
-                System.Configuration.Configuration rootWebConfig =  System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/BitOp");
+                System.Configuration.Configuration rootWebConfig =  System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/GesRTS");
                 System.Configuration.ConnectionStringSettings connString;
                 connString = rootWebConfig.ConnectionStrings.ConnectionStrings["BopDBConnectionString"];
                 con = new SqlConnection(connString.ToString());

@@ -7,48 +7,54 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace BitOp {
+namespace BitOp.Sesiones {
     
     
-    public partial class Inicio {
+    public partial class Rep_Sesiones {
         
         /// <summary>
-        /// Control Image1.
+        /// Control DropDownList1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        /// protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
         
         /// <summary>
-        /// Control Image3.
+        /// Control GesDBRegiones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image3;
+        protected global::System.Web.UI.WebControls.SqlDataSource GesDBRegiones;
         
         /// <summary>
-        /// Control Image2.
+        /// Control ReportViewer1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        /// protected global::System.Web.UI.WebControls.Image Image2;
+        protected global::Microsoft.Reporting.WebForms.ReportViewer ReportViewer1;
         
         /// <summary>
-        /// Propiedad Master.
+        /// Control GesDBSesiones.
         /// </summary>
         /// <remarks>
-        /// Propiedad generada automáticamente.
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        /// public new BitOP.SiteMaster Master {
-        ///    get {
-        ///        return ((BitOP.SiteMaster)(base.Master));
-            }
-        }
- ///   }
-/// }
+        protected global::System.Web.UI.WebControls.SqlDataSource GesDBSesiones;
+        
+        /// <summary>
+        /// Control ScriptManager1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+    }
+}

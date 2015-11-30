@@ -7,39 +7,45 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace BitOp {
+namespace BitOp.Sesiones {
     
     
-    public partial class Inicio {
+    public partial class Prueba {
         
         /// <summary>
-        /// Control Image1.
+        /// Control Panel1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// Control Image2.
+        /// Control Label1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image2;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// Propiedad Master.
+        /// Control Button1.
         /// </summary>
         /// <remarks>
-        /// Propiedad generada automáticamente.
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        public new BitOP.SiteMaster Master {
-            get {
-                return ((BitOP.SiteMaster)(base.Master));
-            }
-        }
+        protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
+        /// Control Button2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }
