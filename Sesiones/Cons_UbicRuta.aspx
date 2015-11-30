@@ -34,7 +34,7 @@ ORDER BY [Region_Txt]"></asp:SqlDataSource>
                 <td>
                     <asp:DropDownList ID="DropDownList3" runat="server" AutoPostBack="True" DataSourceID="GesDBSesiones" DataTextField="Descripcion" DataValueField="Sesion_Key_RTS">
                     </asp:DropDownList>
-                    <asp:SqlDataSource ID="GesDBSesiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT 0 AS [Sesion_Key_RTS], ' ' AS [Region_ID], 'Seleccione una sesión' AS [Descripcion]
+                    <asp:SqlDataSource ID="GesDBSesiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT 0 AS [Sesion_Key_RTS], ' ' AS [Region_ID], '- Seleccione sesión -' AS [Descripcion]
   FROM [Sesiones]
 UNION
 SELECT [Sesion_Key_RTS], [Region_ID], [Descripcion] 
@@ -51,7 +51,7 @@ WHERE [Region_ID] = @Region">
                 <td class="auto-style12">
                     <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="True" DataSourceID="GesDBTerritorios" DataTextField="Territorio_Txt" DataValueField="Territorio_Key_RTS">
                     </asp:DropDownList>
-                    <asp:SqlDataSource ID="GesDBTerritorios" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT 0 AS Territorio_Key_RTS, 0 AS Sesion_Key_RTS, 'Seleccione Territorio' AS Territorio_Txt,
+                    <asp:SqlDataSource ID="GesDBTerritorios" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT 0 AS Territorio_Key_RTS, 0 AS Sesion_Key_RTS, '- Seleccione Territorio -' AS Territorio_Txt,
               0 AS Territorio_Nro, ' ' AS Territorio_ID, ' ' AS Vendedor
   FROM Territorios
 UNION
@@ -71,7 +71,7 @@ ORDER BY Territorio_Txt">
                     <asp:DropDownList ID="DropDownList4" runat="server" AutoPostBack="True" DataSourceID="GesDBRutas" DataTextField="Descripcion_Txt" DataValueField="Ruta_Key_RTS">
                     </asp:DropDownList>
                     <asp:SqlDataSource ID="GesDBRutas" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT  0 AS Ruta_Key_RTS, 0 AS Sesion_Key_RTS, 0 AS Territorio_Key_RTS, 0 AS Ruta_Nro,
-               ' ' AS Ruta_ID, 'Seleccione Ruta' AS Descripcion_Txt, ' ' AS Ruta_Inicio_Tipo, ' ' AS Ruta_Inicio_Ubicacion
+               ' ' AS Ruta_ID, '- Seleccione Ruta -' AS Descripcion_Txt, ' ' AS Ruta_Inicio_Tipo, ' ' AS Ruta_Inicio_Ubicacion
 FROM    Rutas
 UNION
 SELECT  Ruta_Key_RTS, Sesion_Key_RTS, Territorio_Key_RTS, Ruta_Nro, Ruta_ID,
@@ -169,13 +169,13 @@ WHERE  Sesion_Key_RTS      = @Sesion_Key_RTS
  FROM  Paradas INNER JOIN
               V_ClientesTP ON  Ubicacion_ID = ID
                                      AND Ubicacion_Region = REGION_ID
-WHERE Sesion_Key_RTS     = @Sesion_Key_RTS
-    AND  Territory_Key_RTS = @Territory_Nro
-    AND  Ruta_Key_RTS        = @Ruta_Key_RTS
+WHERE Sesion_Key_RTS      = @Sesion_Key_RTS
+    AND  Territorio_Key_RTS = @Territorio_Nro
+    AND  Ruta_Key_RTS         = @Ruta_Key_RTS
 ORDER BY Nro_Secuencia">
             <SelectParameters>
                 <asp:ControlParameter ControlID="DropDownList3" DefaultValue="" Name="Sesion_Key_RTS" PropertyName="SelectedValue" />
-                <asp:ControlParameter ControlID="DropDownList2" DefaultValue="" Name="Territory_Nro" PropertyName="SelectedValue" />
+                <asp:ControlParameter ControlID="DropDownList2" Name="Territorio_Nro" PropertyName="SelectedValue" />
                 <asp:ControlParameter ControlID="DropDownList4" Name="Ruta_Key_RTS" PropertyName="SelectedValue" />
             </SelectParameters>
         </asp:SqlDataSource>

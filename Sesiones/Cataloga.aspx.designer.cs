@@ -10,7 +10,7 @@
 namespace BitOp.Sesiones {
     
     
-    public partial class Cataloga1 {
+    public partial class Catalo {
         
         /// <summary>
         /// Control MultiView1.
@@ -103,6 +103,15 @@ namespace BitOp.Sesiones {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
+        /// Control Cataloga_Button.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Cataloga_Button;
+        
+        /// <summary>
         /// Control GesDBSesionesTP.
         /// </summary>
         /// <remarks>
@@ -110,15 +119,6 @@ namespace BitOp.Sesiones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource GesDBSesionesTP;
-        
-        /// <summary>
-        /// Control CatalogaSesion0.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CatalogaSesion0;
         
         /// <summary>
         /// Control View2.
@@ -139,6 +139,24 @@ namespace BitOp.Sesiones {
         protected global::System.Web.UI.WebControls.FormView FormView1;
         
         /// <summary>
+        /// Control Confirma_Button.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Confirma_Button;
+        
+        /// <summary>
+        /// Control GesDBSesion_TempFV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource GesDBSesion_TempFV;
+        
+        /// <summary>
         /// Control GridView2.
         /// </summary>
         /// <remarks>
@@ -148,22 +166,13 @@ namespace BitOp.Sesiones {
         protected global::System.Web.UI.WebControls.GridView GridView2;
         
         /// <summary>
-        /// Control GesDBSesiones.
+        /// Control GesDBTerritorios_Temp.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource GesDBSesiones;
-        
-        /// <summary>
-        /// Control GesDBTerritorios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource GesDBTerritorios;
+        protected global::System.Web.UI.WebControls.SqlDataSource GesDBTerritorios_Temp;
         
         /// <summary>
         /// Control GesDBVendedores.

@@ -19,7 +19,7 @@ namespace BitOp {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        /// protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
         /// Control Image3.
@@ -37,7 +37,7 @@ namespace BitOp {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image2;
+        /// protected global::System.Web.UI.WebControls.Image Image2;
         
         /// <summary>
         /// Propiedad Master.
@@ -45,10 +45,10 @@ namespace BitOp {
         /// <remarks>
         /// Propiedad generada automáticamente.
         /// </remarks>
-        public new BitOP.SiteMaster Master {
-            get {
-                return ((BitOP.SiteMaster)(base.Master));
+        /// public new BitOP.SiteMaster Master {
+        ///    get {
+        ///        return ((BitOP.SiteMaster)(base.Master));
             }
         }
-    }
-}
+ ///   }
+/// }

@@ -256,17 +256,6 @@
     <Content Include="BopDBDataSet.xss">
       <DependentUpon>BopDBDataSet.xsd</DependentUpon>
     </Content>
-    <Content Include="GesRTSDataSet.xsc">
-      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="GesRTSDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>GesRTSDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="GesRTSDataSet.xss">
-      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -304,10 +293,13 @@
     <Content Include="Sesiones\Cataloga.aspx" />
     <Content Include="Sesiones\Cons_Rutas.aspx" />
     <Content Include="Sesiones\Cons_Sesiones.aspx" />
-    <Content Include="Sesiones\Cons_TerrClte.aspx" />
+    <Content Include="Sesiones\Cons_RutasClteHist.aspx" />
+    <Content Include="Sesiones\Cons_RutasClteTrab.aspx" />
     <Content Include="Sesiones\Cons_Territorios.aspx" />
     <Content Include="Sesiones\Cons_TerrVend.aspx" />
     <Content Include="Sesiones\Cons_UbicRuta.aspx" />
+    <Content Include="Sesiones\Cons_Audita.aspx" />
+    <Content Include="Sesiones\Prueba.aspx" />
     <Content Include="Sesiones\Rep_Sesiones.aspx" />
     <Content Include="Sesiones\Sesiones.aspx" />
     <Content Include="Styles\Site.css" />
@@ -405,11 +397,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BopDBDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="GesRTSDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="InicioMenu.aspx.cs">
       <DependentUpon>InicioMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -463,12 +450,19 @@
     <Compile Include="Sesiones\Cons_Sesiones.aspx.designer.cs">
       <DependentUpon>Cons_Sesiones.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Sesiones\Cons_TerrClte.aspx.cs">
-      <DependentUpon>Cons_TerrClte.aspx</DependentUpon>
+    <Compile Include="Sesiones\Cons_RutasClteHist.aspx.cs">
+      <DependentUpon>Cons_RutasClteHist.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Sesiones\Cons_TerrClte.aspx.designer.cs">
-      <DependentUpon>Cons_TerrClte.aspx</DependentUpon>
+    <Compile Include="Sesiones\Cons_RutasClteHist.aspx.designer.cs">
+      <DependentUpon>Cons_RutasClteHist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sesiones\Cons_RutasClteTrab.aspx.cs">
+      <DependentUpon>Cons_RutasClteTrab.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sesiones\Cons_RutasClteTrab.aspx.designer.cs">
+      <DependentUpon>Cons_RutasClteTrab.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sesiones\Cons_Territorios.aspx.cs">
       <DependentUpon>Cons_Territorios.aspx</DependentUpon>
@@ -490,6 +484,20 @@
     </Compile>
     <Compile Include="Sesiones\Cons_UbicRuta.aspx.designer.cs">
       <DependentUpon>Cons_UbicRuta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sesiones\Cons_Audita.aspx.cs">
+      <DependentUpon>Cons_Audita.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sesiones\Cons_Audita.aspx.designer.cs">
+      <DependentUpon>Cons_Audita.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sesiones\Prueba.aspx.cs">
+      <DependentUpon>Prueba.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sesiones\Prueba.aspx.designer.cs">
+      <DependentUpon>Prueba.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sesiones\Rep_Sesiones.aspx.cs">
       <DependentUpon>Rep_Sesiones.aspx</DependentUpon>

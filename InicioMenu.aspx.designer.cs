@@ -10,7 +10,7 @@
 namespace BitOp {
     
     
-    public partial class InicioMenu {
+    public partial class Inicio {
         
         /// <summary>
         /// Control Image1.

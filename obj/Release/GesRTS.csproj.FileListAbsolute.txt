@@ -38,3 +38,5 @@ C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRT
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.pdb
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\RdlCompile.cache
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\RdlCompile.compiled
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\RdlCompile.cache
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\RdlCompile.compiled

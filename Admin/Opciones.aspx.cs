@@ -61,7 +61,17 @@ namespace BitOp.Admin
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            MultiView1.ActiveViewIndex = 1;
+        }
 
+        protected void InsertButton_Click1(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0;
+        }
+
+        protected void InsertCancelButton_Click1(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0;
         }
 
 
