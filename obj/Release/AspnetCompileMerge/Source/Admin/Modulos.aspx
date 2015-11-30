@@ -6,19 +6,24 @@
             width: 86px;
             color: #000000;
         }
+        .auto-style12 {
+            font-size: medium;
+            color: #000000;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h3>MODULOS</h3>
+    <p class="auto-style12"><strong>MODULOS</strong></p>
     <p>
         <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
             <asp:View ID="View1" runat="server">
                 <p>
                     <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/Images/AddMark_10580_inverse.png" OnClick="LinkButton1_Click" />
-                    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Agregar Modulo</asp:LinkButton>
+                    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Agregar Módulo</asp:LinkButton>
                 </p>
                 <p>
-                    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Modulo" DataSourceID="BopDBModulos" EnableModelValidation="False" Width="60%">
+                    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Modulo" DataSourceID="BopDBModulos" EnableModelValidation="False" Width="60%" ShowHeaderWhenEmpty="True" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <AlternatingRowStyle BackColor="White" />
                         <Columns>
                             <asp:TemplateField ShowHeader="False">
                                 <EditItemTemplate>
@@ -43,7 +48,16 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-                        <HeaderStyle BackColor="#003366" ForeColor="White" />
+                        <EditRowStyle BackColor="#7C6F57" />
+                        <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#1C5E55" ForeColor="White" Font-Bold="True" />
+                        <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#E3EAEB" />
+                        <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                        <SortedAscendingHeaderStyle BackColor="#246B61" />
+                        <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                        <SortedDescendingHeaderStyle BackColor="#15524A" />
                     </asp:GridView>
                     <asp:SqlDataSource ID="BopDBModulos" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Modulos] WHERE [Modulo] = @original_Modulo AND [Descripción] = @original_Descripción AND [Estado] = @original_Estado" InsertCommand="p_ValidaInsertaModulo" InsertCommandType="StoredProcedure" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Modulos]" UpdateCommand="UPDATE [Modulos] SET [Descripción] = @Descripción, [Estado] = @Estado WHERE [Modulo] = @original_Modulo AND [Descripción] = @original_Descripción AND [Estado] = @original_Estado">
                         <DeleteParameters>
@@ -115,8 +129,8 @@
                             </tr>
                         </table>
                         <br />
-                        <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" OnClick="InsertButton_Click" />
-                        &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" OnClick="InsertCancelButton_Click" />
+                        <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" OnClick="InsertButton_Click" />
+                        &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" OnClick="InsertCancelButton_Click" />
                     </InsertItemTemplate>
                     <ItemTemplate>
                         Modulo:

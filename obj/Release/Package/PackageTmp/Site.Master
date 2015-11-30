@@ -39,7 +39,7 @@
             <table class="auto-style6">
                 <tr>
                     <td>
-                        <h1>bitacora operaciones</h1>
+                        <h1>administracion de territorios</h1>
                         <asp:SqlDataSource ID="BopDBLogin" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>"  SelectCommand="Select getdate()"></asp:SqlDataSource>
                     </td>
                     <td align="right"><asp:Login ID="Login1" runat="server" OnAuthenticate="Login1_Authenticate">

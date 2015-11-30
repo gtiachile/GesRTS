@@ -4,17 +4,23 @@
         .auto-style10 {
             color: #000000;
         }
+        .auto-style11 {
+            font-size: medium;
+            color: #000000;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h3>PERFILES</h3>
+    <p class="auto-style11"><strong>PERFILES</strong></p>
     <p>
         <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
             <asp:View ID="View1" runat="server">
                 <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/AddMark_10580_inverse.png" OnClick="ImageButton1_Click" />
                 <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Agregar Perfil</asp:LinkButton>
                 <br />
-                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Perfil" DataSourceID="BopDBPerfiles" Width="60%">
+                <br />
+                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Perfil" DataSourceID="BopDBPerfiles" Width="50%" ShowHeaderWhenEmpty="True" CellPadding="4" ForeColor="#333333" GridLines="None">
+                    <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField ShowHeader="False">
                             <EditItemTemplate>
@@ -39,7 +45,16 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
-                    <HeaderStyle BackColor="#003366" ForeColor="White" />
+                    <EditRowStyle BackColor="#7C6F57" />
+                    <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#1C5E55" ForeColor="White" Font-Bold="True" />
+                    <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#E3EAEB" />
+                    <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                    <SortedAscendingHeaderStyle BackColor="#246B61" />
+                    <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                    <SortedDescendingHeaderStyle BackColor="#15524A" />
                 </asp:GridView>
                 <asp:SqlDataSource ID="BopDBPerfiles" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Perfiles] WHERE [Perfil] = @original_Perfil AND [Descripción] = @original_Descripción AND [Estado] = @original_Estado" InsertCommand="p_ValidaInsertaPerfil" InsertCommandType="StoredProcedure" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Perfiles]" UpdateCommand="UPDATE [Perfiles] SET [Descripción] = @Descripción, [Estado] = @Estado WHERE [Perfil] = @original_Perfil AND [Descripción] = @original_Descripción AND [Estado] = @original_Estado">
                     <DeleteParameters>
@@ -110,8 +125,8 @@
                              </tr>
                          </table>
                          <br />
-                         <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" OnClick="InsertButton_Click" Text="Insert" />
-                         &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancel" />
+                         <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" OnClick="InsertButton_Click" Text="Insertar" />
+                         &nbsp; <asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancelar" />
                      </InsertItemTemplate>
                      <ItemTemplate>
                          Perfil:
