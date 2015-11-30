@@ -95,6 +95,8 @@ BEGIN
 	DECLARE @Ventana2_Apertura	DATETIME 
 	DECLARE @Ventana2_Cierre	DATETIME
 
+	DECLARE @Nro_Ruta		INT
+
 	DELETE FROM Paradas
 	WHERE	Paradas.Sesion_Key_RTS = @Nro_Sesion
 
@@ -115,16 +117,19 @@ BEGIN
 
 	WHILE @@FETCH_STATUS = 0   
 	BEGIN   
-		SELECT	@Territory_Key_RTS=V_RutasTP.TERRITORY_PKEY
+		SELECT	@Territory_Key_RTS = V_RutasTP.TERRITORY_PKEY, @Nro_Ruta = V_RutasTP.ROUTE_NUMBER
 		FROM	V_RutasTP
 		WHERE	V_RutasTP.PKEY = @Ruta_Key_RTS
 
-		INSERT INTO Paradas (Parada_Key_RTS, Sesion_Key_RTS, Territory_Key_RTS, Ruta_Key_RTS, Ubicacion_Region, Ubicacion_Tipo, Ubicacion_ID,
-			Ubicacion_Extension, Nro_Secuencia, Tipo_Parada, Hora_Llegada, Tiempo_Servicio, Tiempo_Viaje,  Distancia, Hora_Apertura,
-			Hora_Cierre, Ventana1_Apertura, Ventana1_Cierre, Ventana2_Apertura, Ventana2_Cierre)
-		VALUES (@Parada_Key_RTS, @Sesion_Key_RTS, @Territory_Key_RTS, @Ruta_Key_RTS, @Ubicacion_Region, @Ubicacion_Tipo, @Ubicacion_ID,
-			@Ubicacion_Extension, @Nro_Secuencia, @Tipo_Parada, @Hora_Llegada, @Tiempo_Servicio, @Tiempo_Viaje, @Distancia,@Hora_Apertura,
-			@Hora_Cierre, @Ventana1_Apertura, @Ventana1_Cierre, @Ventana2_Apertura, @Ventana2_Cierre)
+		IF (@Nro_Ruta > 0)
+		   BEGIN
+			INSERT INTO Paradas (Parada_Key_RTS, Sesion_Key_RTS, Territorio_Key_RTS, Ruta_Key_RTS, Ubicacion_Region, Ubicacion_Tipo, Ubicacion_ID,
+				Ubicacion_Extension, Nro_Secuencia, Tipo_Parada, Hora_Llegada, Tiempo_Servicio, Tiempo_Viaje,  Distancia, Hora_Apertura,
+				Hora_Cierre, Ventana1_Apertura, Ventana1_Cierre, Ventana2_Apertura, Ventana2_Cierre)
+			VALUES (@Parada_Key_RTS, @Sesion_Key_RTS, @Territory_Key_RTS, @Ruta_Key_RTS, @Ubicacion_Region, @Ubicacion_Tipo, @Ubicacion_ID,
+				@Ubicacion_Extension, @Nro_Secuencia, @Tipo_Parada, @Hora_Llegada, @Tiempo_Servicio, @Tiempo_Viaje, @Distancia,@Hora_Apertura,
+				@Hora_Cierre, @Ventana1_Apertura, @Ventana1_Cierre, @Ventana2_Apertura, @Ventana2_Cierre)
+		   END
 
 		FETCH NEXT FROM DB_cursorA INTO @Parada_Key_RTS, @Sesion_Key_RTS, @Ruta_Key_RTS, @Ubicacion_Region, @Ubicacion_Tipo,@Ubicacion_ID, @Ubicacion_Extension,
 					@Nro_Secuencia, @Tipo_Parada, @Hora_Llegada,@Tiempo_Servicio, @Tiempo_Viaje, @Distancia, @Hora_Apertura,
@@ -133,5 +138,28 @@ BEGIN
 
 	CLOSE DB_cursorA   
 	DEALLOCATE DB_cursorA
+
+-- Borra tablas Temporales de Sesión y Territorios
+
+	DELETE FROM Sesion_Temp
+	 WHERE Sesion_Temp.Ses_Key_RTS = @Nro_Sesion
+
+	DELETE FROM Territorio_Temp
+	 WHERE Territorio_Temp.Ses_Key_RTS = @Nro_Sesion
+
+-- Graba tabla de Auditoría
+
+	DECLARE @Region_ID  	VARCHAR(9)
+	DECLARE @Descr_Sesion	VARCHAR(50)
+	DECLARE @Fecha_Accion	DATETIME
+ 
+	SET @Fecha_Accion = GETDATE()
+
+	SELECT	@Region_ID = V_SesionesTP.REGION_ID, @Descr_Sesion = V_SesionesTP.DESCRIPTION
+	  FROM	V_SesionesTP
+	 WHERE	V_SesionesTP.PKEY = @Nro_Sesion
+
+	INSERT INTO Audita (Fecha_Hora_Evento, Opcion_ID, Usuario, Region, Accion) 
+                    VALUES (@Fecha_Accion, 'Cataloga', @Usuario, @Region_ID, CONCAT('Cataloga sesión ', @Nro_Sesion, ' - ', @Descr_Sesion))
 
 END

@@ -51,22 +51,35 @@ namespace BitOp.Sesiones
             int indice2 = GridView2.SelectedIndex;
             Label _nro_ruta = (Label)GridView2.Rows[indice2].FindControl("Label1");
             Lbl_Ruta.Text = _nro_ruta.Text;
+
             FormView2.DataBind();
             GridView4.DataBind();
         }
-
 
         protected void ButtonVolver2_Click(object sender, EventArgs e)
         {
             MultiView1.ActiveViewIndex = 1;
+            FormView1.DataBind();
             GridView2.DataBind();
         }
 
-        protected void Paradas_Click(object sender, EventArgs e)
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 1;
+            FormView1.DataBind();
+            GridView2.DataBind();
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
         {
             MultiView1.ActiveViewIndex = 2;
             FormView2.DataBind();
             GridView4.DataBind();
+        }
+
+        protected void GridView4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
     }
