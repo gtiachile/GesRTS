@@ -1,0 +1,1 @@
+ALTER TABLE Rutas ALTER COLUMN Ruta_Dia char(14) COLLATE SQL_Latin1_General_CP1_CS_AS
