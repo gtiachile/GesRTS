@@ -49,6 +49,21 @@ namespace BitOp.Admin
             MultiView1.ActiveViewIndex = 0;
         }
 
+        protected void LinkButton2_Click(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0;
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0;
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
 
     }

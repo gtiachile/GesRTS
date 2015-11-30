@@ -5,14 +5,14 @@
             text-align: left;
         }
         .auto-style3 {
-            width: 115px;
+            width: 93px;
         }
         .auto-style4 {
             width: 115px;
             text-align: center;
         }
         .auto-style10 {
-            width: 61px;
+            width: 42px;
         }
         .auto-style11 {
             text-align: left;
@@ -21,14 +21,23 @@
             font-weight: bold;
         }
         .auto-style12 {
-            width: 61px;
+            width: 42px;
             color: #000000;
             font-weight: bold;
+        }
+        .auto-style14 {
+            width: 93px;
+            text-align: center;
+            font-size: xx-small;
+        }
+        .auto-style15 {
+            font-size: medium;
+            color: #000000;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h3>AUTORIZACIONES</h3>
+    <p class="auto-style15"><strong>AUTORIZACIONES</strong></p>
     <p>
         <asp:DropDownList ID="DropDownListPerfil" runat="server" DataSourceID="BopDBPerfiles" DataTextField="Descripción" DataValueField="Perfil" AutoPostBack="True">
         </asp:DropDownList>
@@ -51,7 +60,8 @@ order by modulo, opcion">
             </tr>
             <tr>
                 <td class="auto-style10" valign="top">
-                    <asp:GridView ID="GridViewAutDisp" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Opcion" DataSourceID="BopDBOpciones" Width="330px" ShowHeaderWhenEmpty="True">
+                    <asp:GridView ID="GridViewAutDisp" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Opcion" DataSourceID="BopDBOpciones" Width="330px" ShowHeaderWhenEmpty="True" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <AlternatingRowStyle BackColor="White" />
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
@@ -72,10 +82,19 @@ order by modulo, opcion">
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-                        <HeaderStyle BackColor="#003366" ForeColor="White" />
+                        <EditRowStyle BackColor="#7C6F57" />
+                        <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#1C5E55" ForeColor="White" Font-Bold="True" />
+                        <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#E3EAEB" />
+                        <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                        <SortedAscendingHeaderStyle BackColor="#246B61" />
+                        <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                        <SortedDescendingHeaderStyle BackColor="#15524A" />
                     </asp:GridView>
                 </td>
-                <td class="auto-style4" valign="middle">
+                <td class="auto-style14" valign="middle">
                     <asp:Button ID="ButtonAgregaAut" runat="server" OnClick="ButtonAgregaAut_Click" style="text-align: left" Text="&gt;&gt;" />
                     <br />
                     <br />
@@ -88,7 +107,8 @@ order by modulo, opcion">
                     <asp:Button ID="ButtonElimAll" runat="server" OnClick="ButtonElimAll_Click" Text="&lt;&lt;&lt;" />
                 </td>
                 <td valign="top">
-                    <asp:GridView ID="GridViewAutAsig" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="BopDBAutorizaciones" Width="330px" ShowHeaderWhenEmpty="True">
+                    <asp:GridView ID="GridViewAutAsig" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="BopDBAutorizaciones" Width="330px" ShowHeaderWhenEmpty="True" CellPadding="4" ForeColor="#333333" GridLines="None">
+                        <AlternatingRowStyle BackColor="White" />
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
@@ -112,7 +132,16 @@ order by modulo, opcion">
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-                        <HeaderStyle BackColor="#003366" ForeColor="White" />
+                        <EditRowStyle BackColor="#7C6F57" />
+                        <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                        <HeaderStyle BackColor="#1C5E55" ForeColor="White" Font-Bold="True" />
+                        <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                        <RowStyle BackColor="#E3EAEB" />
+                        <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                        <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                        <SortedAscendingHeaderStyle BackColor="#246B61" />
+                        <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                        <SortedDescendingHeaderStyle BackColor="#15524A" />
                     </asp:GridView>
                     <asp:SqlDataSource ID="BopDBAutorizaciones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Autorizaciones] WHERE [uid] = @uid" InsertCommand="INSERT INTO [Autorizaciones] ([Modulo], [Opcion], [uid]) VALUES (@Modulo, @Opcion, @uid)" SelectCommand="SELECT [Modulo], [Opcion] FROM [Autorizaciones] WHERE ([Perfil] = @Perfil)" UpdateCommand="UPDATE [Autorizaciones] SET [Modulo] = @Modulo, [Opcion] = @Opcion WHERE [uid] = @uid">
                         <DeleteParameters>

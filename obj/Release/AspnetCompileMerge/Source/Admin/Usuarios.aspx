@@ -22,24 +22,30 @@
             width: 48px;
             color: #000000;
         }
+        .auto-style13 {
+            font-size: medium;
+            color: #000000;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h3>
-        <strong>Usuarios</strong><br />
-</h3>
+    <p>
+        <span class="auto-style13"><strong>USUARIOS</strong></span><br />
+</p>
     <p>
         <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
             <asp:View ID="View1" runat="server">
                 <p>
                     <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/AddMark_10580_inverse.png" OnClick="ImageButton1_Click" />
+                    &nbsp;
                     <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Agregar Usuario</asp:LinkButton>
                 </p>
                 <p>
                     <table style="width:100%;">
                         <tr>
                             <td>
-                                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Usuario" DataSourceID="BopDBUsuariosGV" Width="90%">
+                                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Usuario" DataSourceID="BopDBUsuariosGV" Width="90%" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                    <AlternatingRowStyle BackColor="White" />
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <EditItemTemplate>
@@ -70,7 +76,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Password" SortExpression="Pass">
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Pass") %>' TextMode="Password" Width="80px"></asp:TextBox>
+                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Pass") %>' Width="80px"></asp:TextBox>
                                             </EditItemTemplate>
                                             <ItemTemplate>
                                                 <asp:Label ID="Label1" runat="server" Text='<%# Bind("Pass") %>' Visible="False"></asp:Label>
@@ -121,16 +127,20 @@
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
-                                    <HeaderStyle BackColor="#003366" ForeColor="White" />
+                                    <EditRowStyle BackColor="#7C6F57" />
+                                    <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#1C5E55" ForeColor="White" Font-Bold="True" />
+                                    <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#E3EAEB" />
+                                    <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                                    <SortedAscendingHeaderStyle BackColor="#246B61" />
+                                    <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                                    <SortedDescendingHeaderStyle BackColor="#15524A" />
                                 </asp:GridView>
-                                <asp:SqlDataSource ID="BopDBUsuariosGV" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Usuarios] WHERE [Usuario] = @original_Usuario AND [Nombre] = @original_Nombre AND [eMail] = @original_eMail AND [Pass] = @original_Pass AND (([Fecha Creación] = @original_Fecha_Creación) OR ([Fecha Creación] IS NULL AND @original_Fecha_Creación IS NULL)) AND [Estado] = @original_Estado" InsertCommand="INSERT INTO [Usuarios] ([Usuario], [Nombre], [eMail], [Pass], [Fecha Creación], [Estado]) VALUES (@Usuario, @Nombre, @eMail, @Pass, @Fecha_Creación, @Estado)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Usuarios]" UpdateCommand="UPDATE [Usuarios] SET [Nombre] = @Nombre, [eMail] = @eMail, [Pass] = @Pass, [Fecha Creación] = @Fecha_Creación, [Estado] = @Estado WHERE [Usuario] = @original_Usuario AND [Nombre] = @original_Nombre AND [eMail] = @original_eMail AND [Pass] = @original_Pass AND (([Fecha Creación] = @original_Fecha_Creación) OR ([Fecha Creación] IS NULL AND @original_Fecha_Creación IS NULL)) AND [Estado] = @original_Estado">
+                                <asp:SqlDataSource ID="BopDBUsuariosGV" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Usuarios] WHERE [Usuario] = @original_Usuario" InsertCommand="INSERT INTO [Usuarios] ([Usuario], [Nombre], [eMail], [Pass], [Fecha Creación], [Estado]) VALUES (@Usuario, @Nombre, @eMail, @Pass, @Fecha_Creación, @Estado)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Usuarios]" UpdateCommand="UPDATE [Usuarios] SET [Nombre] = @Nombre, [eMail] = @eMail, [Pass] = @Pass, [Estado] = @Estado, [UsuarioAD] = @UsuarioAD, [DominioAD]=@DominioAD,[Perfil]=@Perfil, [Expiracion]=@Expiracion WHERE [Usuario] = @original_Usuario ">
                                     <DeleteParameters>
                                         <asp:Parameter Name="original_Usuario" Type="String" />
-                                        <asp:Parameter Name="original_Nombre" Type="String" />
-                                        <asp:Parameter Name="original_eMail" Type="String" />
-                                        <asp:Parameter Name="original_Pass" Type="String" />
-                                        <asp:Parameter Name="original_Fecha_Creación" Type="String" />
-                                        <asp:Parameter Name="original_Estado" Type="String" />
                                     </DeleteParameters>
                                     <InsertParameters>
                                         <asp:Parameter Name="Usuario" Type="String" />
@@ -144,14 +154,12 @@
                                         <asp:Parameter Name="Nombre" Type="String" />
                                         <asp:Parameter Name="eMail" Type="String" />
                                         <asp:Parameter Name="Pass" Type="String" />
-                                        <asp:Parameter Name="Fecha_Creación" Type="String" />
                                         <asp:Parameter Name="Estado" Type="String" />
+                                        <asp:Parameter Name="UsuarioAD" />
+                                        <asp:Parameter Name="DominioAD" />
+                                        <asp:Parameter Name="Perfil" />
+                                        <asp:Parameter Name="Expiracion" />
                                         <asp:Parameter Name="original_Usuario" Type="String" />
-                                        <asp:Parameter Name="original_Nombre" Type="String" />
-                                        <asp:Parameter Name="original_eMail" Type="String" />
-                                        <asp:Parameter Name="original_Pass" Type="String" />
-                                        <asp:Parameter Name="original_Fecha_Creación" Type="String" />
-                                        <asp:Parameter Name="original_Estado" Type="String" />
                                     </UpdateParameters>
                                 </asp:SqlDataSource>
                             </td>
@@ -203,7 +211,7 @@
                                         <tr>
                                             <td class="auto-style10">Nombre:</td>
                                             <td class="auto-style4">
-                                                <asp:TextBox ID="NombreTextBox0" runat="server" Text='<%# Bind("Nombre") %>' />
+                                                <asp:TextBox ID="NombreTextBox0" runat="server" Text='<%# Bind("Nombre") %>' Height="22px" Width="197px" />
                                             </td>
                                             <td class="auto-style4">
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NombreTextBox0" ErrorMessage="*Obligatorio" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -254,8 +262,8 @@
                                             <td>&nbsp;</td>
                                         </tr>
                                     </table>
-                                    &nbsp;<br />&nbsp;<asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" OnClick="InsertButton_Click" Text="Insert" />
-                                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancel" />
+                                    &nbsp;<br />&nbsp;<asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" OnClick="InsertButton_Click" Text="Insertar" />
+                                    &nbsp; <asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancelar" />
                                 </InsertItemTemplate>
                                 <ItemTemplate>
                                     Usuario:
@@ -281,7 +289,7 @@
                                     &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="New" />
                                 </ItemTemplate>
                             </asp:FormView>
-                            <asp:SqlDataSource ID="BopDBUsuariosFV" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Usuarios] WHERE [Usuario] = @original_Usuario AND [Nombre] = @original_Nombre AND [eMail] = @original_eMail AND [Pass] = @original_Pass AND [Fecha Creación] = @original_Fecha_Creación AND [Estado] = @original_Estado" InsertCommand="p_ValidaInsertaUsuario" InsertCommandType="StoredProcedure" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Usuarios]" UpdateCommand="UPDATE [Usuarios] SET [Nombre] = @Nombre, [eMail] = @eMail, [Pass] = @Pass, [Fecha Creación] = @Fecha_Creación, [Estado] = @Estado WHERE [Usuario] = @original_Usuario AND [Nombre] = @original_Nombre AND [eMail] = @original_eMail AND [Pass] = @original_Pass AND [Fecha Creación] = @original_Fecha_Creación AND [Estado] = @original_Estado">
+                            <asp:SqlDataSource ID="BopDBUsuariosFV" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Usuarios] WHERE [Usuario] = @original_Usuario AND [Nombre] = @original_Nombre AND [eMail] = @original_eMail AND [Pass] = @original_Pass AND [Fecha Creación] = @original_Fecha_Creación AND [Estado] = @original_Estado" InsertCommand="p_ValidaInsertaUsuario" InsertCommandType="StoredProcedure" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Usuarios]" UpdateCommand="UPDATE [Usuarios] SET [Nombre] = @Nombre, [eMail] = @eMail, [Pass] = @Pass, [Estado] = @Estado WHERE [Usuario] = @original_Usuario">
                                 <DeleteParameters>
                                     <asp:Parameter Name="original_Usuario" Type="String" />
                                     <asp:Parameter Name="original_Nombre" Type="String" />
@@ -308,14 +316,8 @@
                                     <asp:Parameter Name="Nombre" Type="String" />
                                     <asp:Parameter Name="eMail" Type="String" />
                                     <asp:Parameter Name="Pass" Type="String" />
-                                    <asp:Parameter DbType="Date" Name="Fecha_Creación" />
                                     <asp:Parameter Name="Estado" Type="String" />
                                     <asp:Parameter Name="original_Usuario" Type="String" />
-                                    <asp:Parameter Name="original_Nombre" Type="String" />
-                                    <asp:Parameter Name="original_eMail" Type="String" />
-                                    <asp:Parameter Name="original_Pass" Type="String" />
-                                    <asp:Parameter DbType="Date" Name="original_Fecha_Creación" />
-                                    <asp:Parameter Name="original_Estado" Type="String" />
                                 </UpdateParameters>
                             </asp:SqlDataSource>
             </asp:View>

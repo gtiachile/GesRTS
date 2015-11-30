@@ -9,17 +9,23 @@
         <table style="width:100%;">
             <tr>
                 <td>
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/edificioCIAL.jpeg" />
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/edificioCIAL.jpeg" Height="182px" Width="196px" />
                 </td>
+                <td>
+                    &nbsp;</td>
                 <td align="center">&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
+                <td>
+                    <asp:Image ID="Image3" runat="server" ImageUrl="~/Images/GesRTS.png" />
+                </td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
+                <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td align="right">
@@ -27,8 +33,5 @@
                 </td>
             </tr>
         </table>
-    </p>
-    <p>
-&nbsp;
     </p>
     </asp:Content>

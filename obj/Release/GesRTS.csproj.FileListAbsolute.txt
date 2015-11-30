@@ -30,7 +30,6 @@ C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\bin\pt\Microsoft.
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\bin\ru\Microsoft.ReportViewer.WebForms.resources.dll
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\bin\zh-CHS\Microsoft.ReportViewer.WebForms.resources.dll
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\bin\zh-CHT\Microsoft.ReportViewer.WebForms.resources.dll
-C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.csprojResolveAssemblyReference.cache
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\BitOp.Properties.Resources.resources
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.csproj.GenerateResource.Cache
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.dll.licenses
@@ -38,3 +37,4 @@ C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRT
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.pdb
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\RdlCompile.cache
 C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\RdlCompile.compiled
+C:\Users\Fernando\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.csprojResolveAssemblyReference.cache
