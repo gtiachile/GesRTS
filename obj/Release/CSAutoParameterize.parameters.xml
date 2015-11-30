@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="BopDBConnectionString-Web.config Connection String" description="BopDBConnectionString Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="Data Source=.\sqlexpress;Initial Catalog=GesRTS;Integrated Security=True" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\Fernando\\Documents\\Visual\ Studio\ 2013\\Projects\\GesRTS\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BopDBConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Andres\\Documents\\Visual\ Studio\ 2013\\Projects\\GesRTS\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BopDBConnectionString']/@connectionString" />
   </parameter>
   <parameter name="BitOpContext-Web.config Connection String" description="BitOpContext Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="Data Source=.\sqlexpress;Initial Catalog=GesRTS;Integrated Security=True" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\Fernando\\Documents\\Visual\ Studio\ 2013\\Projects\\GesRTS\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BitOpContext']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Andres\\Documents\\Visual\ Studio\ 2013\\Projects\\GesRTS\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BitOpContext']/@connectionString" />
   </parameter>
 </parameters>

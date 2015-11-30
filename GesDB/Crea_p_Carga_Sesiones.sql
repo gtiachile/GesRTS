@@ -152,14 +152,20 @@ BEGIN
 	DECLARE @Region_ID  	VARCHAR(9)
 	DECLARE @Descr_Sesion	VARCHAR(50)
 	DECLARE @Fecha_Accion	DATETIME
+	DECLARE @Accion		VARCHAR(80)
  
+	SELECT	@Region_ID = V_SesionesTP.REGION_ID, @Descr_Sesion = V_SesionesTP.DESCRIPTION
+	  FROM	V_SesionesTP
+	 WHERE	V_SesionesTP.PKEY = @Nro_Sesion
+
 	SET @Fecha_Accion = GETDATE()
+	SET @Accion       = 'Cataloga sesión '+ CAST(@Nro_Sesion AS VARCHAR) + ' - ' + @Descr_Sesion
 
 	SELECT	@Region_ID = V_SesionesTP.REGION_ID, @Descr_Sesion = V_SesionesTP.DESCRIPTION
 	  FROM	V_SesionesTP
 	 WHERE	V_SesionesTP.PKEY = @Nro_Sesion
 
 	INSERT INTO Audita (Fecha_Hora_Evento, Opcion_ID, Usuario, Region, Accion) 
-                    VALUES (@Fecha_Accion, 'Cataloga', @Usuario, @Region_ID, CONCAT('Cataloga sesión ', @Nro_Sesion, ' - ', @Descr_Sesion))
+                    VALUES (@Fecha_Accion, 'Cataloga', @Usuario, @Region_ID, @Accion)
 
 END

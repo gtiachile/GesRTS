@@ -30,15 +30,17 @@ BEGIN
 	DECLARE @Region_ID  	VARCHAR(9)
 	DECLARE @Descr_Sesion	VARCHAR(50)
 	DECLARE @Fecha_Accion	DATETIME
+	DECLARE @Accion		VARCHAR(80)
  
-	SET @Fecha_Accion = GETDATE()
-
 	SELECT	@Region_ID = Sesiones.Region_ID, @Descr_Sesion = Sesiones.Descripcion
 	  FROM	Sesiones
 	 WHERE	Sesiones.Sesion_Key_RTS = @Nro_Sesion
 
+	SET @Fecha_Accion = GETDATE()
+	SET @Accion       = 'Borra sesión '+ CAST(@Nro_Sesion AS VARCHAR) + ' - ' + @Descr_Sesion
+
 	INSERT INTO Audita (Fecha_Hora_Evento, Opcion_ID, Usuario, Region, Accion) 
-                    VALUES (@Fecha_Accion, 'Sesiones', @Usuario, @Region_ID, CONCAT('Borra sesión ', @Nro_Sesion, ' - ', @Descr_Sesion))
+                    VALUES (@Fecha_Accion, 'Sesiones', @Usuario, @Region_ID, @Accion)
 
 -- Borra tablas Sesiones, Territorios, Rutas y Paradas
 

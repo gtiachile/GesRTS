@@ -178,12 +178,12 @@ WHERE [Region_ID] = @Region_ID">
                 </p>
                 <p>
                     <asp:SqlDataSource ID="GesDBTerritorios" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT Territorio_Key_RTS, Sesion_Key_RTS, Territorio_Nro, Territorio_ID, Territorio_Descrip,
-              Vendedor_Nombre,
+              isNull(Vendedores.Vendedor_Nombre,' ') Vendedor_Nombre,
               (SELECT COUNT(Ruta_Key_RTS) FROM Rutas
                 WHERE Rutas.Territorio_Key_RTS = Territorios.Territorio_Key_RTS) AS Cant_Rutas,
               (SELECT COUNT(Parada_Key_RTS) FROM Paradas
                WHERE Paradas.Territorio_Key_RTS = Territorios.Territorio_Key_RTS) AS Cant_Paradas
-  FROM Territorios INNER JOIN
+  FROM Territorios LEFT OUTER JOIN
               Vendedores ON Vendedor = Vendedor_ID
 WHERE cast(Sesion_Key_RTS as varchar) = @Sesion_Key_RTS">
                         <SelectParameters>
