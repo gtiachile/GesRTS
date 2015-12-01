@@ -22,7 +22,7 @@
         }
         .auto-style18 {
             height: 23px;
-            width: 91px;
+            width: 127px;
         }
         .auto-style22 {
             height: 23px;
@@ -70,6 +70,9 @@
         .auto-style42 {
             width: 210px;
         }
+        .auto-style43 {
+            width: 127px;
+        }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -101,6 +104,9 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                         <td class="auto-style22">
                             <asp:Label ID="Lbl_Supervisor" runat="server" Text="Lbl_Supervisor"></asp:Label>
                         </td>
+                        <td class="auto-style22">
+                            <asp:Label ID="Lbl_Fecha_Aux" runat="server" Text="Lbl_Fecha_Aux" Visible="False"></asp:Label>
+                        </td>
                     </tr>
                     <tr>
                         <td class="auto-style17">F.Desde:</td>
@@ -110,10 +116,11 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                         <td class="auto-style21">
                             <asp:Label ID="Lbl_Sesion" runat="server" Visible="False"></asp:Label>
                         </td>
-                        <td class="auto-style19">Inicio Descrip.: </td>
+                        <td class="auto-style43">Inicio Descrip.: </td>
                         <td class="auto-style23">
                             <asp:Label ID="Lbl_Inicio_Descrip" runat="server" Text="Lbl_Inicio_Descrip"></asp:Label>
                         </td>
+                        <td class="auto-style23">&nbsp;</td>
                     </tr>
                 </table>
                 <br />
@@ -139,6 +146,9 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="DESCRIPTION" HeaderText="Descripción" SortExpression="DESCRIPTION" />
+                        <asp:BoundField DataField="Cant_Territorios" HeaderText="Cant.Territorios" SortExpression="Cant_Territorios">
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="SCENARIO" HeaderText="Escenario" SortExpression="SCENARIO" />
                         <asp:TemplateField HeaderText="Fecha Creación" SortExpression="SESSION_DATE">
                             <EditItemTemplate>
@@ -159,6 +169,9 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
+                        <asp:BoundField DataField="Catalogada" HeaderText="Catalogada" SortExpression="Catalogada">
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
                     </Columns>
                     <EditRowStyle BackColor="#7C6F57" />
                     <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -182,7 +195,16 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                     </tr>
                 </table>
                 <br />
-                <asp:SqlDataSource ID="GesDBSesionesTP" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [PKEY], [REGION_ID], [DESCRIPTION], [SCENARIO], [SESSION_DATE], [USER_MODIFIED], [DATE_MODIFIED]
+                <asp:SqlDataSource ID="GesDBSesionesTP" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [PKEY], [REGION_ID], [DESCRIPTION],
+              Cant_Territorios = (SELECT COUNT(*) FROM V_TerritoriosTP
+                                                 WHERE V_TerritoriosTP.RN_SESSION_PKEY = V_SesionesTP.PKEY
+                                                      AND V_TerritoriosTP.TERRITORY_NUMBER &lt;&gt; 0),
+              [SCENARIO], [SESSION_DATE], [USER_MODIFIED], [DATE_MODIFIED],
+              Catalogada =
+                  CASE (SELECT COUNT(*) FROM Sesiones WHERE Sesion_Key_RTS = PKEY)
+                       WHEN 0   THEN '  '
+                       ELSE          'si'
+                   END
   FROM [V_SesionesTP]
 WHERE [REGION_ID]           =  @Region_ID
     AND [TYPE]                      =  1
@@ -191,7 +213,7 @@ WHERE [REGION_ID]           =  @Region_ID
                     <SelectParameters>
                         <asp:ControlParameter ControlID="Lbl_Region" Name="Region_ID" PropertyName="Text" />
                         <asp:ControlParameter ControlID="Lbl_Inicio_Descrip" Name="Inicio_Descrip" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="Lbl_Fecha_Desde" Name="Fecha_Desde" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="Lbl_Fecha_Aux" Name="Fecha_Desde" PropertyName="Text" />
                     </SelectParameters>
                 </asp:SqlDataSource>
                 <br />
