@@ -23,17 +23,17 @@
             font-size: medium;
             color: #000000;
         }
-        .auto-style15 {
-            width: 144px;
+        .auto-style26 {
+            width: 25px;
         }
-        .auto-style17 {
-            width: 42px;
+        .auto-style27 {
+            width: 110px;
         }
-        .auto-style18 {
-            width: 249px;
+        .auto-style30 {
+            width: 80px;
         }
-        .auto-style20 {
-            width: 61px;
+        .auto-style31 {
+            width: 128px;
         }
     </style>
 </asp:Content>
@@ -48,13 +48,13 @@
                     <asp:LinkButton ID="LinkButton1" runat="server" OnClick="ImageButton1_Click">Agregar Opción</asp:LinkButton>
                 </p>
                 <p>
-                    <span class="auto-style13">Módulo:</span>
-                    <asp:DropDownList ID="DropDownListModulos" runat="server" AutoPostBack="True" DataSourceID="BopDBModulos" DataTextField="Modulo" DataValueField="Modulo">
+                    <span class="auto-style13">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Módulo:</span>
+                    <asp:DropDownList ID="DropDownListModulos" runat="server" AutoPostBack="True" DataSourceID="GesDBModulos" DataTextField="Modulo" DataValueField="Modulo">
                     </asp:DropDownList>
-                    <asp:SqlDataSource ID="BopDBModulos" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Modulo] FROM [Modulos]"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="GesDBModulos" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Modulo] FROM [Modulos]"></asp:SqlDataSource>
                 </p>
                 <p>
-                    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Opcion" DataSourceID="BopDBOpciones" Width="90%" ShowHeaderWhenEmpty="True" CellPadding="4" ForeColor="#333333" GridLines="None">
+                    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Opcion" DataSourceID="GesDBOpciones" Width="90%" ShowHeaderWhenEmpty="True" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
                             <asp:TemplateField ShowHeader="False">
@@ -64,56 +64,74 @@
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Edit" ImageUrl="~/Images/EditTableHS.png" Text="Editar" />
-                                    &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" Text="Eliminar" />
+                                    &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png"  OnClientClick="return confirm('¿Está seguro que desea eliminar?'); " Text="Eliminar" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="Opcion" HeaderText="Opción" ReadOnly="True" SortExpression="Opcion" />
-                            <asp:BoundField DataField="Descripción" HeaderText="Descripción" SortExpression="Descripción" />
-                            <asp:TemplateField HeaderText="Módulo" SortExpression="Modulo">
+                            <asp:BoundField DataField="Opcion" HeaderText="Opcion" ReadOnly="True" SortExpression="Opcion" />
+                            <asp:TemplateField HeaderText="Descripción" SortExpression="Descripción">
                                 <EditItemTemplate>
-                                    <asp:DropDownList ID="DropDownList7" runat="server" AutoPostBack="True" DataSourceID="BopDBModulos" DataTextField="Modulo" DataValueField="Modulo" SelectedValue='<%# Bind("Modulo") %>'>
+                                    <asp:TextBox ID="TextBox1" runat="server" MaxLength="30" Text='<%# Bind("Descripción") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="Label5" runat="server" Text='<%# Bind("Descripción") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Modulo" SortExpression="Modulo">
+                                <EditItemTemplate>
+                                    <asp:DropDownList ID="DropDownList15" runat="server" AutoPostBack="True" DataSourceID="GesDBModulos" DataTextField="Modulo" DataValueField="Modulo" SelectedValue='<%# Bind("Modulo") %>'>
                                     </asp:DropDownList>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("Modulo") %>'></asp:Label>
+                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Modulo") %>'></asp:Label>
                                 </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Center" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Tipo" SortExpression="Tipo">
-                                <EditItemTemplate>
-                                    <asp:DropDownList ID="DropDownList8" runat="server" AutoPostBack="True" SelectedValue='<%# Bind("Tipo") %>'>
-                                        <asp:ListItem Value="Menu">Menú</asp:ListItem>
-                                        <asp:ListItem Value="Pagina">Página</asp:ListItem>
-                                    </asp:DropDownList>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Tipo") %>'></asp:Label>
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Center" />
-                            </asp:TemplateField>
-                            <asp:BoundField DataField="Url" HeaderText="Url" SortExpression="Url" />
-                            <asp:BoundField DataField="Txt" HeaderText="Txt" SortExpression="Txt" />
-                            <asp:TemplateField HeaderText="Audita" SortExpression="Audita">
-                                <EditItemTemplate>
-                                    <asp:DropDownList ID="DropDownList9" runat="server" AutoPostBack="True" SelectedValue='<%# Bind("Audita") %>'>
-                                        <asp:ListItem>No</asp:ListItem>
-                                        <asp:ListItem>Si</asp:ListItem>
-                                    </asp:DropDownList>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Audita") %>'></asp:Label>
-                                </ItemTemplate>
-                                <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Estado" SortExpression="Estado">
                                 <EditItemTemplate>
-                                    <asp:DropDownList ID="DropDownList10" runat="server" AutoPostBack="True" SelectedValue='<%# Bind("Estado") %>'>
+                                    <asp:DropDownList ID="DropDownList16" runat="server" AutoPostBack="True" SelectedValue='<%# Bind("Estado") %>'>
                                         <asp:ListItem>Activo</asp:ListItem>
                                         <asp:ListItem>Inactivo</asp:ListItem>
                                     </asp:DropDownList>
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label3" runat="server" Text='<%# Bind("Estado") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Tipo" SortExpression="Tipo">
+                                <EditItemTemplate>
+                                    <asp:DropDownList ID="DropDownList17" runat="server" SelectedValue='<%# Bind("Tipo") %>'>
+                                        <asp:ListItem Value="Pagina">Página</asp:ListItem>
+                                        <asp:ListItem Value="Menu">Menú</asp:ListItem>
+                                    </asp:DropDownList>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("Tipo") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Url" SortExpression="Url">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="TextBox2" runat="server" MaxLength="100" Text='<%# Bind("Url") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="Label6" runat="server" Text='<%# Bind("Url") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Txt" SortExpression="Txt">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="TextBox3" runat="server" MaxLength="20" Text='<%# Bind("Txt") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="Label7" runat="server" Text='<%# Bind("Txt") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Audita" SortExpression="Audita">
+                                <EditItemTemplate>
+                                    <asp:DropDownList ID="DropDownList18" runat="server" SelectedValue='<%# Bind("Audita") %>'>
+                                        <asp:ListItem>No</asp:ListItem>
+                                        <asp:ListItem>Si</asp:ListItem>
+                                    </asp:DropDownList>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Audita") %>'></asp:Label>
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
@@ -129,7 +147,7 @@
                         <SortedDescendingCellStyle BackColor="#D4DFE1" />
                         <SortedDescendingHeaderStyle BackColor="#15524A" />
                     </asp:GridView>
-                    <asp:SqlDataSource ID="BopDBOpciones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Opciones] WHERE [Opcion] = @original_Opcion" InsertCommand="p_ValidaInsertaOpcion" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Opciones]
+                    <asp:SqlDataSource ID="GesDBOpciones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Opciones] WHERE [Opcion] = @original_Opcion" InsertCommand="p_ValidaInsertaOpcion" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Opciones]
 WHERE Modulo = @Módulo" UpdateCommand="UPDATE [Opciones] SET [Descripción] = @Descripción, [Modulo] = @Modulo, [Estado] = @Estado, [Tipo] = @Tipo, [Url] = @Url, [Txt] = @Txt, [Audita] = @Audita WHERE [Opcion] = @original_Opcion" InsertCommandType="StoredProcedure">
                         <DeleteParameters>
                             <asp:Parameter Name="original_Opcion" Type="String" />
@@ -141,7 +159,8 @@ WHERE Modulo = @Módulo" UpdateCommand="UPDATE [Opciones] SET [Descripción] = @
                             <asp:Parameter Name="Estado" Type="String" />
                             <asp:Parameter Name="Tipo" Type="String" />
                             <asp:Parameter Name="Url" Type="String" />
-                            <asp:Parameter Name="tx" Type="String" />
+                            <asp:Parameter Name="Txt" Type="String" />
+                            <asp:Parameter Name="Audita" Type="String" />
                             <asp:Parameter Name="Done" Type="Boolean" />
                             <asp:Parameter Name="Msg" Type="String" />
                         </InsertParameters>
@@ -162,7 +181,7 @@ WHERE Modulo = @Módulo" UpdateCommand="UPDATE [Opciones] SET [Descripción] = @
                 </p>
             </asp:View>
             <asp:View ID="View2" runat="server">
-                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Opcion" DataSourceID="BopDBOpcionesFV" DefaultMode="Insert" OnPageIndexChanging="FormView1_PageIndexChanging">
+                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Opcion" DataSourceID="GesDBOpcionesFV" DefaultMode="Insert" OnPageIndexChanging="FormView1_PageIndexChanging">
         <EditItemTemplate>
             Opcion:
             <asp:Label ID="OpcionLabel1" runat="server" Text='<%# Eval("Opcion") %>' />
@@ -192,80 +211,67 @@ WHERE Modulo = @Módulo" UpdateCommand="UPDATE [Opciones] SET [Descripción] = @
             &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" />
         </EditItemTemplate>
         <InsertItemTemplate>
-            <table style="width:100%;">
+            &nbsp;<table style="width:100%;">
                 <tr>
-                    <td class="auto-style15">Opción: </td>
-                    <td class="auto-style18">
-                        <asp:TextBox ID="OpcionTextBox" runat="server" Text='<%# Bind("Opcion") %>' Width="200px" />
+                    <td class="auto-style27" rowspan="4">
+                        <asp:Image ID="Image1" runat="server" Height="220px" ImageUrl="~/Images/Opciones.png" Width="140px" />
                     </td>
-                    <td class="auto-style17">&nbsp;</td>
-                    <td class="auto-style20">Tipo:</td>
+                    <td class="auto-style26" rowspan="4">&nbsp;</td>
+                    <td class="auto-style30">Opción:</td>
+                    <td class="auto-style31">
+                        <asp:TextBox ID="OpcionTextBox" runat="server" Text='<%# Bind("Opcion") %>' MaxLength="20" Width="120px" />
+                    </td>
+                    <td class="auto-style26" rowspan="4">&nbsp;</td>
+                    <td>Tipo:</td>
                     <td>
-                        <asp:DropDownList ID="DropDownList11" runat="server" SelectedValue='<%# Bind("Tipo") %>'>
-                            <asp:ListItem Value="Menu">Menú</asp:ListItem>
+                        <asp:DropDownList ID="DropDownList20" runat="server" SelectedValue='<%# Bind("Tipo") %>'>
                             <asp:ListItem Value="Pagina">Página</asp:ListItem>
+                            <asp:ListItem Value="Menu">Menú</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style15">Descripción :</td>
-                    <td class="auto-style18">
-                        <asp:TextBox ID="DescripciónTextBox" runat="server" Text='<%# Bind("Descripción") %>' Width="200px" />
+                    <td class="auto-style30">Descripción:</td>
+                    <td class="auto-style31">
+                        <asp:TextBox ID="DescripciónTextBox" runat="server" Text='<%# Bind("Descripción") %>' Width="250px" MaxLength="30" />
                     </td>
-                    <td class="auto-style17">&nbsp;</td>
-                    <td class="auto-style20">Audita:</td>
+                    <td>Código Txt:</td>
                     <td>
-                        <asp:DropDownList ID="DropDownList12" runat="server" SelectedValue='<%# Bind("Audita") %>'>
+                        <asp:TextBox ID="TxtTextBox" runat="server" Text='<%# Bind("Txt") %>' MaxLength="20" Width="200px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style30">Módulo:</td>
+                    <td class="auto-style31">
+                        <asp:DropDownList ID="DropDownList19" runat="server" DataSourceID="GesDBModulos" DataTextField="Modulo" DataValueField="Modulo" SelectedValue='<%# Bind("Modulo") %>'>
+                        </asp:DropDownList>
+                    </td>
+                    <td>Audita:</td>
+                    <td>
+                        <asp:DropDownList ID="DropDownList21" runat="server" SelectedValue='<%# Bind("Audita") %>'>
                             <asp:ListItem>No</asp:ListItem>
                             <asp:ListItem>Si</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style15">Módulo: </td>
-                    <td class="auto-style18">
-                        <asp:DropDownList ID="DropDownList14" runat="server" AutoPostBack="True" DataSourceID="BopDBModulos" DataTextField="Modulo" DataValueField="Modulo" SelectedValue='<%# Bind("Modulo") %>'>
-                        </asp:DropDownList>
+                    <td class="auto-style30">Url:</td>
+                    <td class="auto-style31">
+                        <asp:TextBox ID="UrlTextBox" runat="server" Text='<%# Bind("Url") %>' Width="300px" MaxLength="100" />
                     </td>
-                    <td class="auto-style17">&nbsp;</td>
-                    <td class="auto-style20">Estado:</td>
+                    <td>Estado:</td>
                     <td>
-                        <asp:DropDownList ID="DropDownList13" runat="server" AutoPostBack="True" SelectedValue='<%# Bind("Estado") %>'>
+                        <asp:DropDownList ID="DropDownList22" runat="server" SelectedValue='<%# Bind("Estado") %>'>
                             <asp:ListItem>Activo</asp:ListItem>
                             <asp:ListItem>Inactivo</asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>
-                <tr>
-                    <td class="auto-style15">Url:</td>
-                    <td class="auto-style18">
-                        <asp:TextBox ID="UrlTextBox" runat="server" Text='<%# Bind("Url") %>' Width="300px" />
-                    </td>
-                    <td class="auto-style17">&nbsp;</td>
-                    <td class="auto-style20">&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td class="auto-style15">Txt:</td>
-                    <td class="auto-style18">
-                        <asp:TextBox ID="TxtTextBox" runat="server" Text='<%# Bind("Txt") %>' Width="150px" />
-                    </td>
-                    <td class="auto-style17">&nbsp;</td>
-                    <td class="auto-style20">&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td class="auto-style15">&nbsp;</td>
-                    <td class="auto-style18">&nbsp;</td>
-                    <td class="auto-style17">&nbsp;</td>
-                    <td class="auto-style20">&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
             </table>
             <br />
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" OnClick="InsertButton_Click1" />
-            &nbsp;&nbsp;&nbsp; &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click1" Text="Cancelar" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" OnClick="InsertButton_Click2" Text="Insertar" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click2" Text="Cancelar" />
         </InsertItemTemplate>
         <ItemTemplate>
             Opcion:
@@ -297,7 +303,7 @@ WHERE Modulo = @Módulo" UpdateCommand="UPDATE [Opciones] SET [Descripción] = @
             &nbsp;<asp:LinkButton ID="NewButton" runat="server" CausesValidation="False" CommandName="New" Text="Nuevo" />
         </ItemTemplate>
     </asp:FormView>
-    <asp:SqlDataSource ID="BopDBOpcionesFV" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Opciones] WHERE [Opcion] = @original_Opcion" InsertCommand="p_ValidaInsertaOpcion" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Opciones]" UpdateCommand="UPDATE [Opciones] SET [Descripción] = @Descripción, [Modulo] = @Modulo, [Estado] = @Estado, [Tipo] = @Tipo, [Url] = @Url, [Txt] = @Txt, [Audita] = @Audita WHERE [Opcion] = @original_Opcion" InsertCommandType="StoredProcedure">
+    <asp:SqlDataSource ID="GesDBOpcionesFV" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Opciones] WHERE [Opcion] = @original_Opcion" InsertCommand="p_ValidaInsertaOpcion" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [Opciones]" UpdateCommand="UPDATE [Opciones] SET [Descripción] = @Descripción, [Modulo] = @Modulo, [Estado] = @Estado, [Tipo] = @Tipo, [Url] = @Url, [Txt] = @Txt, [Audita] = @Audita WHERE [Opcion] = @original_Opcion" InsertCommandType="StoredProcedure" OnSelecting="GesDBOpcionesFV_Selecting">
         <DeleteParameters>
             <asp:Parameter Name="original_Opcion" Type="String" />
         </DeleteParameters>
@@ -308,7 +314,8 @@ WHERE Modulo = @Módulo" UpdateCommand="UPDATE [Opciones] SET [Descripción] = @
             <asp:Parameter Name="Estado" Type="String" />
             <asp:Parameter Name="Tipo" Type="String" />
             <asp:Parameter Name="Url" Type="String" />
-            <asp:Parameter Name="tx" Type="String" />
+            <asp:Parameter Name="Txt" Type="String" />
+            <asp:Parameter Name="Audita" Type="String" />
             <asp:Parameter Name="Done" Type="Boolean" />
             <asp:Parameter Name="Msg" Type="String" />
         </InsertParameters>

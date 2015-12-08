@@ -15,9 +15,10 @@ CREATE PROC [dbo].[p_ValidaInsertaOpcion]
 @Descripción VARCHAR(30),
 @Modulo VARCHAR(15),
 @Estado VARCHAR(10),
-@tipo VARCHAR(10),
-@url VARCHAR(100),
-@tx VARCHAR(20),
+@Tipo VARCHAR(10),
+@Url VARCHAR(100),
+@Txt VARCHAR(20),
+@Audita VARCHAR(2),
 @Done BIT,
 @Msg VARCHAR(200)
 )
@@ -31,7 +32,8 @@ BEGIN
 		SET @Msg = 'Registro ya existe'
 		RETURN;
 	END
-	INSERT INTO [Opciones] ([Opcion], [Descripción], [Modulo], [Estado],[Tipo],[Url]) VALUES (@Opcion, @Descripción, @Modulo, @Estado, @Tipo, @Url)
+	INSERT INTO [Opciones] ([Opcion], [Descripción], [Modulo], [Estado],[Tipo], [Url], [Txt], [Audita])
+                        VALUES (@Opcion, @Descripción, @Modulo, @Estado, @Tipo, @Url, @Txt, @Audita)
 END
 
 GO

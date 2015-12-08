@@ -2,17 +2,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
         .auto-style16 {
-            width: 318px;
+            width: 118px;
         }
         .auto-style17 {
             font-size: medium;
             color: #000000;
         }
         .auto-style18 {
-            width: 368px;
+            width: 12px;
         }
-        .auto-style21 {
-            width: 528px;
+        .auto-style24 {
+            width: 104px;
         }
     </style>
 </asp:Content>
@@ -30,9 +30,12 @@
                 Seleccione Región:&nbsp;
                 <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
                 </asp:DropDownList>
-                <asp:SqlDataSource ID="GesDBRegiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Region_ID], ([Region_Chile] + ' - ' + [Descripción]) as Region_Txt, [Region_RTS] 
- FROM [Regiones]
-ORDER BY [Region_Txt]"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="GesDBRegiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT ' ' AS Region_ID, '- Seleccione Región -' as Region_Txt, ' ' AS Region_RTS 
+  FROM Regiones
+UNION
+SELECT Region_ID, (Region_Chile + ' - ' + Descripción) as Region_Txt, Region_RTS
+  FROM Regiones
+ORDER BY Region_Txt"></asp:SqlDataSource>
                 <br />
                 <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Vendedor_ID" DataSourceID="GesDBVendedoresGV" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" Width="80%">
                     <AlternatingRowStyle BackColor="White" />
@@ -74,7 +77,7 @@ ORDER BY [Region_Txt]"></asp:SqlDataSource>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Supervisor" SortExpression="Supervisor">
                             <EditItemTemplate>
-                                <asp:DropDownList ID="DropDownRegionGV" runat="server" DataSourceID="GesDBSupervisoresGV" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" SelectedValue='<%# Bind("Supervisor") %>' AutoPostBack="True">
+                                <asp:DropDownList ID="DropDownSupervisorGV" runat="server" DataSourceID="GesDBSupervisoresGV" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" SelectedValue='<%# Bind("Supervisor") %>' AutoPostBack="True">
                                 </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
@@ -135,11 +138,14 @@ WHERE [Vendedor_ID] = @Vendedor_ID">
                         <asp:Parameter Name="Vendedor_ID" Type="String" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
-                <asp:SqlDataSource ID="GesDBSupervisoresGV" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Vendedor_ID], [Vendedor_Nombre]
-  FROM [Vendedores]
-WHERE [Vendedor_Tipo] = 'Supervisor'
-    AND [Region]                = @Region_ID
-    AND [Estado]                 = 'Activo'">
+                <asp:SqlDataSource ID="GesDBSupervisoresGV" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT ' ' AS Vendedor_ID, '- Seleccione Supervisor -' AS Vendedor_Nombre
+  FROM Vendedores
+UNION
+SELECT isNull(Vendedor_ID, 0) Vendedor_ID, isNull(Vendedor_Nombre, ' ') Vendedor_Nombre
+  FROM Vendedores
+WHERE Vendedor_Tipo = 'Supervisor'
+    AND Region                = @Region_ID
+    AND Estado                 = 'Activo'">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="DropDownList1" Name="Region_ID" PropertyName="SelectedValue" />
                     </SelectParameters>
@@ -176,16 +182,15 @@ WHERE [Vendedor_Tipo] = 'Supervisor'
                             <tr>
                                 <td class="auto-style16" rowspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:Image ID="Image1" runat="server" Height="180px" ImageUrl="~/Images/Vendedores.png" Width="100px" />
                                 </td>
-                                <td class="auto-style18">&nbsp;</td>
-                                <td class="auto-style21">ID Vendedor: </td>
+                                <td class="auto-style18" rowspan="6">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                <td class="auto-style24">ID Vendedor: </td>
                                 <td>
                                     <asp:TextBox ID="Vendedor_IDTextBox" runat="server" Text='<%# Bind("Vendedor_ID") %>' MaxLength="10" Height="22px" Width="100px" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style18">&nbsp;</td>
-                                <td class="auto-style21">Tipo:</td>
+                                <td class="auto-style24">Tipo:</td>
                                 <td>
                                     <asp:DropDownList ID="DropDownList2" runat="server" SelectedValue='<%# Bind("Vendedor_Tipo") %>' Height="22px" Width="90px" AutoPostBack="True">
                                         <asp:ListItem>Vendedor</asp:ListItem>
@@ -195,33 +200,29 @@ WHERE [Vendedor_Tipo] = 'Supervisor'
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style18">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                                <td class="auto-style21">Nombre:</td>
+                                <td class="auto-style24">Nombre:</td>
                                 <td>
                                     <asp:TextBox ID="Vendedor_NombreTextBox" runat="server" Height="22px" Text='<%# Bind("Vendedor_Nombre") %>' Width="350px" MaxLength="50" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style18">&nbsp;</td>
-                                <td class="auto-style21">Región:</td>
+                                <td class="auto-style24">Región:</td>
                                 <td>
-                                    <asp:TextBox ID="TextBoxRegion" runat="server" Height="22px" ReadOnly="True" Width="40px" BackColor="#CCCCCC" Text='<%# Bind("Region") %>'></asp:TextBox>
+                                    <asp:TextBox ID="TextBox_Region" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Region") %>'></asp:TextBox>
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style18">&nbsp;</td>
-                                <td class="auto-style21">Supervisor:</td>
+                                <td class="auto-style24">Supervisor:</td>
                                 <td>
-                                    <asp:DropDownList ID="DropDownList4" runat="server" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" SelectedValue='<%# Bind("Supervisor") %>' Height="22px" Width="200px">
+                                    <asp:DropDownList ID="DropDownList4" runat="server" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" SelectedValue='<%# Bind("Supervisor") %>' Height="22px" Width="200px" OnSelectedIndexChanged="DropDownList4_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style18">&nbsp;</td>
-                                <td class="auto-style21">Estado:</td>
+                                <td class="auto-style24">Estado:</td>
                                 <td>
                                     <asp:DropDownList ID="DropDownList5" runat="server" SelectedValue='<%# Bind("Estado") %>' Height="22px" Width="90px">
                                         <asp:ListItem>Activo</asp:ListItem>
@@ -261,15 +262,19 @@ WHERE [Vendedor_Tipo] = 'Supervisor'
                     </ItemTemplate>
                 </asp:FormView>
                 <br />
-                <asp:SqlDataSource ID="GesDBSupervisores" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Vendedor_ID], [Vendedor_Nombre], [Vendedor_Tipo], [Region], [Supervisor], [Estado] 
-  FROM [Vendedores]
-WHERE [Vendedor_Tipo] = 'Supervisor'
-    AND [Region]                = @Region_ID
-    AND [Estado]                 = 'Activo'">
+                <asp:SqlDataSource ID="GesDBSupervisores" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT ' ' AS Vendedor_ID, '- Seleccione Supervisor -' AS Vendedor_Nombre
+  FROM Vendedores
+UNION
+SELECT Vendedor_ID, Vendedor_Nombre
+  FROM Vendedores
+WHERE Vendedor_Tipo = 'Supervisor'
+     AND Region                = @Region_ID
+     AND Estado                 = 'Activo'">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="DropDownList1" Name="Region_ID" PropertyName="SelectedValue" />
                     </SelectParameters>
                 </asp:SqlDataSource>
+                <br />
             </asp:View>
         </asp:MultiView>
     </p>

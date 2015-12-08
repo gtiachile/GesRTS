@@ -248,23 +248,23 @@ WHERE Territorio_Key_RTS =  @Territorio_Key_RTS">
                             <tr>
                                 <td class="auto-style36">Sesión: </td>
                                 <td class="auto-style42">
-                                    <asp:Label ID="Lbl_Sesion" runat="server" Text='<%# Bind("Sesion_Key_RTS") %>' />
+                                    <asp:Label ID="Lbl_Sesion" runat="server" Text='<%# Bind("Sesion_Key_RTS") %>' BackColor="#00CC66" Font-Bold="True" style="text-align: center" Width="80px" />
                                 </td>
                                 <td class="auto-style61">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
                                 <td class="auto-style38">Nº Ruta: </td>
                                 <td class="auto-style43">
-                                    <asp:Label ID="Lbl_Nro_Ruta" runat="server" Text='<%# Bind("Ruta_Nro") %>' />
+                                    <asp:Label ID="Lbl_Nro_Ruta" runat="server" Text='<%# Bind("Ruta_Nro") %>' BackColor="#00CC66" Font-Bold="True" style="text-align: center" Width="80px" />
                                 </td>
                                 <td class="auto-style62">&nbsp;&nbsp; &nbsp;</td>
                                 <td class="auto-style41">Dia: </td>
                                 <td>
-                                    <asp:Label ID="Lbl_Dia_Semana" runat="server" Text='<%# Bind("Dia_Semana") %>' />
+                                    <asp:Label ID="Lbl_Dia_Semana" runat="server" Text='<%# Bind("Dia_Semana") %>' Font-Bold="True" />
                                 </td>
                             </tr>
                             <tr>
                                 <td class="auto-style36">Territorio: </td>
                                 <td class="auto-style42">
-                                    <asp:Label ID="Lbl_Territorio" runat="server" Text='<%# Bind("Territorio_Key_RTS") %>' />
+                                    <asp:Label ID="Lbl_Territorio" runat="server" Text='<%# Bind("Territorio_Key_RTS") %>' BackColor="#00CC66" Font-Bold="True" style="text-align: center" Width="80px" />
                                 </td>
                                 <td class="auto-style61">&nbsp;</td>
                                 <td class="auto-style38">Descrip.Ruta: </td>

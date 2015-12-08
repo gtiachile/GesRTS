@@ -10,6 +10,10 @@
             font-size: medium;
             color: #000000;
         }
+        .auto-style14 {
+            width: 27px;
+            color: #000000;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -27,16 +31,23 @@
                         <Columns>
                             <asp:TemplateField ShowHeader="False">
                                 <EditItemTemplate>
-                                    <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" ImageUrl="~/Images/saveHS.png" Text="Update" />
-                                    &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/StopHS.png" Text="Cancel" />
+                                    <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" ImageUrl="~/Images/saveHS.png" Text="Actualizar" />
+                                    &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/Cancel(build)_194_32.bmp" Text="Cancelar" />
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="ImageButton3" runat="server" CausesValidation="False" CommandName="Edit" ImageUrl="~/Images/EditTableHS.png" Text="Edit" />
-                                    &nbsp;<asp:ImageButton ID="ImageButton4" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" Text="Delete" OnClientClick="return confirm('¿Está seguro que desea eliminar?'); " OnClick="ImageButton4_Click" />
+                                    <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Edit" ImageUrl="~/Images/EditTableHS.png" Text="Editar" />
+                                    &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" OnClientClick="return confirm('¿Está seguro que desea eliminar?'); " Text="Eliminar" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Modulo" HeaderText="Módulo" ReadOnly="True" SortExpression="Modulo" />
-                            <asp:BoundField DataField="Descripción" HeaderText="Descripción" SortExpression="Descripción" />
+                            <asp:TemplateField HeaderText="Descripción" SortExpression="Descripción">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="TextBox1" runat="server" MaxLength="30" Text='<%# Bind("Descripción") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Descripción") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Estado" SortExpression="Estado">
                                 <EditItemTemplate>
                                     <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="Estado" DataValueField="Estado" SelectedValue='<%# Bind("Estado") %>'>
@@ -98,11 +109,14 @@
                         &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
                     </EditItemTemplate>
                     <InsertItemTemplate>
-                        &nbsp;<table style="width:100%;">
+                        &nbsp;<table style="width:103%;">
                             <tr>
+                                <td class="auto-style10" rowspan="3">&nbsp;&nbsp; &nbsp;<asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Modulos.png" Width="130px" Height="130px" />
+                                </td>
+                                <td class="auto-style14" rowspan="3">&nbsp;</td>
                                 <td class="auto-style10">Módulo:</td>
                                 <td>
-                                    <asp:TextBox ID="ModuloTextBox" runat="server" Text='<%# Bind("Modulo") %>' />
+                                    <asp:TextBox ID="ModuloTextBox" runat="server" Text='<%# Bind("Modulo") %>' Height="22px" MaxLength="15" Width="140px" />
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ModuloTextBox" ErrorMessage="*Obligatorio" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -111,7 +125,7 @@
                             <tr>
                                 <td class="auto-style10">Descripción: </td>
                                 <td>
-                                    <asp:TextBox ID="DescripciónTextBox0" runat="server" Height="22px" MaxLength="30" Text='<%# Bind("Descripción") %>' Width="243px" />
+                                    <asp:TextBox ID="DescripciónTextBox0" runat="server" Height="22px" MaxLength="30" Text='<%# Bind("Descripción") %>' Width="280px" />
                                 </td>
                                 <td>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="DescripciónTextBox0" ErrorMessage="*Obligatorio" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -129,8 +143,9 @@
                             </tr>
                         </table>
                         <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insertar" OnClick="InsertButton_Click" />
-                        &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" OnClick="InsertCancelButton_Click" />
+                        &nbsp;&nbsp;&nbsp;&nbsp; <asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" OnClick="InsertCancelButton_Click" />
                     </InsertItemTemplate>
                     <ItemTemplate>
                         Modulo:

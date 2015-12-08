@@ -40,3 +40,5 @@ C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\RdlComp
 C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\RdlCompile.compiled
 C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.dll
 C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\obj\Release\GesRTS.pdb
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\bin\BasicFrame.WebControls.BasicDatePicker.dll
+C:\Users\Andres\Documents\Visual Studio 2013\Projects\GesRTS\bin\BasicFrame.WebControls.BasicDatePicker.xml

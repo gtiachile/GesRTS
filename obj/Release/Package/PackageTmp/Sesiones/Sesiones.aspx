@@ -42,7 +42,7 @@
 ORDER BY [Region_Txt]"></asp:SqlDataSource>
                         </td>
                         <td class="auto-style22">
-                            <asp:Label ID="Lbl_Region" runat="server" BackColor="#00CC99" Font-Bold="True" style="text-align: center" Text="Lbl_Region" Width="90px"></asp:Label>
+                            <asp:Label ID="Lbl_Region" runat="server" BackColor="#00CC66" Font-Bold="True" style="text-align: center" Text="Lbl_Region" Width="90px"></asp:Label>
                         </td>
                         <td class="auto-style23">
                             <asp:Label ID="Lbl_Sesion" runat="server" Text="Lbl_Sesion" Visible="False"></asp:Label>

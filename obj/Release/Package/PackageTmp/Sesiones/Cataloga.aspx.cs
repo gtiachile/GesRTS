@@ -45,6 +45,7 @@ namespace BitOp.Sesiones
             Lbl_Fecha_Desde.Text    = "";
             Lbl_Region.Text         = "";
             Lbl_Supervisor.Text     = "";
+            Lbl_Fecha_Aux.Text      = "";
 
             SqlConnection con;
             SqlCommand cmd = new SqlCommand();
@@ -67,7 +68,12 @@ namespace BitOp.Sesiones
                 if (row["Inicio_Nombre"] != DBNull.Value)
                     Lbl_Inicio_Descrip.Text = row["Inicio_Nombre"].ToString();
                 if (row["Fecha_Desde"] != DBNull.Value)
-                    Lbl_Fecha_Desde.Text    = row["Fecha_Desde"].ToString().Substring(0,10);
+                  {
+                    Lbl_Fecha_Desde.Text = row["Fecha_Desde"].ToString().Substring(0, 10);
+                    string _fecha_desde  = row["Fecha_Desde"].ToString().Substring(0, 10);
+                    Lbl_Fecha_Aux.Text   = _fecha_desde.Substring(3, 3) + _fecha_desde.Substring(0, 3) + _fecha_desde.Substring(6, 4);
+                  }
+
                 if (row["Region"] != DBNull.Value)
                     Lbl_Region.Text         = row["Region"].ToString();
                 if (row["Supervisor"] != DBNull.Value)
@@ -272,7 +278,7 @@ namespace BitOp.Sesiones
             TextBox _tb_fec_vigencia   = (TextBox)FormView1.FindControl("Fec_VigenciaTextBox");
             DateTime _fecha_vigencia   = Convert.ToDateTime(_tb_fec_vigencia.Text);
             TextBox _tb_fec_expiracion = (TextBox)FormView1.FindControl("Fec_ExpiracionTextBox");
-            DateTime _fecha_expiracion = Convert.ToDateTime(_tb_fec_vigencia.Text);
+            DateTime _fecha_expiracion = Convert.ToDateTime(_tb_fec_expiracion.Text);
 
             Carga_Tablas_Desde_RTS(_nro_sesion, _usuario, _fecha_vigencia, _fecha_expiracion);
 

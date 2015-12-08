@@ -74,6 +74,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="BasicFrame.WebControls.BasicDatePicker, Version=1.4.3.40829, Culture=neutral, PublicKeyToken=e1cce521aa9b4849, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BasicDatePicker_1_4_3\BasicDatePicker_1_4_3\BasicFrame.WebControls.BasicDatePicker.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -222,13 +226,17 @@
     <Content Include="Images\GesRTS.png" />
     <Content Include="Images\Home_5699.png" />
     <Content Include="Images\logocial.png" />
+    <Content Include="Images\Modulos.png" />
     <Content Include="Images\NewRow.png" />
+    <Content Include="Images\Opciones.png" />
+    <Content Include="Images\Perfiles.png" />
     <Content Include="Images\saveHS.png" />
     <Content Include="Images\Select.png" />
     <Content Include="Images\selectedtab.GIF" />
     <Content Include="Images\StopHS.png" />
     <Content Include="Images\tabb.gif" />
     <Content Include="Images\unselectedtab.GIF" />
+    <Content Include="Images\Usuarios.png" />
     <Content Include="Images\ZoomHS.png" />
     <Content Include="InicioMenu.aspx" />
     <Content Include="Inicio.aspx" />

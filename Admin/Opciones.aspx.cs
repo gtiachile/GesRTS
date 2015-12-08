@@ -14,11 +14,6 @@ namespace BitOp.Admin
             if (!this.IsPostBack) { BitOP.Global.MenuControl.getMenu((Menu)Master.FindControl("NavigationMenu"), (Login)Master.FindControl("Login1"), BitOP.Global.Perfil); }                  
         }
 
-        protected void FormView1_PageIndexChanging(object sender, FormViewPageEventArgs e)
-        {
-
-        }
-
         protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
         {
             MultiView1.ActiveViewIndex = 1;
@@ -32,31 +27,25 @@ namespace BitOp.Admin
         protected void ImageButton2_Click1(object sender, ImageClickEventArgs e)
         {
             MultiView1.ActiveViewIndex = 0;
+            GridView1.DataBind();
         }
 
         protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
         {
             MultiView1.ActiveViewIndex = 0;
-        }
-
-        protected void InsertButton_Click(object sender, EventArgs e)
-        {
-            MultiView1.ActiveViewIndex = 0;
-        }
-
-        protected void InsertCancelButton_Click(object sender, EventArgs e)
-        {
-            MultiView1.ActiveViewIndex = 0;
+            GridView1.DataBind();
         }
 
         protected void LinkButton2_Click(object sender, EventArgs e)
         {
             MultiView1.ActiveViewIndex = 0;
+            GridView1.DataBind();
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             MultiView1.ActiveViewIndex = 0;
+            GridView1.DataBind();
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,16 +53,27 @@ namespace BitOp.Admin
             MultiView1.ActiveViewIndex = 1;
         }
 
-        protected void InsertButton_Click1(object sender, EventArgs e)
+        protected void FormView1_PageIndexChanging(object sender, FormViewPageEventArgs e)
         {
-            MultiView1.ActiveViewIndex = 0;
+
         }
 
-        protected void InsertCancelButton_Click1(object sender, EventArgs e)
+        protected void InsertButton_Click2(object sender, EventArgs e)
         {
             MultiView1.ActiveViewIndex = 0;
+            GridView1.DataBind();
         }
 
+        protected void InsertCancelButton_Click2(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0;
+            GridView1.DataBind();
+        }
+
+        protected void GesDBOpcionesFV_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+        {
+
+        }
 
 
     }

@@ -26,6 +26,22 @@
             font-size: medium;
             color: #000000;
         }
+        .auto-style14 {
+            width: 162px;
+            color: #000000;
+        }
+        .auto-style18 {
+            width: 100px;
+            font-size: xx-small;
+        }
+        .auto-style19 {
+            width: 29px;
+            color: #000000;
+        }
+        .auto-style20 {
+            width: 96px;
+            font-size: xx-small;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -49,18 +65,25 @@
                                     <Columns>
                                         <asp:TemplateField ShowHeader="False">
                                             <EditItemTemplate>
-                                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" ImageUrl="~/Images/saveHS.png" Text="Update" />
-                                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/StopHS.png" Text="Cancel" />
+                                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" ImageUrl="~/Images/saveHS.png" Text="Actualizar" />
+                                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/Cancel(build)_194_32.bmp" Text="Cancelar" />
                                             </EditItemTemplate>
                                             <ItemTemplate>
-                                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Edit" ImageUrl="~/Images/EditTableHS.png" OnClick="ImageButton1_Click1" Text="Edit" />
-                                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" OnClick="ImageButton2_Click" Text="Delete" />
+                                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Edit" ImageUrl="~/Images/EditTableHS.png" Text="Editar" />
+                                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" Text="Eliminar" OnClientClick="return confirm('¿Está seguro que desea eliminar?'); " />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-                                        <asp:BoundField DataField="Usuario" HeaderText="Usuario" ReadOnly="True" SortExpression="Usuario" />
+                                        <asp:TemplateField HeaderText="Usuario" SortExpression="Usuario">
+                                            <EditItemTemplate>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("Usuario") %>'></asp:Label>
+                                            </EditItemTemplate>
+                                            <ItemTemplate>
+                                                <asp:Label ID="Label9" runat="server" Text='<%# Bind("Usuario") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Nombre" SortExpression="Nombre">
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Nombre") %>' Width="80px"></asp:TextBox>
+                                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Nombre") %>' Width="80px" MaxLength="30"></asp:TextBox>
                                             </EditItemTemplate>
                                             <ItemTemplate>
                                                 <asp:Label ID="Label7" runat="server" Text='<%# Bind("Nombre") %>'></asp:Label>
@@ -68,7 +91,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="eMail" SortExpression="eMail">
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("eMail") %>' TextMode="Email" Width="100px"></asp:TextBox>
+                                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("eMail") %>' TextMode="Email" Width="100px" MaxLength="40"></asp:TextBox>
                                             </EditItemTemplate>
                                             <ItemTemplate>
                                                 <asp:Label ID="Label8" runat="server" Text='<%# Bind("eMail") %>'></asp:Label>
@@ -76,7 +99,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Password" SortExpression="Pass">
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Pass") %>' Width="80px"></asp:TextBox>
+                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Pass") %>' Width="80px" MaxLength="10"></asp:TextBox>
                                             </EditItemTemplate>
                                             <ItemTemplate>
                                                 <asp:Label ID="Label1" runat="server" Text='<%# Bind("Pass") %>' Visible="False"></asp:Label>
@@ -110,7 +133,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField ConvertEmptyStringToNull="False" HeaderText="Expiración" SortExpression="Expiracion">
                                             <EditItemTemplate>
-                                                <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("Expiracion") %>' TextMode="Date"></asp:TextBox>
+                                                <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("Expiracion") %>' TextMode="Date" MaxLength="10"></asp:TextBox>
                                             </EditItemTemplate>
                                             <ItemTemplate>
                                                 <asp:Label ID="Label6" runat="server" Text='<%# Eval("Expiracion") %>'></asp:Label>
@@ -196,74 +219,81 @@
                                 <InsertItemTemplate>
                                     <table style="width:100%;">
                                         <tr>
-                                            <td class="auto-style12">Usuario:</td>
-                                            <td class="auto-style4">
-                                                <asp:TextBox ID="UsuarioTextBox" runat="server" style="text-align: left" Text='<%# Bind("Usuario") %>' />
+                                            <td class="auto-style14" rowspan="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:Image ID="Image1" runat="server" ImageAlign="Middle" ImageUrl="~/Images/Usuarios.png" Width="130px" Height="250px" />
                                             </td>
-                                            <td class="auto-style4">
+                                            <td class="auto-style19">&nbsp;</td>
+                                            <td class="auto-style12">Usuario:</td>
+                                            <td class="auto-style18">
+                                                <asp:TextBox ID="UsuarioTextBox" runat="server" Height="22px" style="text-align: left" Text='<%# Bind("Usuario") %>' MaxLength="50" Width="200px" />
+                                            </td>
+                                            <td class="auto-style20">
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="UsuarioTextBox" ErrorMessage="*Obligatorio" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </td>
                                             <td class="auto-style11">Usuario Dominio:</td>
                                             <td class="auto-style1">
-                                                <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("UsuarioAD") %>'></asp:TextBox>
+                                                <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("UsuarioAD") %>' Height="22px" MaxLength="50" Width="180px"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td class="auto-style19">&nbsp;</td>
                                             <td class="auto-style10">Nombre:</td>
-                                            <td class="auto-style4">
-                                                <asp:TextBox ID="NombreTextBox0" runat="server" Text='<%# Bind("Nombre") %>' Height="22px" Width="197px" />
+                                            <td class="auto-style18">
+                                                <asp:TextBox ID="NombreTextBox0" runat="server" Height="22px" Text='<%# Bind("Nombre") %>' Width="150px" MaxLength="30" />
                                             </td>
-                                            <td class="auto-style4">
+                                            <td class="auto-style20">
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NombreTextBox0" ErrorMessage="*Obligatorio" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </td>
                                             <td class="auto-style11">Dominio:</td>
                                             <td>
-                                                <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("DominioAD") %>'></asp:TextBox>
+                                                <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("DominioAD") %>' Height="22px" MaxLength="20"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td class="auto-style19">&nbsp;</td>
                                             <td class="auto-style10">Password:</td>
-                                            <td class="auto-style4">
-                                                <asp:TextBox ID="PassTextBox0" runat="server" Text='<%# Bind("Pass") %>' TextMode="Password" />
+                                            <td class="auto-style18">
+                                                <asp:TextBox ID="PassTextBox0" runat="server" Height="22px" Text='<%# Bind("Pass") %>' TextMode="Password" />
                                             </td>
-                                            <td class="auto-style4">
+                                            <td class="auto-style20">
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="PassTextBox0" ErrorMessage="*Obligatorio" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </td>
                                             <td class="auto-style11">Perfil:</td>
                                             <td>
-                                                <asp:DropDownList ID="DropDownList4" runat="server" DataSourceID="BopDBPerfiles" DataTextField="Descripción" DataValueField="Perfil" SelectedValue='<%# Bind("Perfil") %>'>
+                                                <asp:DropDownList ID="DropDownList4" runat="server" DataSourceID="BopDBPerfiles" DataTextField="Descripción" DataValueField="Perfil" SelectedValue='<%# Bind("Perfil") %>' Height="22px" Width="120px">
                                                 </asp:DropDownList>
                                                 <asp:SqlDataSource ID="BopDBPerfiles" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Perfil], [Descripción] FROM [Perfiles] where [Estado]='Activo'"></asp:SqlDataSource>
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td class="auto-style19">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                                             <td class="auto-style10">eMail:</td>
-                                            <td class="auto-style4">
-                                                <asp:TextBox ID="eMailTextBox0" runat="server" Height="16px" Text='<%# Bind("eMail") %>' Width="212px" />
+                                            <td class="auto-style18">
+                                                <asp:TextBox ID="eMailTextBox0" runat="server" Height="22px" Text='<%# Bind("eMail") %>' Width="200px" MaxLength="40" />
                                             </td>
-                                            <td class="auto-style4">
+                                            <td class="auto-style20">
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="eMailTextBox0" ErrorMessage="*Obligatorio" ForeColor="Red"></asp:RequiredFieldValidator>
                                             </td>
                                             <td class="auto-style11">Fecha expiración:</td>
                                             <td>
-                                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Expiracion") %>' TextMode="Date"></asp:TextBox>
+                                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Expiracion") %>' TextMode="Date" Height="22px" MaxLength="10" Width="80px"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td class="auto-style19">&nbsp;</td>
                                             <td class="auto-style10">Estado:</td>
-                                            <td class="auto-style4">
-                                                <asp:DropDownList ID="DropDownList3" runat="server" SelectedValue='<%# Bind("Estado") %>'>
+                                            <td class="auto-style18">
+                                                <asp:DropDownList ID="DropDownList3" runat="server" Height="22px" SelectedValue='<%# Bind("Estado") %>'>
                                                     <asp:ListItem>Activo</asp:ListItem>
                                                     <asp:ListItem>Inactivo</asp:ListItem>
                                                 </asp:DropDownList>
                                             </td>
-                                            <td class="auto-style4">&nbsp;</td>
+                                            <td class="auto-style20">&nbsp;</td>
                                             <td class="auto-style5">&nbsp;</td>
                                             <td>&nbsp;</td>
                                         </tr>
                                     </table>
-                                    &nbsp;<br />&nbsp;<asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" OnClick="InsertButton_Click" Text="Insertar" />
-                                    &nbsp; <asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancelar" />
+                                    &nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" OnClick="InsertButton_Click" Text="Insertar" />
+                                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; <asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancelar" />
                                 </InsertItemTemplate>
                                 <ItemTemplate>
                                     Usuario:

@@ -1,12 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Rep_Sesiones.aspx.cs" Inherits="BitOp.Sesiones.Rep_Sesiones" %>
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <style type="text/css">
+        .auto-style10 {
+            font-size: medium;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <p class="auto-style10">
+        <strong>SESIONES CATALOGADAS</strong></p>
     <p>
-        REPORTE SESIONES</p>
-    <p>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Región:&nbsp;
         <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
         </asp:DropDownList>
         <asp:SqlDataSource ID="GesDBRegiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Region_ID], ([Region_Chile] + ' - ' + [Descripción]) as Region_Txt, [Region_RTS] 

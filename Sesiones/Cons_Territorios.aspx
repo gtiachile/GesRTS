@@ -126,7 +126,7 @@ WHERE [Region_ID] = @Region_ID">
                     </table>
                 </p>
                 <p>
-                    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Territorio_Key_RTS" DataSourceID="GesDBTerritorios" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" ShowHeaderWhenEmpty="True" Width="90%">
+                    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Territorio_Key_RTS" DataSourceID="GesDBTerritorios" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" ShowHeaderWhenEmpty="True" Width="95%">
                         <AlternatingRowStyle BackColor="White" />
                         <Columns>
                             <asp:TemplateField ShowHeader="False">
@@ -157,6 +157,7 @@ WHERE [Region_ID] = @Region_ID">
                                 <ItemTemplate>
                                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("Sesion_Key_RTS") %>'></asp:Label>
                                 </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Clave TP (Terr)" SortExpression="Territorio_Key_RTS">
                                 <EditItemTemplate>
@@ -165,6 +166,7 @@ WHERE [Region_ID] = @Region_ID">
                                 <ItemTemplate>
                                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Territorio_Key_RTS") %>'></asp:Label>
                                 </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
                         </Columns>
                         <EditRowStyle BackColor="#7C6F57" />

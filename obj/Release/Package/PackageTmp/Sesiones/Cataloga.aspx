@@ -22,7 +22,7 @@
         }
         .auto-style18 {
             height: 23px;
-            width: 91px;
+            width: 127px;
         }
         .auto-style22 {
             height: 23px;
@@ -50,7 +50,6 @@
             width: 100px;
         }
         .auto-style32 {
-            width: 105px;
         }
         .auto-style33 {
             width: 111px;
@@ -69,6 +68,14 @@
         }
         .auto-style42 {
             width: 210px;
+        }
+        .auto-style43 {
+            width: 127px;
+        }
+        .auto-style44 {
+        }
+        .auto-style45 {
+            width: 31px;
         }
         </style>
 </asp:Content>
@@ -101,6 +108,9 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                         <td class="auto-style22">
                             <asp:Label ID="Lbl_Supervisor" runat="server" Text="Lbl_Supervisor"></asp:Label>
                         </td>
+                        <td class="auto-style22">
+                            <asp:Label ID="Lbl_Fecha_Aux" runat="server" Text="Lbl_Fecha_Aux" Visible="False"></asp:Label>
+                        </td>
                     </tr>
                     <tr>
                         <td class="auto-style17">F.Desde:</td>
@@ -110,10 +120,11 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                         <td class="auto-style21">
                             <asp:Label ID="Lbl_Sesion" runat="server" Visible="False"></asp:Label>
                         </td>
-                        <td class="auto-style19">Inicio Descrip.: </td>
+                        <td class="auto-style43">Inicio Descrip.: </td>
                         <td class="auto-style23">
                             <asp:Label ID="Lbl_Inicio_Descrip" runat="server" Text="Lbl_Inicio_Descrip"></asp:Label>
                         </td>
+                        <td class="auto-style23">&nbsp;</td>
                     </tr>
                 </table>
                 <br />
@@ -139,6 +150,9 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="DESCRIPTION" HeaderText="Descripción" SortExpression="DESCRIPTION" />
+                        <asp:BoundField DataField="Cant_Territorios" HeaderText="Cant.Territorios" SortExpression="Cant_Territorios">
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
                         <asp:BoundField DataField="SCENARIO" HeaderText="Escenario" SortExpression="SCENARIO" />
                         <asp:TemplateField HeaderText="Fecha Creación" SortExpression="SESSION_DATE">
                             <EditItemTemplate>
@@ -159,6 +173,9 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
+                        <asp:BoundField DataField="Catalogada" HeaderText="Catalogada" SortExpression="Catalogada">
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
                     </Columns>
                     <EditRowStyle BackColor="#7C6F57" />
                     <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -182,16 +199,27 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                     </tr>
                 </table>
                 <br />
-                <asp:SqlDataSource ID="GesDBSesionesTP" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [PKEY], [REGION_ID], [DESCRIPTION], [SCENARIO], [SESSION_DATE], [USER_MODIFIED], [DATE_MODIFIED]
+                <asp:SqlDataSource ID="GesDBSesionesTP" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [PKEY], [REGION_ID], [DESCRIPTION],
+              Cant_Territorios = (SELECT COUNT(*) FROM V_TerritoriosTP
+                                                 WHERE V_TerritoriosTP.RN_SESSION_PKEY = V_SesionesTP.PKEY
+                                                      AND V_TerritoriosTP.TERRITORY_NUMBER &lt;&gt; 0),
+              [SCENARIO], [SESSION_DATE], [USER_MODIFIED], [DATE_MODIFIED],
+              Catalogada =
+                  CASE (SELECT COUNT(*) FROM Sesiones WHERE Sesion_Key_RTS = PKEY)
+                       WHEN 0   THEN '  '
+                       ELSE          'si'
+                   END
   FROM [V_SesionesTP]
-WHERE [REGION_ID]           =  @Region_ID
-    AND [TYPE]                      =  1
-    AND [DESCRIPTION]      LIKE (@Inicio_Descrip + '%')
-    AND CAST([DATE_MODIFIED] AS DATE) &gt;=   CAST(@Fecha_Desde AS DATE)">
+WHERE [REGION_ID]          =  @Region_ID
+    AND [TYPE]                     =  1
+    AND [DESCRIPTION]  LIKE (@Inicio_Descrip + '%')
+    AND CAST([DATE_MODIFIED] AS DATE) &gt;= CAST(@Fecha_Desde AS DATE)
+ORDER BY [DATE_MODIFIED] DESC
+">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="Lbl_Region" Name="Region_ID" PropertyName="Text" />
                         <asp:ControlParameter ControlID="Lbl_Inicio_Descrip" Name="Inicio_Descrip" PropertyName="Text" />
-                        <asp:ControlParameter ControlID="Lbl_Fecha_Desde" Name="Fecha_Desde" PropertyName="Text" />
+                        <asp:ControlParameter ControlID="Lbl_Fecha_Aux" Name="Fecha_Desde" PropertyName="Text" DefaultValue="01-01-2014" />
                     </SelectParameters>
                 </asp:SqlDataSource>
                 <br />
@@ -199,7 +227,7 @@ WHERE [REGION_ID]           =  @Region_ID
             <asp:View ID="View2" runat="server">
                 <asp:FormView ID="FormView1" runat="server" DataKeyNames="Ses_Key_RTS" DataSourceID="GesDBSesion_TempFV" DefaultMode="Edit" >
                     <EditItemTemplate>
-                        <table style="width: 100%;">
+                        <table style="width: 95%;">
                             <tr>
                                 <td class="auto-style33">Sesión: </td>
                                 <td class="auto-style25">
@@ -210,12 +238,14 @@ WHERE [REGION_ID]           =  @Region_ID
                                 <td class="auto-style34">
                                     <asp:TextBox ID="Fec_CreacionTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Fec_Creacion", "{0:d}") %>' TextMode="Date" Width="70px" />
                                 </td>
-                                <td class="auto-style19">&nbsp;</td>
-                                <td class="auto-style32">Región:</td>
+                                <td class="auto-style45">&nbsp;</td>
+                                <td class="auto-style44">Región:</td>
                                 <td class="auto-style40">
                                     <asp:TextBox ID="Reg_IDTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Reg_ID") %>' Width="90px" />
                                 </td>
-                                <td class="auto-style41">&nbsp;</td>
+                                <td class="auto-style41">
+                                    <asp:TextBox ID="TipTextBox" runat="server" ReadOnly="True" Text='<%# Bind("Tip") %>' Visible="False" Width="20px" />
+                                </td>
                             </tr>
                             <tr>
                                 <td class="auto-style33">Descripción: </td>
@@ -227,12 +257,10 @@ WHERE [REGION_ID]           =  @Region_ID
                                 <td class="auto-style34">
                                     <asp:TextBox ID="EscTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Esc") %>' Width="180px" />
                                 </td>
-                                <td class="auto-style19">&nbsp;</td>
-                                <td class="auto-style32">&nbsp;</td>
-                                <td class="auto-style40">
-                                    <asp:TextBox ID="TipTextBox" runat="server" ReadOnly="True" Text='<%# Bind("Tip") %>' Visible="False" Width="20px" />
+                                <td class="auto-style45">&nbsp;</td>
+                                <td class="auto-style44" colspan="3">
+                                    <asp:RangeValidator ID="Valida_Fec_Vigencia" runat="server" ControlToValidate="Fec_VigenciaTextBox" ErrorMessage="Fecha Vigencia Inválida" Font-Bold="True" ForeColor="Red" MaximumValue="31-12-2025" MinimumValue="01-01-2015" Width="180px"></asp:RangeValidator>
                                 </td>
-                                <td class="auto-style41">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td class="auto-style33">Usuario Modifica: </td>
@@ -244,10 +272,10 @@ WHERE [REGION_ID]           =  @Region_ID
                                 <td class="auto-style34">
                                     <asp:TextBox ID="Fec_ModificacionTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Fec_Modificacion", "{0:d}") %>' TextMode="Date" Width="70px" />
                                 </td>
-                                <td class="auto-style19">&nbsp;</td>
-                                <td class="auto-style32">Vigencia Desde:</td>
+                                <td class="auto-style45">&nbsp;</td>
+                                <td class="auto-style44">Vigencia Desde:</td>
                                 <td class="auto-style40">
-                                    <asp:TextBox ID="Fec_VigenciaTextBox" runat="server" Text='<%# Bind("Fec_Vigencia", "{0:d}") %>' Width="70px" />
+                                    <asp:TextBox ID="Fec_VigenciaTextBox" runat="server" Text='<%# Bind("Fec_Vigencia", "{0:d}") %>' Width="70px" MaxLength="10" TextMode="Date" />
                                 </td>
                                 <td class="auto-style41" style="color: #FF0000">dd-mm-aaaa</td>
                             </tr>
@@ -261,15 +289,27 @@ WHERE [REGION_ID]           =  @Region_ID
                                 <td class="auto-style34">
                                     <asp:TextBox ID="Fec_CatalogacionTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Fec_Catalogacion", "{0:d}") %>' TextMode="Date" Width="70px" />
                                 </td>
-                                <td class="auto-style19">&nbsp;</td>
-                                <td class="auto-style32">Expiración:</td>
+                                <td class="auto-style45">&nbsp;</td>
+                                <td class="auto-style44">Fecha Expiración:</td>
                                 <td class="auto-style40">
-                                    <asp:TextBox ID="Fec_ExpiracionTextBox" runat="server" Text='<%# Bind("Fec_Expiracion", "{0:d}") %>' Width="70px" />
+                                    <asp:TextBox ID="Fec_ExpiracionTextBox" runat="server" Text='<%# Bind("Fec_Expiracion", "{0:d}") %>' Width="70px" MaxLength="10" TextMode="Date" />
                                 </td>
                                 <td class="auto-style41" style="color: #FF0000">dd-mm-aaaa</td>
                             </tr>
+                            <tr>
+                                <td class="auto-style33">&nbsp;</td>
+                                <td class="auto-style25">&nbsp;</td>
+                                <td class="auto-style39">&nbsp;</td>
+                                <td class="auto-style27">&nbsp;</td>
+                                <td class="auto-style34">
+                                    &nbsp;</td>
+                                <td class="auto-style45">&nbsp;</td>
+                                <td class="auto-style32" colspan="2">
+                                    <asp:RangeValidator ID="Valida_Fec_Expira" runat="server" ControlToValidate="Fec_ExpiracionTextBox" ErrorMessage="Fecha Expiración Inválida" Font-Bold="True" ForeColor="Red" MaximumValue="31-12-2025" MinimumValue="01-01-2015" Width="180px"></asp:RangeValidator>
+                                </td>
+                                <td class="auto-style41" style="color: #FF0000">&nbsp;</td>
+                            </tr>
                         </table>
-                        <br />
                         <br />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" OnClick="UpdateButton_Click" OnClientClick="return confirm('¿Está seguro de catalogar esta sesión?'); " Text="Catalogar" Font-Bold="True" Width="65px"></asp:LinkButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" OnClick="UpdateCancelButton_Click" Font-Bold="True" ForeColor="#CC3300" />

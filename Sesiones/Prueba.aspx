@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Prueba.aspx.cs" Inherits="BitOp.Sesiones.Prueba" %>
+<%@ Register assembly="BasicFrame.WebControls.BasicDatePicker" namespace="BasicFrame.WebControls" tagprefix="BDP" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -16,6 +17,7 @@
     </p>
     <p>
     </p>
+    <BDP:BasicDatePicker ID="BasicDatePicker1" runat="server" DateFormat="dd-MM-yyyy" />
     <p>
     </p>
     <p>

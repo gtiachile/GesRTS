@@ -33,8 +33,13 @@ namespace BitOp.Admin
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             region = DropDownList1.SelectedValue.ToString();
-            TextBox textbox_region = (TextBox)FormView1.FindControl("TextBoxRegion");
-            textbox_region.Text = region;
+            TextBox _region = (TextBox)FormView1.FindControl("TextBox_Region");
+            _region.Text = region;
+        }
+
+        protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

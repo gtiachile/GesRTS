@@ -58,13 +58,13 @@ namespace BitOp.Admin {
         protected global::System.Web.UI.WebControls.DropDownList DropDownListModulos;
         
         /// <summary>
-        /// Control BopDBModulos.
+        /// Control GesDBModulos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource BopDBModulos;
+        protected global::System.Web.UI.WebControls.SqlDataSource GesDBModulos;
         
         /// <summary>
         /// Control GridView1.
@@ -76,13 +76,13 @@ namespace BitOp.Admin {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// Control BopDBOpciones.
+        /// Control GesDBOpciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource BopDBOpciones;
+        protected global::System.Web.UI.WebControls.SqlDataSource GesDBOpciones;
         
         /// <summary>
         /// Control View2.
@@ -103,12 +103,12 @@ namespace BitOp.Admin {
         protected global::System.Web.UI.WebControls.FormView FormView1;
         
         /// <summary>
-        /// Control BopDBOpcionesFV.
+        /// Control GesDBOpcionesFV.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource BopDBOpcionesFV;
+        protected global::System.Web.UI.WebControls.SqlDataSource GesDBOpcionesFV;
     }
 }

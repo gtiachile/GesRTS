@@ -1,12 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Perfiles.aspx.cs" Inherits="BitOp.Admin.Perfiles" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
-        .auto-style10 {
-            color: #000000;
-        }
         .auto-style11 {
             font-size: medium;
             color: #000000;
+        }
+        .auto-style13 {
+            color: #000000;
+            width: 92px;
+        }
+        .auto-style16 {
+            color: #000000;
+            width: 20px;
+        }
+        .auto-style17 {
+            color: #000000;
+            width: 77px;
+        }
+        .auto-style18 {
+            width: 78px;
         }
     </style>
 </asp:Content>
@@ -24,16 +36,23 @@
                     <Columns>
                         <asp:TemplateField ShowHeader="False">
                             <EditItemTemplate>
-                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" ImageUrl="~/Images/saveHS.png" Text="Update" />
-                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/StopHS.png" Text="Cancel" />
+                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="True" CommandName="Update" ImageUrl="~/Images/saveHS.png" Text="Actualizar" />
+                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Cancel" ImageUrl="~/Images/Cancel(build)_194_32.bmp" Text="Cancelar" />
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Edit" ImageUrl="~/Images/EditTableHS.png" Text="Edit" />
-                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" Text="Delete" OnClientClick="return confirm('¿Está seguro que desea eliminar?'); "/>
+                                <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Edit" ImageUrl="~/Images/EditTableHS.png" Text="Editar" />
+                                &nbsp;<asp:ImageButton ID="ImageButton2" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Images/DeleteHS.png" OnClientClick="return confirm('¿Está seguro que desea eliminar?'); " Text="Eliminar"/>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:BoundField DataField="Perfil" HeaderText="Perfil" ReadOnly="True" SortExpression="Perfil" />
-                        <asp:BoundField DataField="Descripción" HeaderText="Descripción" SortExpression="Descripción" />
+                        <asp:TemplateField HeaderText="Descripción" SortExpression="Descripción">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server" MaxLength="30" Text='<%# Bind("Descripción") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("Descripción") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Estado" SortExpression="Estado">
                             <EditItemTemplate>
                                 <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="Estado" DataValueField="Estado" SelectedValue='<%# Bind("Estado") %>'>
@@ -96,26 +115,31 @@
                      <InsertItemTemplate>
                          <table style="width:100%;">
                              <tr>
-                                 <td class="auto-style10">Perfil: </td>
-                                 <td>
-                                     <asp:TextBox ID="PerfilTextBox" runat="server" Text='<%# Bind("Perfil") %>' />
+                                 <td class="auto-style13" rowspan="3">&nbsp; &nbsp;<asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Perfiles.png" />
+                                 </td>
+                                 <td class="auto-style16">&nbsp;</td>
+                                 <td class="auto-style17">Perfil: </td>
+                                 <td class="auto-style18">
+                                     <asp:TextBox ID="PerfilTextBox" runat="server" Text='<%# Bind("Perfil") %>' MaxLength="15" Width="140px" />
                                  </td>
                                  <td>
                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="PerfilTextBox" ErrorMessage="*Obligatorio" ForeColor="Red"></asp:RequiredFieldValidator>
                                  </td>
                              </tr>
                              <tr>
-                                 <td class="auto-style10">Descripción: </td>
-                                 <td>
-                                     <asp:TextBox ID="DescripciónTextBox0" runat="server" MaxLength="30" Text='<%# Bind("Descripción") %>' Width="262px" />
+                                 <td class="auto-style16">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
+                                 <td class="auto-style17">Descripción: </td>
+                                 <td class="auto-style18">
+                                     <asp:TextBox ID="DescripciónTextBox0" runat="server" MaxLength="30" Text='<%# Bind("Descripción") %>' Width="280px" />
                                  </td>
                                  <td>
                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="DescripciónTextBox0" ErrorMessage="*Obligatorio" ForeColor="Red"></asp:RequiredFieldValidator>
                                  </td>
                              </tr>
                              <tr>
-                                 <td class="auto-style10">Estado:</td>
-                                 <td>
+                                 <td class="auto-style16">&nbsp;</td>
+                                 <td class="auto-style17">Estado:</td>
+                                 <td class="auto-style18">
                                      <asp:DropDownList ID="DropDownList2" runat="server" SelectedValue='<%# Bind("Estado") %>'>
                                          <asp:ListItem>Activo</asp:ListItem>
                                          <asp:ListItem>Inactivo</asp:ListItem>
@@ -125,6 +149,7 @@
                              </tr>
                          </table>
                          <br />
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                          <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" OnClick="InsertButton_Click" Text="Insertar" />
                          &nbsp; <asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" OnClick="InsertCancelButton_Click" Text="Cancelar" />
                      </InsertItemTemplate>

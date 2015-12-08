@@ -179,6 +179,8 @@ namespace BitOP
             CultureInfo newCulture = (CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
             newCulture.DateTimeFormat.ShortDatePattern = "dd-MM-yyyy";
             newCulture.DateTimeFormat.DateSeparator = "-";
+            newCulture.DateTimeFormat.ShortTimePattern = "HH:mm";
+            newCulture.DateTimeFormat.TimeSeparator = ":";
             Thread.CurrentThread.CurrentCulture = newCulture;
         }
 

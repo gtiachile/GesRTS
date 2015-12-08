@@ -8,24 +8,20 @@
         .auto-style15 {
             width: 99px;
         }
-        .auto-style25 {
-            width: 22px;
-            height: 40px;
-        }
         .auto-style31 {
-            width: 22px;
+            width: 1px;
             height: 38px;
         }
         .auto-style32 {
-            width: 96px;
+            width: 115px;
             height: 38px;
         }
         .auto-style37 {
-            width: 22px;
+            width: 1px;
             height: 39px;
         }
         .auto-style38 {
-            width: 96px;
+            width: 115px;
             height: 39px;
         }
         .auto-style40 {
@@ -38,27 +34,44 @@
             width: 138px;
         }
         .auto-style47 {
-            width: 200px;
+            width: 314px;
             height: 38px;
         }
         .auto-style48 {
-            width: 200px;
+            width: 314px;
             height: 39px;
         }
         .auto-style54 {
-            width: 596px;
+            width: 1008px;
         }
         .auto-style55 {
             height: 40px;
             width: 138px;
         }
-        .auto-style59 {
-            width: 200px;
+        .auto-style63 {
+            width: 1px;
             height: 40px;
         }
-        .auto-style60 {
-            width: 96px;
+        .auto-style65 {
+            height: 38px;
+            color: red;
+            width: 595px;
+        }
+        .auto-style66 {
+            height: 39px;
+            width: 595px;
+        }
+        .auto-style68 {
+            width: 314px;
             height: 40px;
+        }
+        .auto-style69 {
+            width: 115px;
+            height: 40px;
+        }
+        .auto-style71 {
+            height: 40px;
+            width: 595px;
         }
     </style>
 </asp:Content>
@@ -73,7 +86,7 @@
                 <asp:LinkButton ID="LinkButton1" runat="server" OnClick="ImageButton3_Click">Agregar Criterio</asp:LinkButton>
                 <br />
                 <br />
-                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Criterio_ID" DataSourceID="GesDBCriteriosGV" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" Width="80%">
+                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Criterio_ID" DataSourceID="GesDBCriteriosGV" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" ShowHeaderWhenEmpty="True" Width="80%">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField ShowHeader="False">
@@ -89,7 +102,9 @@
                         <asp:BoundField DataField="Criterio_ID" HeaderText="ID Criterio" ReadOnly="True" SortExpression="Criterio_ID" />
                         <asp:TemplateField HeaderText="Fecha Desde" SortExpression="Fecha_Desde">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Fecha_Desde") %>' MaxLength="10" TextMode="Date"></asp:TextBox>
+                                <asp:TextBox ID="TextBox1" runat="server" MaxLength="10" OnTextChanged="TextBox1_TextChanged" Text='<%# Bind("Fecha_Desde", "{0:d}") %>' TextMode="Date"></asp:TextBox>
+                                &nbsp;&nbsp;&nbsp;
+                                <asp:RangeValidator ID="Valida_Fecha_GV" runat="server" ControlToValidate="TextBox1" ErrorMessage="Fecha Inválida (formato dd-mm-aaaa)" Font-Bold="True" ForeColor="#FF3300" MaximumValue="31-12-2020" MinimumValue="01-01-2014"></asp:RangeValidator>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label1" runat="server" Text='<%# Bind("Fecha_Desde", "{0:d}") %>'></asp:Label>
@@ -138,6 +153,7 @@
                     <SortedDescendingCellStyle BackColor="#D4DFE1" />
                     <SortedDescendingHeaderStyle BackColor="#15524A" />
                 </asp:GridView>
+                <br />
                 <br />
                 <asp:SqlDataSource ID="GesDBCriteriosGV" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" DeleteCommand="DELETE FROM [Criterios] WHERE [Criterio_ID] = @Criterio_ID" InsertCommand="p_ValidaInsertaCriterio" SelectCommand="SELECT * FROM [Criterios]" UpdateCommand="UPDATE [Criterios] SET [Fecha_Desde] = @Fecha_Desde, [Inicio_Nombre] = @Inicio_Nombre, [Region] = @Region, [Supervisor] = @Supervisor, [Estado] = @Estado WHERE [Criterio_ID] = @Criterio_ID" InsertCommandType="StoredProcedure">
                     <DeleteParameters>
@@ -193,46 +209,53 @@
                                 <td class="auto-style15" rowspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                                     <asp:Image ID="Image1" runat="server" Height="150px" ImageAlign="Middle" ImageUrl="~/Images/Criterios.png" Width="100px" />
                                     &nbsp; &nbsp;</td>
-                                <td class="auto-style25"></td>
-                                <td class="auto-style60">ID Criterio:</td>
-                                <td class="auto-style59">
+                                <td class="auto-style63"></td>
+                                <td class="auto-style69">ID Criterio:</td>
+                                <td class="auto-style68">
                                     <asp:TextBox ID="Criterio_IDTextBox" runat="server" Height="22px" MaxLength="20" Text='<%# Bind("Criterio_ID") %>' Width="180px" />
                                 </td>
-                                <td class="auto-style55"></td>
+                                <td class="auto-style71">&nbsp;</td>
+                                <td class="auto-style55">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td class="auto-style31">&nbsp;&nbsp;&nbsp;</td>
                                 <td class="auto-style32">Fecha Desde:</td>
                                 <td class="auto-style47">
-                                    <asp:TextBox ID="Fecha_DesdeTextBox" runat="server" Height="22px" Text='<%# Bind("Fecha_Desde", "{0:d}") %>' TextMode="Date" Width="100px" MaxLength="10" />
+                                    <asp:TextBox ID="Fecha_DesdeTextBox" runat="server" Height="22px" Text='<%# Bind("Fecha_Desde", "{0:d}") %>' TextMode="Date" Width="120px" MaxLength="10" OnTextChanged="Fecha_DesdeTextBox_TextChanged" />
                                 </td>
-                                <td class="auto-style40">* Formato dd-mm-aaaa</td>
+                                <td class="auto-style65">
+                                    <asp:RangeValidator ID="Valida_Fecha" runat="server" ControlToValidate="Fecha_DesdeTextBox" ErrorMessage="Fecha Inválida (formato dd-mm-aaaa)" Font-Bold="True" Font-Size="Medium" MaximumValue="31-12-2020" MinimumValue="01-01-2014" Width="300px"></asp:RangeValidator>
+                                </td>
+                                <td class="auto-style40">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style25"></td>
-                                <td class="auto-style60">Inicio Nombre:&nbsp;&nbsp;&nbsp; </td>
-                                <td class="auto-style59">
+                                <td class="auto-style63"></td>
+                                <td class="auto-style69">Inicio Descrip.:</td>
+                                <td class="auto-style68">
                                     <asp:TextBox ID="Inicio_NombreTextBox" runat="server" Height="22px" MaxLength="20" Text='<%# Bind("Inicio_Nombre") %>' Width="180px" />
                                 </td>
-                                <td class="auto-style55"></td>
+                                <td class="auto-style71"></td>
+                                <td class="auto-style55">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style25"></td>
-                                <td class="auto-style60">Región:</td>
-                                <td class="auto-style59">
-                                    <asp:DropDownList ID="DropDownRegionFV" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" Height="22px" SelectedValue='<%# Bind("Region") %>' Width="200px">
+                                <td class="auto-style63"></td>
+                                <td class="auto-style69">Región:</td>
+                                <td class="auto-style68">
+                                    <asp:DropDownList ID="DropDownRegionFV" runat="server" AutoPostBack="True" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" Height="22px" SelectedValue='<%# Bind("Region") %>' Width="250px">
                                     </asp:DropDownList>
                                 </td>
-                                <td class="auto-style55"></td>
+                                <td class="auto-style71"></td>
+                                <td class="auto-style55">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style25"></td>
-                                <td class="auto-style60">Supervisor:</td>
-                                <td class="auto-style59">
-                                    <asp:DropDownList ID="DropDownSupervisorFV" runat="server" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" Height="22px" SelectedValue='<%# Bind("Supervisor") %>' Width="200px" AutoPostBack="True">
+                                <td class="auto-style63"></td>
+                                <td class="auto-style69">Supervisor:</td>
+                                <td class="auto-style68">
+                                    <asp:DropDownList ID="DropDownSupervisorFV" runat="server" DataSourceID="GesDBSupervisores" DataTextField="Vendedor_Nombre" DataValueField="Vendedor_ID" Height="22px" SelectedValue='<%# Bind("Supervisor") %>' Width="250px" AutoPostBack="True">
                                     </asp:DropDownList>
                                 </td>
-                                <td class="auto-style55"></td>
+                                <td class="auto-style71"></td>
+                                <td class="auto-style55">&nbsp;</td>
                             </tr>
                             <tr>
                                 <td class="auto-style37"></td>
@@ -243,7 +266,8 @@
                                         <asp:ListItem>Inactivo</asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
-                                <td class="auto-style42"></td>
+                                <td class="auto-style66"></td>
+                                <td class="auto-style42">&nbsp;</td>
                             </tr>
                         </table>
                         <br />
@@ -298,7 +322,7 @@
                         <asp:Parameter Name="Criterio_ID" Type="String" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
-                <asp:SqlDataSource ID="GesDBRegiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT ' ' AS Region_ID, '- Seleccione Región' as Region_Txt, ' ' AS Region_RTS 
+                <asp:SqlDataSource ID="GesDBRegiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT ' ' AS Region_ID, '- Seleccione Región -' as Region_Txt, ' ' AS Region_RTS 
   FROM Regiones
 UNION
 SELECT Region_ID, (Region_Chile + ' - ' + Descripción) as Region_Txt, Region_RTS
