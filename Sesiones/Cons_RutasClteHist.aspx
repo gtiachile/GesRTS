@@ -72,7 +72,7 @@ WHERE [REGION_ID] = @Region_ID
         </table>
     </p>
     <br />
-    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GesDBTerritorios" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" Width="90%">
+    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GesDBTerritorios" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" Width="100%">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="Sesion_Key_RTS" HeaderText="ID Sesión" SortExpression="Sesion_Key_RTS">
@@ -92,9 +92,36 @@ WHERE [REGION_ID] = @Region_ID
             <asp:BoundField DataField="Dia_Nombre_Corto" HeaderText="Día" SortExpression="Dia_Nombre_Corto">
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:BoundField DataField="Nro_Secuencia" HeaderText="Nº Secuencia" SortExpression="Nro_Secuencia">
+            <asp:BoundField DataField="Nro_Secuencia" HeaderText="Sec." SortExpression="Nro_Secuencia">
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
+            <asp:TemplateField HeaderText="Prom Fact." SortExpression="Prom_Facturacion">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Prom_Facturacion") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Prom_Facturacion", "{0:C0}") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Right" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Prom. Kilos" SortExpression="Prom_Kilos">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Prom_Kilos") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Prom_Kilos", "{0:F0}") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Right" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Carga. Trab" SortExpression="Carga_Trab">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Carga_Trab") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("Carga_Trab", "{0:F5}") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Right" />
+            </asp:TemplateField>
         </Columns>
         <EditRowStyle BackColor="#7C6F57" />
         <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -111,12 +138,14 @@ WHERE [REGION_ID] = @Region_ID
         <asp:SqlDataSource ID="GesDBTerritorios" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT	Paradas.Sesion_Key_RTS, Sesiones.Descripcion,
 	Rutas.Territorio_Key_RTS, Territorios.Territorio_Descrip,
 	Paradas.Ruta_Key_RTS, Rutas.Ruta_ID, Rutas.Ruta_Nro,
-	Dia_Nombre_Corto, Paradas.Ubicacion_ID, Paradas.Nro_Secuencia
-  FROM     Paradas                                                                                                                            INNER JOIN
-	Rutas                ON Paradas.Ruta_Key_RTS         = Rutas.Ruta_Key_RTS                  INNER JOIN
-	Territorios        ON Rutas.Territorio_Key_RTS    = Territorios.Territorio_Key_RTS INNER JOIN
-	Sesiones           ON Territorios.Sesion_Key_RTS = Sesiones.Sesion_Key_RTS         INNER JOIN
-                   Dias_Semana   ON Rutas.Ruta_Dia                     = Inicial_Dia_Ingles
+	Dia_Nombre_Corto, Paradas.Ubicacion_ID, Paradas.Nro_Secuencia,
+	Prom_Facturacion, Prom_Kilos, Carga_Trab
+  FROM     Paradas                                                                                                                                     INNER JOIN
+	Ext_Paradas    ON Ext_Paradas.Ext_Parada_Key_RTS  = Paradas.Ext_Parada_Key_RTS   INNER JOIN
+	Rutas               ON Rutas.Ruta_Key_RTS                       = Paradas.Ruta_Key_RTS              INNER JOIN
+	Territorios       ON Rutas.Territorio_Key_RTS              = Territorios.Territorio_Key_RTS INNER JOIN
+	Sesiones          ON Territorios.Sesion_Key_RTS           = Sesiones.Sesion_Key_RTS         INNER JOIN
+                   Dias_Semana  ON Dias_Semana.Inicial_Dia_Ingles    = Rutas.Ruta_Dia
   WHERE   Paradas.Ubicacion_Tipo      = 'SIT'
      AND     Paradas.Ubicacion_Region = @Region_ID
      AND     Paradas.Ubicacion_ID          = @Cliente_ID

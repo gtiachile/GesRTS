@@ -128,7 +128,7 @@ ORDER BY [Criterio_ID]"></asp:SqlDataSource>
                     </tr>
                 </table>
                 <br />
-                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="PKEY" DataSourceID="GesDBSesionesTP" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" Width="95%" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="PKEY" DataSourceID="GesDBSesionesTP" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" Width="100%" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField ShowHeader="False">
@@ -227,7 +227,7 @@ ORDER BY [DATE_MODIFIED] DESC
             <asp:View ID="View2" runat="server">
                 <asp:FormView ID="FormView1" runat="server" DataKeyNames="Ses_Key_RTS" DataSourceID="GesDBSesion_TempFV" DefaultMode="Edit" >
                     <EditItemTemplate>
-                        <table style="width: 95%;">
+                        <table style="width: 100%;">
                             <tr>
                                 <td class="auto-style33">Sesión: </td>
                                 <td class="auto-style25">
@@ -236,7 +236,7 @@ ORDER BY [DATE_MODIFIED] DESC
                                 <td class="auto-style39">&nbsp;</td>
                                 <td class="auto-style27">Fecha Creación:</td>
                                 <td class="auto-style34">
-                                    <asp:TextBox ID="Fec_CreacionTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Fec_Creacion", "{0:d}") %>' TextMode="Date" Width="70px" />
+                                    <asp:TextBox ID="Fec_CreacionTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Fec_Creacion", "{0:d}") %>' TextMode="Date" Width="120px" />
                                 </td>
                                 <td class="auto-style45">&nbsp;</td>
                                 <td class="auto-style44">Región:</td>
@@ -270,12 +270,12 @@ ORDER BY [DATE_MODIFIED] DESC
                                 <td class="auto-style39">&nbsp;</td>
                                 <td class="auto-style27">Fecha Modifica:</td>
                                 <td class="auto-style34">
-                                    <asp:TextBox ID="Fec_ModificacionTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Fec_Modificacion", "{0:d}") %>' TextMode="Date" Width="70px" />
+                                    <asp:TextBox ID="Fec_ModificacionTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Fec_Modificacion", "{0:d}") %>' TextMode="Date" Width="120px" />
                                 </td>
                                 <td class="auto-style45">&nbsp;</td>
                                 <td class="auto-style44">Vigencia Desde:</td>
                                 <td class="auto-style40">
-                                    <asp:TextBox ID="Fec_VigenciaTextBox" runat="server" Text='<%# Bind("Fec_Vigencia", "{0:d}") %>' Width="70px" MaxLength="10" TextMode="Date" />
+                                    <asp:TextBox ID="Fec_VigenciaTextBox" runat="server" Text='<%# Bind("Fec_Vigencia", "{0:d}") %>' Width="120px" MaxLength="10" TextMode="Date" />
                                 </td>
                                 <td class="auto-style41" style="color: #FF0000">dd-mm-aaaa</td>
                             </tr>
@@ -287,12 +287,12 @@ ORDER BY [DATE_MODIFIED] DESC
                                 <td class="auto-style39">&nbsp;</td>
                                 <td class="auto-style27">Fecha Cataloga:</td>
                                 <td class="auto-style34">
-                                    <asp:TextBox ID="Fec_CatalogacionTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Fec_Catalogacion", "{0:d}") %>' TextMode="Date" Width="70px" />
+                                    <asp:TextBox ID="Fec_CatalogacionTextBox" runat="server" BackColor="#CCCCCC" ReadOnly="True" Text='<%# Bind("Fec_Catalogacion", "{0:d}") %>' TextMode="Date" Width="120px" />
                                 </td>
                                 <td class="auto-style45">&nbsp;</td>
                                 <td class="auto-style44">Fecha Expiración:</td>
                                 <td class="auto-style40">
-                                    <asp:TextBox ID="Fec_ExpiracionTextBox" runat="server" Text='<%# Bind("Fec_Expiracion", "{0:d}") %>' Width="70px" MaxLength="10" TextMode="Date" />
+                                    <asp:TextBox ID="Fec_ExpiracionTextBox" runat="server" Text='<%# Bind("Fec_Expiracion", "{0:d}") %>' Width="120px" MaxLength="10" TextMode="Date" />
                                 </td>
                                 <td class="auto-style41" style="color: #FF0000">dd-mm-aaaa</td>
                             </tr>
@@ -435,7 +435,7 @@ WHERE [Ses_Key_RTS] = @Ses_Key_RTS" UpdateCommand="UPDATE [Sesion_Temp]
                         <asp:Parameter Name="Ses_Key_RTS" Type="Int32" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
-                <asp:GridView ID="GridView2" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Terr_Key_RTS" DataSourceID="GesDBTerritorios_Temp" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" PageSize="7" Width="90%">
+                <asp:GridView ID="GridView2" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Terr_Key_RTS" DataSourceID="GesDBTerritorios_Temp" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" PageSize="7" Width="100%">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField ShowHeader="False">

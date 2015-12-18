@@ -51,7 +51,7 @@ ORDER BY [Region_Txt]"></asp:SqlDataSource>
                     </tr>
                 </table>
                 <br />
-                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Sesion_Key_RTS" DataSourceID="GesDBSesionesGV" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1" Width="95%" ShowHeaderWhenEmpty="True">
+                <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Sesion_Key_RTS" DataSourceID="GesDBSesionesGV" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1" Width="100%" ShowHeaderWhenEmpty="True">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField ShowHeader="False">

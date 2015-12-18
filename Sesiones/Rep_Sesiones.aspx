@@ -9,7 +9,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <p class="auto-style10">
-        <strong>SESIONES CATALOGADAS</strong></p>
+        <strong>RESUMEN SESIONES CATALOGADAS</strong></p>
     <p>
         Región:&nbsp;
         <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="GesDBRegiones" DataTextField="Region_Txt" DataValueField="Region_ID" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
@@ -27,7 +27,9 @@ ORDER BY [Region_Txt]"></asp:SqlDataSource>
             </DataSources>
         </LocalReport>
     </rsweb:ReportViewer>
-    <asp:SqlDataSource ID="GesDBSesiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT * FROM [Sesiones] where region_id=@region_id">
+    <asp:SqlDataSource ID="GesDBSesiones" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT * FROM [Sesiones]
+ WHERE Region_ID = @Region_ID
+ORDER BY Fecha_Catalogacion DESC">
         <SelectParameters>
             <asp:ControlParameter ControlID="DropDownList1" DefaultValue="RM" Name="region_id" PropertyName="SelectedValue" />
         </SelectParameters>

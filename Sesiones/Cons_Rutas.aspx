@@ -292,25 +292,25 @@ WHERE cast(Sesion_Key_RTS as nvarchar)     = @ID_Sesion
                 <asp:GridView ID="GridView4" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Parada_Key_RTS" DataSourceID="GesDBParadas" ForeColor="#333333" GridLines="None" Width="100%" ShowHeaderWhenEmpty="True">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
-                        <asp:BoundField DataField="Nro_Secuencia" HeaderText="Secuencia" SortExpression="Nro_Secuencia">
+                        <asp:BoundField DataField="Nro_Secuencia" HeaderText="Sec." SortExpression="Nro_Secuencia">
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField DataField="Ubicacion_ID" HeaderText="Cliente" SortExpression="Ubicacion_ID">
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                        <asp:BoundField DataField="DESCRIPTION" HeaderText="Descripción" SortExpression="DESCRIPTION" />
+                        <asp:BoundField DataField="DESCRIPTION" HeaderText="Nombre" SortExpression="DESCRIPTION" />
                         <asp:BoundField DataField="ADDR_LINE1" HeaderText="Dirección" SortExpression="ADDR_LINE1" />
                         <asp:BoundField DataField="COMUNA" HeaderText="Comuna" SortExpression="COMUNA" />
-                        <asp:TemplateField HeaderText="Llegada" SortExpression="Hra_Llegada">
+                        <asp:TemplateField HeaderText="Dist. (km)" SortExpression="Distancia_Km">
                             <EditItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("Hra_Llegada") %>'></asp:Label>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("Distancia_Km") %>'></asp:Label>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label6" runat="server" Text='<%# Bind("Hra_Llegada", "{0:t}") %>'></asp:Label>
+                                <asp:Label ID="Label8" runat="server" Text='<%# Bind("Distancia_Km") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Tpo.Viaje" SortExpression="Tpo_Viaje">
+                        <asp:TemplateField HeaderText="Tpo. Viaje" SortExpression="Tpo_Viaje">
                             <EditItemTemplate>
                                 <asp:Label ID="Label2" runat="server" Text='<%# Eval("Tpo_Viaje") %>'></asp:Label>
                             </EditItemTemplate>
@@ -319,12 +319,12 @@ WHERE cast(Sesion_Key_RTS as nvarchar)     = @ID_Sesion
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Distancia (km)" SortExpression="Distancia_Km">
+                        <asp:TemplateField HeaderText="Llegada" SortExpression="Hra_Llegada">
                             <EditItemTemplate>
-                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("Distancia_Km") %>'></asp:Label>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("Hra_Llegada") %>'></asp:Label>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label8" runat="server" Text='<%# Bind("Distancia_Km") %>'></asp:Label>
+                                <asp:Label ID="Label6" runat="server" Text='<%# Bind("Hra_Llegada", "{0:t}") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
@@ -345,6 +345,33 @@ WHERE cast(Sesion_Key_RTS as nvarchar)     = @ID_Sesion
                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("Hora_Cierre", "{0:t}") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Prom. Fact." SortExpression="Prom_Facturacion">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Prom_Facturacion") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("Prom_Facturacion", "{0:C0}") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Prom. Kilos" SortExpression="Prom_Kilos">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Prom_Kilos") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("Prom_Kilos", "{0:F0}") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Carga Trab." SortExpression="Carga_Trab">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Carga_Trab") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("Carga_Trab", "{0:F5}") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
                     </Columns>
                     <EditRowStyle BackColor="#7C6F57" />
@@ -368,19 +395,20 @@ WHERE cast(Sesion_Key_RTS as nvarchar)     = @ID_Sesion
                     </tr>
                 </table>
                 <br />
-                <asp:SqlDataSource ID="GesDBParadas" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT DISTINCT Parada_Key_RTS, Nro_Secuencia, Ubicacion_ID, DESCRIPTION, ADDR_LINE1, COMUNA,
+                <asp:SqlDataSource ID="GesDBParadas" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT DISTINCT Parada_Key_RTS, Nro_Secuencia, Paradas.Ubicacion_ID, DESCRIPTION, ADDR_LINE1, COMUNA,
                                 CAST(CONVERT(VARCHAR(8),DATEADD(SECOND,
                                 DATEDIFF(SECOND, '05:00:00', Hora_Llegada),0),114) AS DATETIME) AS Hra_Llegada,
                                 CONVERT(VARCHAR(8),DATEADD(SECOND,Tiempo_Servicio,0),114) AS Tpo_Servicio,
                                 CONVERT(VARCHAR(8),DATEADD(SECOND,Tiempo_Viaje,0),114) AS Tpo_Viaje,
-                                CAST((Distancia/100.00) AS DECIMAL(5,2)) AS Distancia_Km,
-                                Hora_Apertura, Hora_Cierre
+                                CAST((Distancia/100.00) AS DECIMAL(5,2)) AS Distancia_Km, Hora_Apertura, Hora_Cierre,
+                                Prom_Facturacion, Prom_Kilos, Carga_Trab
  FROM  Paradas INNER JOIN
-              V_ClientesTP ON  Ubicacion_ID = ID
-                                     AND Ubicacion_Region = REGION_ID
-WHERE cast(Sesion_Key_RTS as nvarchar)      = @Sesion_Key_RTS
-    AND  cast(Territorio_Key_RTS as nvarchar) = @Territorio_Nro
-    AND  cast(Ruta_Key_RTS as nvarchar)         = @Ruta_Key_RTS
+              Ext_Paradas ON Ext_Paradas.Ext_Parada_Key_RTS = Paradas.Ext_Parada_Key_RTS  INNER JOIN
+              V_ClientesTP ON  Paradas.Ubicacion_ID          = ID
+                                     AND Paradas.Ubicacion_Region = REGION_ID
+WHERE cast(Paradas.Sesion_Key_RTS as nvarchar)      = @Sesion_Key_RTS
+    AND  cast(Paradas.Territorio_Key_RTS as nvarchar) = @Territorio_Nro
+    AND  cast(Paradas.Ruta_Key_RTS as nvarchar)         = @Ruta_Key_RTS
 ORDER BY Nro_Secuencia">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="DropDownList2" DefaultValue="" Name="Sesion_Key_RTS" PropertyName="SelectedValue" />

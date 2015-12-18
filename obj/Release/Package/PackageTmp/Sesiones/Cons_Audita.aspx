@@ -83,7 +83,7 @@ WHERE Audita = 'Si'"></asp:SqlDataSource>
         </table>
     </p>
     <p>
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Fecha_Hora_Evento" DataSourceID="GesDBAudita" ForeColor="#333333" GridLines="None" PageSize="12" ShowHeaderWhenEmpty="True" Width="90%">
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Fecha_Hora_Evento" DataSourceID="GesDBAudita" ForeColor="#333333" GridLines="None" PageSize="12" ShowHeaderWhenEmpty="True" Width="100%">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:TemplateField HeaderText="Fecha Evento" SortExpression="Fecha_Hora_Evento">

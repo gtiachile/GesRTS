@@ -260,6 +260,28 @@
     <Content Include="BopDBDataSet.xss">
       <DependentUpon>BopDBDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="GesRTSDataSet.xsc">
+      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="GesRTSDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GesRTSDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="GesRTSDataSet.xss">
+      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="GesRTSDataSet1.xsc">
+      <DependentUpon>GesRTSDataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="GesRTSDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GesRTSDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="GesRTSDataSet1.xss">
+      <DependentUpon>GesRTSDataSet1.xsd</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -305,6 +327,7 @@
     <Content Include="Sesiones\Cons_Audita.aspx" />
     <Content Include="Sesiones\Prueba.aspx" />
     <Content Include="Sesiones\Rep_Sesiones.aspx" />
+    <Content Include="Sesiones\Rep_Sesion_Total.aspx" />
     <Content Include="Sesiones\Sesiones.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Global.asax" />
@@ -400,6 +423,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BopDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GesRTSDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GesRTSDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GesRTSDataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="InicioMenu.aspx.cs">
       <DependentUpon>InicioMenu.aspx</DependentUpon>
@@ -510,6 +543,13 @@
     <Compile Include="Sesiones\Rep_Sesiones.aspx.designer.cs">
       <DependentUpon>Rep_Sesiones.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Sesiones\Rep_Sesion_Total.aspx.cs">
+      <DependentUpon>Rep_Sesion_Total.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sesiones\Rep_Sesion_Total.aspx.designer.cs">
+      <DependentUpon>Rep_Sesion_Total.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Sesiones\Sesiones.aspx.cs">
       <DependentUpon>Sesiones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -532,6 +572,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
+    <EmbeddedResource Include="Sesiones\Rep_Sesion_Total.rdlc" />
     <EmbeddedResource Include="Sesiones\Rep_Sesiones.rdlc" />
   </ItemGroup>
   <ItemGroup>

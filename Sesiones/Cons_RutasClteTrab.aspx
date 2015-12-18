@@ -38,7 +38,7 @@ WHERE [REGION_ID] = @Region_ID
             </SelectParameters>
     </asp:SqlDataSource>
     <br />
-    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GesRTSTerritorios" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" Width="90%">
+    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="GesRTSTerritorios" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" Width="100%">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="RN_SESSION_PKEY" HeaderText="ID Sesión" SortExpression="RN_SESSION_PKEY">
@@ -64,12 +64,39 @@ WHERE [REGION_ID] = @Region_ID
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
-            <asp:BoundField DataField="SEQUENCE_NUMBER" HeaderText="Nº Secuencia" SortExpression="SEQUENCE_NUMBER">
+            <asp:BoundField DataField="SEQUENCE_NUMBER" HeaderText="Sec" SortExpression="SEQUENCE_NUMBER">
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
             <asp:BoundField DataField="STOP_IX" HeaderText="Parada" SortExpression="STOP_IX">
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
+            <asp:TemplateField HeaderText="Prom. Fact." SortExpression="CYCLE_QTY_SIZE1">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE1") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE1", "{0:C0}") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Right" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Prom. Kilos" SortExpression="CYCLE_QTY_SIZE2">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE2") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE2", "{0:F0}") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Right" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Carga Trab." SortExpression="CYCLE_QTY_SIZE3">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE3") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE3", "{0:F5}") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Right" />
+            </asp:TemplateField>
         </Columns>
         <EditRowStyle BackColor="#7C6F57" />
         <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -88,15 +115,18 @@ WHERE [REGION_ID] = @Region_ID
 	V_RutasTP.TERRITORY_PKEY, V_TerritoriosTP.DESCRIPTION,
 	V_ParadasTP.ROUTE_PKEY, V_RutasTP.ROUTE_ID, V_RutasTP.ROUTE_NUMBER,
 	Dia_Nombre_Corto,V_ParadasTP.LOCATION_ID, V_ParadasTP.SEQUENCE_NUMBER,
-	V_ParadasTP.STOP_IX	
-  FROM     V_ParadasTP INNER JOIN
-	V_RutasTP         ON V_ParadasTP.ROUTE_PKEY               = V_RutasTP.PKEY INNER JOIN
-	V_TerritoriosTP ON V_RutasTP.TERRITORY_PKEY           = V_TerritoriosTP.PKEY INNER JOIN
-	V_SesionesTP    ON V_TerritoriosTP.RN_SESSION_PKEY = V_SesionesTP.PKEY INNER JOIN
-                   Dias_Semana    ON INITIAL_DAY                                       = Inicial_Dia_Ingles
-  WHERE   LOCATION_TYPE            = 'SIT'
-     AND     LOCATION_REGION_ID = @Region_ID
-     AND     LOCATION_ID                 = @Cliente_ID
+	V_ParadasTP.STOP_IX, V_Ext_ParadasTP.CYCLE_QTY_SIZE1, V_Ext_ParadasTP.CYCLE_QTY_SIZE2,
+	V_Ext_ParadasTP.CYCLE_QTY_SIZE3 
+  FROM     V_ParadasTP                                                                                                                      INNER JOIN
+	V_Ext_ParadasTP ON V_Ext_ParadasTP.PKEY                       = V_ParadasTP.LOCATION_EXTENSION_PKEY
+                                                                                                                                                               INNER JOIN
+                   V_RutasTP            ON V_ParadasTP.ROUTE_PKEY               = V_RutasTP.PKEY         INNER JOIN
+	V_TerritoriosTP    ON V_RutasTP.TERRITORY_PKEY           = V_TerritoriosTP.PKEY INNER JOIN
+	V_SesionesTP       ON V_TerritoriosTP.RN_SESSION_PKEY = V_SesionesTP.PKEY    INNER JOIN
+                   Dias_Semana       ON INITIAL_DAY                                       = Inicial_Dia_Ingles
+  WHERE   V_ParadasTP.LOCATION_TYPE            = 'SIT'
+     AND     V_ParadasTP.LOCATION_REGION_ID = @Region_ID
+     AND     V_ParadasTP.LOCATION_ID                 = @Cliente_ID
 ORDER BY V_SesionesTP.DATE_MODIFIED DESC">
             <SelectParameters>
                 <asp:ControlParameter ControlID="DropDownList1" Name="Region_ID" PropertyName="SelectedValue" />

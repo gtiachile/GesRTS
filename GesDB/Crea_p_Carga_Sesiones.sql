@@ -1,6 +1,6 @@
-USE [GesRTS]
+USE GesRTS
 GO
-/****** Object:  StoredProcedure [dbo].[p_Carga_Sesiones]    ******/
+/****** Object:  StoredProcedure dbo.p_Carga_Sesiones    ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -13,7 +13,7 @@ GO
 --              Paradas en GesRTS, desde las tablas en RTS
 -- ==================================================================
 
-CREATE PROC [dbo].[p_Carga_Sesiones]
+CREATE PROC dbo.p_Carga_Sesiones
 -- Add the parameters for the stored procedure here
 	 @Nro_Sesion		INT
 	,@Usuario		NVARCHAR(30)
@@ -74,70 +74,30 @@ BEGIN
 
 -- Carga Tabla de Paradas
 
-	DECLARE @Parada_Key_RTS		INT  
-	DECLARE @Sesion_Key_RTS		INT  
-	DECLARE @Territory_Key_RTS	INT  
-	DECLARE @Ruta_Key_RTS		INT 
-	DECLARE @Ubicacion_Region	NVARCHAR(9) 
-	DECLARE @Ubicacion_Tipo		NVARCHAR(3) 
-	DECLARE @Ubicacion_ID		NVARCHAR(15) 
-	DECLARE @Ubicacion_Extension	INT 
-	DECLARE @Nro_Secuencia		INT 
-	DECLARE @Tipo_Parada		NVARCHAR(3) 
-	DECLARE @Hora_Llegada		DATETIME 
-	DECLARE @Tiempo_Servicio	INT 
-	DECLARE @Tiempo_Viaje		INT 
-	DECLARE @Distancia		INT 
-	DECLARE @Hora_Apertura		DATETIME 
-	DECLARE @Hora_Cierre		DATETIME 
-	DECLARE @Ventana1_Apertura	DATETIME 
-	DECLARE @Ventana1_Cierre	DATETIME 
-	DECLARE @Ventana2_Apertura	DATETIME 
-	DECLARE @Ventana2_Cierre	DATETIME
-
-	DECLARE @Nro_Ruta		INT
-
 	DELETE FROM Paradas
 	WHERE	Paradas.Sesion_Key_RTS = @Nro_Sesion
 
-	DECLARE DB_cursorA CURSOR FOR  
-	SELECT	V_ParadasTP.PKEY, V_ParadasTP.RN_SESSION_PKEY, V_ParadasTP.ROUTE_PKEY, V_ParadasTP.LOCATION_REGION_ID, V_ParadasTP.LOCATION_TYPE,
-		V_ParadasTP.LOCATION_ID, V_ParadasTP.LOCATION_EXTENSION_PKEY, V_ParadasTP.SEQUENCE_NUMBER, V_ParadasTP.STOP_TYPE,
-		V_ParadasTP.ARRIVAL, V_ParadasTP.SERVICE_TIME, V_ParadasTP.TRAVEL_TIME, V_ParadasTP.DISTANCE,V_ParadasTP.OPEN_TIME,
-		V_ParadasTP.CLOSE_TIME, V_ParadasTP.TW1_OPEN_TIME, V_ParadasTP.TW1_CLOSE_TIME, V_ParadasTP.TW2_OPEN_TIME, V_ParadasTP.TW2_CLOSE_TIME		
-	FROM	V_ParadasTP
+	INSERT INTO Paradas 
+	SELECT	V_ParadasTP.PKEY, V_ParadasTP.RN_SESSION_PKEY, Rutas.Territorio_Key_RTS, V_ParadasTP.ROUTE_PKEY, V_ParadasTP.LOCATION_REGION_ID, V_ParadasTP.LOCATION_TYPE,
+		V_ParadasTP.LOCATION_ID, V_ParadasTP.SEQUENCE_NUMBER, V_ParadasTP.STOP_TYPE, V_ParadasTP.ARRIVAL, V_ParadasTP.SERVICE_TIME, V_ParadasTP.TRAVEL_TIME,
+		V_ParadasTP.DISTANCE,V_ParadasTP.OPEN_TIME, V_ParadasTP.CLOSE_TIME, V_ParadasTP.TW1_OPEN_TIME, V_ParadasTP.TW1_CLOSE_TIME, V_ParadasTP.TW2_OPEN_TIME,
+		V_ParadasTP.TW2_CLOSE_TIME, V_ParadasTP.LOCATION_EXTENSION_PKEY
+	FROM	V_ParadasTP INNER JOIN
+		Rutas ON Ruta_Key_RTS = V_ParadasTP.ROUTE_PKEY
 	WHERE	V_ParadasTP.RN_SESSION_PKEY =  @Nro_Sesion
 	AND     V_ParadasTP.SEQUENCE_NUMBER <> 0
 
-	OPEN DB_cursorA
-  
-	FETCH NEXT FROM DB_cursorA INTO @Parada_Key_RTS, @Sesion_Key_RTS, @Ruta_Key_RTS, @Ubicacion_Region, @Ubicacion_Tipo,@Ubicacion_ID, @Ubicacion_Extension,
-					@Nro_Secuencia, @Tipo_Parada, @Hora_Llegada,@Tiempo_Servicio, @Tiempo_Viaje, @Distancia, @Hora_Apertura,
-					@Hora_Cierre, @Ventana1_Apertura, @Ventana1_Cierre, @Ventana2_Apertura, @Ventana2_Cierre
+-- Carga Tabla de Extensión de Paradas
 
-	WHILE @@FETCH_STATUS = 0   
-	BEGIN   
-		SELECT	@Territory_Key_RTS = V_RutasTP.TERRITORY_PKEY, @Nro_Ruta = V_RutasTP.ROUTE_NUMBER
-		FROM	V_RutasTP
-		WHERE	V_RutasTP.PKEY = @Ruta_Key_RTS
+	DELETE FROM Ext_Paradas
+	 WHERE	Ext_Paradas.Sesion_Key_RTS = @Nro_Sesion
 
-		IF (@Nro_Ruta > 0)
-		   BEGIN
-			INSERT INTO Paradas (Parada_Key_RTS, Sesion_Key_RTS, Territorio_Key_RTS, Ruta_Key_RTS, Ubicacion_Region, Ubicacion_Tipo, Ubicacion_ID,
-				Ubicacion_Extension, Nro_Secuencia, Tipo_Parada, Hora_Llegada, Tiempo_Servicio, Tiempo_Viaje,  Distancia, Hora_Apertura,
-				Hora_Cierre, Ventana1_Apertura, Ventana1_Cierre, Ventana2_Apertura, Ventana2_Cierre)
-			VALUES (@Parada_Key_RTS, @Sesion_Key_RTS, @Territory_Key_RTS, @Ruta_Key_RTS, @Ubicacion_Region, @Ubicacion_Tipo, @Ubicacion_ID,
-				@Ubicacion_Extension, @Nro_Secuencia, @Tipo_Parada, @Hora_Llegada, @Tiempo_Servicio, @Tiempo_Viaje, @Distancia,@Hora_Apertura,
-				@Hora_Cierre, @Ventana1_Apertura, @Ventana1_Cierre, @Ventana2_Apertura, @Ventana2_Cierre)
-		   END
-
-		FETCH NEXT FROM DB_cursorA INTO @Parada_Key_RTS, @Sesion_Key_RTS, @Ruta_Key_RTS, @Ubicacion_Region, @Ubicacion_Tipo,@Ubicacion_ID, @Ubicacion_Extension,
-					@Nro_Secuencia, @Tipo_Parada, @Hora_Llegada,@Tiempo_Servicio, @Tiempo_Viaje, @Distancia, @Hora_Apertura,
-					@Hora_Cierre, @Ventana1_Apertura, @Ventana1_Cierre, @Ventana2_Apertura, @Ventana2_Cierre
-	END   
-
-	CLOSE DB_cursorA   
-	DEALLOCATE DB_cursorA
+	INSERT INTO Ext_Paradas
+	SELECT 	V_Ext_ParadasTP.PKEY, V_Ext_ParadasTP.RN_SESSION_PKEY, V_Ext_ParadasTP.TERRITORY_PKEY, V_Ext_ParadasTP.LOCATION_REGION_ID,
+		V_Ext_ParadasTP.LOCATION_TYPE, V_Ext_ParadasTP.LOCATION_ID, V_Ext_ParadasTP.CYCLE_QTY_SIZE1, V_Ext_ParadasTP.CYCLE_QTY_SIZE2,
+		V_Ext_ParadasTP.CYCLE_QTY_SIZE3
+	 FROM	V_Ext_ParadasTP
+	 WHERE	V_Ext_ParadasTP.RN_SESSION_PKEY = @Nro_Sesion
 
 -- Borra tablas Temporales de Sesión y Territorios
 

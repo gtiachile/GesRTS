@@ -42,7 +42,7 @@ BEGIN
 	INSERT INTO Audita (Fecha_Hora_Evento, Opcion_ID, Usuario, Region, Accion) 
                     VALUES (@Fecha_Accion, 'Sesiones', @Usuario, @Region_ID, @Accion)
 
--- Borra tablas Sesiones, Territorios, Rutas y Paradas
+-- Borra tablas Sesiones, Territorios, Rutas, Paradas y Ext_Paradas
 
 	DELETE FROM Sesiones
 	 WHERE Sesiones.Sesion_Key_RTS = @Nro_Sesion
@@ -56,4 +56,6 @@ BEGIN
 	DELETE FROM Paradas
 	 WHERE Paradas.Sesion_Key_RTS = @Nro_Sesion
 
+	DELETE FROM Ext_Paradas
+	 WHERE Ext_Paradas.Sesion_Key_RTS = @Nro_Sesion
 END
