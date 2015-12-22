@@ -70,33 +70,34 @@ WHERE [REGION_ID] = @Region_ID
             <asp:BoundField DataField="STOP_IX" HeaderText="Parada" SortExpression="STOP_IX">
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:TemplateField HeaderText="Prom. Fact." SortExpression="CYCLE_QTY_SIZE1">
+            <asp:TemplateField HeaderText="Prom. Fact." SortExpression="Prom_Fact">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE1") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Prom_Fact") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE1", "{0:C0}") %>'></asp:Label>
+                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Prom_Fact", "{0:C0}") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Right" />
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Prom. Kilos" SortExpression="CYCLE_QTY_SIZE2">
+            <asp:TemplateField HeaderText="Prom. Kilos" SortExpression="Prom_Kilos">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE2") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Prom_Kilos") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE2", "{0:F0}") %>'></asp:Label>
+                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("Prom_Kilos", "{0:F0}") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Right" />
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Carga Trab." SortExpression="CYCLE_QTY_SIZE3">
+            <asp:TemplateField HeaderText="Carga Trab." SortExpression="Carga_Trab">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE3") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Carga_Trab") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("CYCLE_QTY_SIZE3", "{0:F5}") %>'></asp:Label>
+                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("Carga_Trab", "{0:F5}") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Right" />
             </asp:TemplateField>
+            <asp:BoundField DataField="Descr_Entrega_Espanol" HeaderText="Días" SortExpression="Descr_Entrega_Espanol" />
         </Columns>
         <EditRowStyle BackColor="#7C6F57" />
         <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -115,10 +116,14 @@ WHERE [REGION_ID] = @Region_ID
 	V_RutasTP.TERRITORY_PKEY, V_TerritoriosTP.DESCRIPTION,
 	V_ParadasTP.ROUTE_PKEY, V_RutasTP.ROUTE_ID, V_RutasTP.ROUTE_NUMBER,
 	Dia_Nombre_Corto,V_ParadasTP.LOCATION_ID, V_ParadasTP.SEQUENCE_NUMBER,
-	V_ParadasTP.STOP_IX, V_Ext_ParadasTP.CYCLE_QTY_SIZE1, V_Ext_ParadasTP.CYCLE_QTY_SIZE2,
-	V_Ext_ParadasTP.CYCLE_QTY_SIZE3 
+	V_ParadasTP.STOP_IX, Dias_Entrega.Descr_Entrega_Espanol, 
+	(V_Ext_ParadasTP.CYCLE_QTY_SIZE1 / Dias_Entrega.Cant_Dias) AS Prom_Fact,
+                   (V_Ext_ParadasTP.CYCLE_QTY_SIZE2 / Dias_Entrega.Cant_Dias) AS Prom_Kilos,
+	(V_Ext_ParadasTP.CYCLE_QTY_SIZE3  / Dias_Entrega.Cant_Dias) AS Carga_Trab
   FROM     V_ParadasTP                                                                                                                      INNER JOIN
 	V_Ext_ParadasTP ON V_Ext_ParadasTP.PKEY                       = V_ParadasTP.LOCATION_EXTENSION_PKEY
+                                                                                                                                                               INNER JOIN
+	Dias_Entrega       ON Dias_Entrega.Dias_Entrega_Ingles     = V_Ext_ParadasTP.DAYS_DELIVERED
                                                                                                                                                                INNER JOIN
                    V_RutasTP            ON V_ParadasTP.ROUTE_PKEY               = V_RutasTP.PKEY         INNER JOIN
 	V_TerritoriosTP    ON V_RutasTP.TERRITORY_PKEY           = V_TerritoriosTP.PKEY INNER JOIN

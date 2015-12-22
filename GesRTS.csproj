@@ -249,38 +249,27 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="packages.config" />
-    <Content Include="BopDBDataSet.xsc">
-      <DependentUpon>BopDBDataSet.xsd</DependentUpon>
+    <Content Include="GesRTSDataSet2.xsc">
+      <DependentUpon>GesRTSDataSet2.xsd</DependentUpon>
     </Content>
-    <None Include="BopDBDataSet.xsd">
+    <None Include="GesRTSDataSet2.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>BopDBDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>GesRTSDataSet2.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="BopDBDataSet.xss">
-      <DependentUpon>BopDBDataSet.xsd</DependentUpon>
+    <Content Include="GesRTSDataSet2.xss">
+      <DependentUpon>GesRTSDataSet2.xsd</DependentUpon>
     </Content>
-    <Content Include="GesRTSDataSet.xsc">
-      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
+    <Content Include="GesRTSDataSet3.xsc">
+      <DependentUpon>GesRTSDataSet3.xsd</DependentUpon>
     </Content>
-    <None Include="GesRTSDataSet.xsd">
+    <None Include="GesRTSDataSet3.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>GesRTSDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>GesRTSDataSet3.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="GesRTSDataSet.xss">
-      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
-    </Content>
-    <Content Include="GesRTSDataSet1.xsc">
-      <DependentUpon>GesRTSDataSet1.xsd</DependentUpon>
-    </Content>
-    <None Include="GesRTSDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>GesRTSDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="GesRTSDataSet1.xss">
-      <DependentUpon>GesRTSDataSet1.xsd</DependentUpon>
+    <Content Include="GesRTSDataSet3.xss">
+      <DependentUpon>GesRTSDataSet3.xsd</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
@@ -419,20 +408,15 @@
     <Compile Include="Admin\Vendedores.aspx.designer.cs">
       <DependentUpon>Vendedores.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BopDBDataSet.Designer.cs">
+    <Compile Include="GesRTSDataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BopDBDataSet.xsd</DependentUpon>
+      <DependentUpon>GesRTSDataSet2.xsd</DependentUpon>
     </Compile>
-    <Compile Include="GesRTSDataSet.Designer.cs">
+    <Compile Include="GesRTSDataSet3.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GesRTSDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="GesRTSDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GesRTSDataSet1.xsd</DependentUpon>
+      <DependentUpon>GesRTSDataSet3.xsd</DependentUpon>
     </Compile>
     <Compile Include="InicioMenu.aspx.cs">
       <DependentUpon>InicioMenu.aspx</DependentUpon>

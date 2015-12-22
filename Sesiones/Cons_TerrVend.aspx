@@ -29,25 +29,13 @@
         .auto-style36 {
             width: 62px;
         }
-        .auto-style38 {
-            width: 85px;
-        }
         .auto-style39 {
         }
         .auto-style41 {
             width: 30px;
         }
-        .auto-style42 {
-            width: 154px;
-        }
         .auto-style43 {
             width: 116px;
-        }
-        .auto-style44 {
-            width: 28px;
-        }
-        .auto-style45 {
-            width: 25px;
         }
         .auto-style61 {
             width: 47px;
@@ -57,6 +45,24 @@
         }
         .auto-style64 {
             width: 79px;
+        }
+        .auto-style65 {
+            width: 93px;
+        }
+        .auto-style66 {
+            width: 29px;
+        }
+        .auto-style67 {
+            width: 31px;
+        }
+        .auto-style68 {
+            width: 125px;
+        }
+        .auto-style69 {
+            width: 91px;
+        }
+        .auto-style70 {
+            width: 90px;
         }
     </style>
 </asp:Content>
@@ -266,12 +272,12 @@ WHERE  Region_ID = @Region_ID
                             <tr>
                                 <td class="auto-style64">ID Territorio: </td>
                                 <td class="auto-style61">
-                                    <asp:Label ID="Territorio_IDLabel" runat="server" Text='<%# Bind("Territorio_ID") %>' Font-Bold="True" Width="80px" />
+                                    <asp:Label ID="Territorio_IDLabel" runat="server" Text='<%# Bind("Territorio_ID") %>' Font-Bold="True" Width="80px" BackColor="#00CC66" style="text-align: center" />
                                 </td>
                                 <td class="auto-style41">&nbsp;</td>
                                 <td class="auto-style63">Vendedor:</td>
                                 <td>
-                                    <asp:Label ID="Vendedor_NombreLabel" runat="server" Text='<%# Bind("Vendedor_Nombre") %>' Width="300px" />
+                                    <asp:Label ID="Vendedor_NombreLabel" runat="server" Text='<%# Bind("Vendedor_Nombre") %>' Width="300px" BackColor="#00CC66" style="font-weight: 700; text-align: center" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
@@ -368,7 +374,7 @@ WHERE cast(Territorio_Key_RTS as nvarchar) =  @Territorio_Key_RTS">
                 </asp:SqlDataSource>
             </asp:View>
             <asp:View ID="View3" runat="server">
-                <asp:FormView ID="FormView2" runat="server" DataKeyNames="Ruta_Key_RTS" DataSourceID="GesDBRutasFV" Width="569px">
+                <asp:FormView ID="FormView2" runat="server" DataKeyNames="Ruta_Key_RTS" DataSourceID="GesDBRutasFV" Width="948px">
                     <EditItemTemplate>
                         Ruta_Key_RTS:
                         <asp:Label ID="Ruta_Key_RTSLabel1" runat="server" Text='<%# Eval("Ruta_Key_RTS") %>' />
@@ -435,41 +441,50 @@ WHERE cast(Territorio_Key_RTS as nvarchar) =  @Territorio_Key_RTS">
                         <table style="width:100%;">
                             <tr>
                                 <td class="auto-style36">Sesión: </td>
-                                <td class="auto-style42">
+                                <td class="auto-style68">
                                     <asp:Label ID="Sesion_Key_RTSLabel" runat="server" Text='<%# Bind("Sesion_Key_RTS") %>' BackColor="#00CC66" Font-Bold="True" style="text-align: center" Width="80px" />
                                 </td>
-                                <td class="auto-style44">&nbsp;</td>
-                                <td class="auto-style38">Nº Ruta: </td>
+                                <td class="auto-style66">&nbsp;</td>
+                                <td class="auto-style65">Nº Territorio: </td>
                                 <td class="auto-style43">
-                                    <asp:Label ID="Ruta_NroLabel" runat="server" Text='<%# Bind("Ruta_Nro") %>' BackColor="#00CC66" Font-Bold="True" style="text-align: center" Width="80px" />
+                                    <asp:Label ID="Territorio_Key_RTSLabel" runat="server" BackColor="#00CC66" Font-Bold="True" style="text-align: center" Text='<%# Bind("Territorio_Key_RTS") %>' Width="80px" />
                                 </td>
-                                <td class="auto-style45">&nbsp;</td>
-                                <td class="auto-style41">Dia: </td>
+                                <td class="auto-style67">&nbsp;</td>
+                                <td class="auto-style70">ID Territorio: </td>
                                 <td>
-                                    <asp:Label ID="Dia_SemanaLabel" runat="server" Text='<%# Bind("Dia_Semana") %>' Font-Bold="True" />
+                                    <asp:Label ID="ID_TerritorioLabel" runat="server" BackColor="#00CC66" style="font-weight: 700; text-align: center" Text='<%# Bind("Territorio_ID") %>' Width="90px"></asp:Label>
                                 </td>
+                                <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style36">Territorio: </td>
-                                <td class="auto-style42">
-                                    <asp:Label ID="Territorio_Key_RTSLabel" runat="server" Text='<%# Bind("Territorio_Key_RTS") %>' BackColor="#00CC66" Font-Bold="True" style="text-align: center" Width="80px" />
+                                <td class="auto-style36">&nbsp;Nº Ruta:</td>
+                                <td class="auto-style68">
+                                    <asp:Label ID="Ruta_NroLabel" runat="server" BackColor="#00CC66" Font-Bold="True" style="text-align: center" Text='<%# Bind("Ruta_Nro") %>' Width="80px" />
                                 </td>
-                                <td class="auto-style44">&nbsp;</td>
-                                <td class="auto-style38">Descrip.Ruta: </td>
-                                <td class="auto-style39" colspan="4">
-                                    <asp:Label ID="Ruta_DescripLabel" runat="server" Text='<%# Bind("Ruta_Descrip") %>' Width="250px" />
+                                <td class="auto-style66">&nbsp;</td>
+                                <td class="auto-style65">Descrip. Ruta: </td>
+                                <td class="auto-style39">
+                                    <asp:Label ID="Ruta_DescripLabel" runat="server" Text='<%# Bind("Ruta_Descrip") %>' Width="250px" BackColor="#00CC66" style="font-weight: 700; text-align: center" />
                                 </td>
+                                <td class="auto-style67">&nbsp;</td>
+                                <td class="auto-style70">Día:</td>
+                                <td class="auto-style39">
+                                    <asp:Label ID="Dia_SemanaLabel" runat="server" BackColor="#00CC66" Font-Bold="True" style="text-align: center" Text='<%# Bind("Dia_Semana") %>' Width="90px" />
+                                </td>
+                                <td class="auto-style39">&nbsp;</td>
                             </tr>
                         </table>
                     </ItemTemplate>
                 </asp:FormView>
-                <asp:SqlDataSource ID="GesDBRutasFV" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Ruta_Key_RTS], [Sesion_Key_RTS], [Territorio_Key_RTS], [Ruta_Nro], [Ruta_ID], [Ruta_Descrip],
-              [Dia_Semana], [Ruta_Inicio_Tipo], [Ruta_Inicio_Ubicacion] 
-  FROM [Rutas]  INNER JOIN
-              [Dias_Semana] ON [Ruta_Dia] = [Inicial_Dia_Ingles]
-WHERE cast(Sesion_Key_RTS as nvarchar)     = @ID_Sesion
-    AND cast(Territorio_Key_RTS as nvarchar) = @Territorio_Key_RTS
-    AND cast(Ruta_Key_RTS as nvarchar)         = @Ruta_Key_RTS">
+                <asp:SqlDataSource ID="GesDBRutasFV" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT Rutas.Ruta_Key_RTS, Rutas.Sesion_Key_RTS, Rutas.Territorio_Key_RTS, Territorios.Territorio_ID,
+              Rutas.Ruta_Nro, Rutas.Ruta_ID, Rutas.Ruta_Descrip, Dias_Semana.Dia_Semana, Rutas.Ruta_Inicio_Tipo,
+              Rutas.Ruta_Inicio_Ubicacion
+  FROM Rutas                                                                                                                            INNER JOIN
+              Territorios      ON Territorios.Territorio_Key_RTS   = Rutas.Territorio_Key_RTS INNER JOIN
+              Dias_Semana ON Dias_Semana.Inicial_Dia_Ingles = Rutas.Ruta_Dia
+WHERE cast(Rutas.Sesion_Key_RTS     as nvarchar) = @ID_Sesion
+    AND cast(Rutas.Territorio_Key_RTS as nvarchar) = @Territorio_Key_RTS
+    AND cast(Rutas.Ruta_Key_RTS         as nvarchar) = @Ruta_Key_RTS">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="Lbl_Sesion" Name="ID_Sesion" PropertyName="Text" />
                         <asp:ControlParameter ControlID="Lbl_Territorio" DefaultValue="" Name="Territorio_Key_RTS" PropertyName="Text" />
@@ -522,33 +537,34 @@ WHERE cast(Sesion_Key_RTS as nvarchar)     = @ID_Sesion
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Prom. Fact." SortExpression="Prom_Facturacion">
+                        <asp:TemplateField HeaderText="Prom. Fact." SortExpression="Prom_Fact">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Prom_Facturacion") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Prom_Fact") %>'></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("Prom_Facturacion", "{0:C0}") %>'></asp:Label>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("Prom_Fact", "{0:C0}") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Prom. Kilos" SortExpression="Prom_Kilos">
+                        <asp:TemplateField HeaderText="Prom. Kilos" SortExpression="Prom_Kil">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Prom_Kilos") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Prom_Kil") %>'></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label5" runat="server" Text='<%# Bind("Prom_Kilos", "{0:F0}") %>'></asp:Label>
+                                <asp:Label ID="Label5" runat="server" Text='<%# Bind("Prom_Kil", "{0:F0}") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Carga Trab." SortExpression="Carga_Trab">
+                        <asp:TemplateField HeaderText="Carga Trab." SortExpression="Carga_Trabajo">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Carga_Trab") %>'></asp:TextBox>
+                                <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Carga_Trabajo") %>'></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label6" runat="server" Text='<%# Bind("Carga_Trab", "{0:F5}") %>'></asp:Label>
+                                <asp:Label ID="Label6" runat="server" Text='<%# Bind("Carga_Trabajo", "{0:F5}") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Right" />
                         </asp:TemplateField>
+                        <asp:BoundField DataField="Descr_Entrega_Espanol" HeaderText="Días" SortExpression="Descr_Entrega_Espanol" />
                     </Columns>
                     <EditRowStyle BackColor="#7C6F57" />
                     <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -572,14 +588,16 @@ WHERE cast(Sesion_Key_RTS as nvarchar)     = @ID_Sesion
                     </tr>
                 </table>
                 <asp:SqlDataSource ID="GesDBParadas" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT DISTINCT Parada_Key_RTS, Nro_Secuencia, Paradas.Ubicacion_ID, DESCRIPTION, ADDR_LINE1, COMUNA,
-                                CAST(CONVERT(VARCHAR(8),DATEADD(SECOND,DATEDIFF(SECOND, '05:00:00',
-                                Hora_Llegada),0),114) AS DATETIME) AS Hra_Llegada,
-                                CONVERT(VARCHAR(8),DATEADD(SECOND,Tiempo_Servicio,0),114) AS Tpo_Servicio,
-                                CONVERT(VARCHAR(8),DATEADD(SECOND,Tiempo_Viaje,0),114) AS Tpo_Viaje,
-                                CAST((Distancia/100.00) AS DECIMAL(5,2)) AS Distancia_Km, Hora_Apertura, Hora_Cierre,
-                                Prom_Facturacion, Prom_Kilos, Carga_Trab
+              CAST(CONVERT(VARCHAR(8),DATEADD(SECOND,DATEDIFF(SECOND, '05:00:00',
+              Hora_Llegada),0),114) AS DATETIME) AS Hra_Llegada,
+              CONVERT(VARCHAR(8),DATEADD(SECOND,Tiempo_Servicio,0),114) AS Tpo_Servicio,
+              CONVERT(VARCHAR(8),DATEADD(SECOND,Tiempo_Viaje,0),114) AS Tpo_Viaje,
+              CAST((Distancia/100.00) AS DECIMAL(5,2)) AS Distancia_Km, Hora_Apertura, Hora_Cierre,
+              Descr_Entrega_Espanol, (Prom_Facturacion / Cant_Dias) AS Prom_Fact,
+              (Prom_Kilos / Cant_Dias) AS Prom_Kil, (Carga_Trab / Cant_Dias) AS Carga_Trabajo
  FROM  Paradas INNER JOIN
-              Ext_Paradas ON Ext_Paradas.Ext_Parada_Key_RTS = Paradas.Ext_Parada_Key_RTS  INNER JOIN
+              Ext_Paradas ON Ext_Paradas.Ext_Parada_Key_RTS     = Paradas.Ext_Parada_Key_RTS        INNER JOIN
+              Dias_Entrega  ON Dias_Entrega.Dias_Entrega_Ingles = Ext_Paradas.Dias_Entrega_Ingles  INNER JOIN
               V_ClientesTP ON  Paradas.Ubicacion_ID          = ID
                                      AND Paradas.Ubicacion_Region = REGION_ID
 WHERE cast(Paradas.Sesion_Key_RTS as nvarchar)      = @Sesion_Key_RTS

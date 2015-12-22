@@ -67,15 +67,6 @@ namespace BitOp.Sesiones {
         protected global::System.Web.UI.WebControls.Label Lbl_Sesion;
         
         /// <summary>
-        /// Control Lbl_Ruta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Lbl_Ruta;
-        
-        /// <summary>
         /// Control Lbl_Territorio.
         /// </summary>
         /// <remarks>
@@ -83,6 +74,15 @@ namespace BitOp.Sesiones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Lbl_Territorio;
+        
+        /// <summary>
+        /// Control Lbl_Ruta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Lbl_Ruta;
         
         /// <summary>
         /// Control GridView1.
