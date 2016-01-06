@@ -201,7 +201,9 @@
     <Content Include="Admin\Autorizaciones.aspx" />
     <Content Include="Admin\CambioPass.aspx" />
     <Content Include="Admin\Criterios.aspx" />
+    <Content Include="Admin\DiasEntrega.aspx" />
     <Content Include="Admin\Menus.aspx" />
+    <Content Include="Admin\ModifPass.aspx" />
     <Content Include="Admin\Modulos.aspx" />
     <Content Include="Admin\Opciones.aspx" />
     <Content Include="Admin\Perfiles.aspx" />
@@ -221,6 +223,7 @@
     <Content Include="Images\Cancel.png" />
     <Content Include="Images\clock.png" />
     <Content Include="Images\DeleteHS.png" />
+    <Content Include="Images\Días.png" />
     <Content Include="Images\edificioCIAL.jpeg" />
     <Content Include="Images\EditTableHS.png" />
     <Content Include="Images\GesRTS.png" />
@@ -359,12 +362,26 @@
     <Compile Include="Admin\Criterios.aspx.designer.cs">
       <DependentUpon>Criterios.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DiasEntrega.aspx.cs">
+      <DependentUpon>DiasEntrega.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DiasEntrega.aspx.designer.cs">
+      <DependentUpon>DiasEntrega.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Menus.aspx.cs">
       <DependentUpon>Menus.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\Menus.aspx.designer.cs">
       <DependentUpon>Menus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ModifPass.aspx.cs">
+      <DependentUpon>ModifPass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModifPass.aspx.designer.cs">
+      <DependentUpon>ModifPass.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Modulos.aspx.cs">
       <DependentUpon>Modulos.aspx</DependentUpon>

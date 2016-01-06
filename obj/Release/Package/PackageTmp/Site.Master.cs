@@ -14,7 +14,9 @@ namespace BitOP
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.IsPostBack)
+            {
                 ViewState["LoginErrors"] = 0;
+            }
         }
 
 
@@ -156,12 +158,11 @@ namespace BitOP
 
         protected void btCerrarSesion_Click(object sender, EventArgs e)
         {
-            NavigationMenu.Visible = false;
-            Login1.Visible = true;
             Session.Clear();
             Session.Abandon();
+            NavigationMenu.Visible = false;
+            Login1.Visible = true;
         }
 
-        
     }
 }

@@ -219,7 +219,7 @@
                                 <InsertItemTemplate>
                                     <table style="width:100%;">
                                         <tr>
-                                            <td class="auto-style14" rowspan="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:Image ID="Image1" runat="server" ImageAlign="Middle" ImageUrl="~/Images/Usuarios.png" Width="130px" Height="250px" />
+                                            <td class="auto-style14" rowspan="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:Image ID="Image1" runat="server" ImageAlign="Middle" ImageUrl="~/Images/Usuarios.png" Width="130px" Height="200px" />
                                             </td>
                                             <td class="auto-style19">&nbsp;</td>
                                             <td class="auto-style12">Usuario:</td>
@@ -259,7 +259,7 @@
                                             </td>
                                             <td class="auto-style11">Perfil:</td>
                                             <td>
-                                                <asp:DropDownList ID="DropDownList4" runat="server" DataSourceID="BopDBPerfiles" DataTextField="Descripción" DataValueField="Perfil" SelectedValue='<%# Bind("Perfil") %>' Height="22px" Width="120px">
+                                                <asp:DropDownList ID="DropDownList4" runat="server" DataSourceID="BopDBPerfiles" DataTextField="Descripción" DataValueField="Perfil" SelectedValue='<%# Bind("Perfil") %>' Height="22px" Width="180px">
                                                 </asp:DropDownList>
                                                 <asp:SqlDataSource ID="BopDBPerfiles" runat="server" ConnectionString="<%$ ConnectionStrings:BopDBConnectionString %>" SelectCommand="SELECT [Perfil], [Descripción] FROM [Perfiles] where [Estado]='Activo'"></asp:SqlDataSource>
                                             </td>

@@ -13,5 +13,15 @@ namespace BitOp.Admin
         {
             if (!this.IsPostBack) { BitOP.Global.MenuControl.getMenu((Menu)Master.FindControl("NavigationMenu"), (Login)Master.FindControl("Login1"), BitOP.Global.Perfil); }                  
         }
+
+        protected void UpdateButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void UpdateCancelButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
